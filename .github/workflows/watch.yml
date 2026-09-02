@@ -48,7 +48,7 @@ jobs:
           [ "$COUNT" = "0" ] && { echo "no match — no alert"; exit 0; }
           BODY=$(node -e "
             const r=require('./result.json');
-            console.log('**'+r.matches.length+' match(es)** as of '+r.when+' — '+r.listings.toLocaleString()+' listings read.\n');
+            console.log('@maruthoner — **'+r.matches.length+' match(es)** as of '+r.when+' — '+r.listings.toLocaleString()+' listings read.\n');
             for(const m of r.matches) console.log('- **Target '+m.target+'** — Section '+m.sec+', Row '+m.row+' — **\$'+m.price.toFixed(2)+'** all-in each\n  '+m.link+'\n');
             console.log('\nConfirm the marketplace page says **Sep 20 2026** before paying. Links carry TicketWhiz affiliate tracking.');
           ")
@@ -56,7 +56,7 @@ jobs:
           if gh issue list --state open --search "in:title Seat match found" --json title --jq '.[].title' | grep -qxF "$TITLE"; then
             echo "issue already open for this seat"
           else
-            gh issue create --title "$TITLE" --body "$BODY"
+            gh issue create --title "$TITLE" --body "$BODY" --assignee maruthoner
           fi
 
       - name: Report a broken check
@@ -66,5 +66,5 @@ jobs:
         run: |
           TITLE="Seat watch check failed"
           if ! gh issue list --state open --search "in:title $TITLE" --json title --jq '.[].title' | grep -qxF "$TITLE"; then
-            gh issue create --title "$TITLE" --body "A scheduled run could not read the market (blocked, or fewer than 8,000 listings). Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            gh issue create --assignee maruthoner --title "$TITLE" --body "@maruthoner — a scheduled run could not read the market (blocked, or fewer than 8,000 listings). Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           fi
