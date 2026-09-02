@@ -10,14 +10,14 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Open a test issue as the workflow bot
+      - name: Open a test issue that mentions and assigns the owner
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          BODY='This is a **test**, sent the same way a real seat match will be: created by the workflow bot rather than by you.
+          BODY='@maruthoner — this is a **test**, sent exactly how a real seat match will be.
 
           If this reached hello@ruthcardona.com, alert delivery works end to end.
 
           A real alert will name the target, section, row, all-in price, and carry a direct checkout link.'
-          gh issue create --title "Test — alert from the workflow (safe to close)" --body "$BODY"
+          gh issue create --title "Test 2 — alert with mention (safe to close)" --body "$BODY" --assignee maruthoner
