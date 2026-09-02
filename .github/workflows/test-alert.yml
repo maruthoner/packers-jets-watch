@@ -1,0 +1,24 @@
+name: Test alert delivery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open a test issue as the workflow bot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh issue create \
+            --title "Test — alert from the workflow (safe to close)" \
+            --body "This is a **test**, sent the same way a real seat match will be: created by the workflow bot rather than by you.
+
+If this reaches hello@ruthcardona.com, alert delivery works end to end.
+
+A real one will name the target, section, row, all-in price, and carry a direct checkout link."
