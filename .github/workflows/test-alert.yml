@@ -15,10 +15,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh issue create \
-            --title "Test — alert from the workflow (safe to close)" \
-            --body "This is a **test**, sent the same way a real seat match will be: created by the workflow bot rather than by you.
+          BODY='This is a **test**, sent the same way a real seat match will be: created by the workflow bot rather than by you.
 
-If this reaches hello@ruthcardona.com, alert delivery works end to end.
+          If this reached hello@ruthcardona.com, alert delivery works end to end.
 
-A real one will name the target, section, row, all-in price, and carry a direct checkout link."
+          A real alert will name the target, section, row, all-in price, and carry a direct checkout link.'
+          gh issue create --title "Test — alert from the workflow (safe to close)" --body "$BODY"
