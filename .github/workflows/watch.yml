@@ -2,7 +2,7 @@ name: Seat watch
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0,30 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -14,9 +14,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  check:
+  watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -25,46 +25,28 @@ jobs:
       - run: npm install
       - run: npx playwright install --with-deps chromium
 
-      - name: Check listings
-        id: check
-        run: node watch.mjs
-
-      - name: Publish status page
-        if: always()
+      - name: Configure git
         run: |
           git config user.name "seat-watch"
           git config user.email "noreply@github.com"
-          git add -A docs result.json 2>/dev/null || true
-          git diff --quiet --cached || git commit -q -m "status: $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git pull --rebase -q origin main || true
-          git push -q origin main || true
 
-      - name: Alert on match
-        if: success()
+      # GitHub's scheduler throttles */30 badly — observed ~1 run per 5 hours.
+      # So one run stays alive and checks on its own clock instead.
+      - name: Watch loop
         env:
           GH_TOKEN: ${{ github.token }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
-          COUNT=$(node -e "console.log(require('./result.json').matches.length)")
-          [ "$COUNT" = "0" ] && { echo "no match — no alert"; exit 0; }
-          BODY=$(node -e "
-            const r=require('./result.json');
-            console.log('@maruthoner — **'+r.matches.length+' match(es)** as of '+r.when+' — '+r.listings.toLocaleString()+' listings read.\n');
-            for(const m of r.matches) console.log('- **Target '+m.target+'** — Section '+m.sec+', Row '+m.row+' — **\$'+m.price.toFixed(2)+'** all-in each\n  '+m.link+'\n');
-            console.log('\nConfirm the marketplace page says **Sep 20 2026** before paying. Links carry TicketWhiz affiliate tracking.');
-          ")
-          TITLE="Seat match found — $(node -e "const r=require('./result.json');const m=r.matches[0];console.log('Sec '+m.sec+' Row '+m.row+' \$'+m.price.toFixed(2))")"
-          if gh issue list --state open --search "in:title Seat match found" --json title --jq '.[].title' | grep -qxF "$TITLE"; then
-            echo "issue already open for this seat"
-          else
-            gh issue create --title "$TITLE" --body "$BODY" --assignee maruthoner
-          fi
-
-      - name: Report a broken check
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          TITLE="Seat watch check failed"
-          if ! gh issue list --state open --search "in:title $TITLE" --json title --jq '.[].title' | grep -qxF "$TITLE"; then
-            gh issue create --assignee maruthoner --title "$TITLE" --body "@maruthoner — a scheduled run could not read the market (blocked, or fewer than 8,000 listings). Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          fi
+          END=$(( $(date +%s) + 19200 ))   # stop after 5h20m, inside the 340-min job cap
+          N=0
+          while :; do
+            N=$((N+1))
+            echo "::group::cycle $N — $(date -u '+%H:%M UTC')"
+            ./cycle.sh
+            echo "::endgroup::"
+            NOW=$(date +%s)
+            [ "$NOW" -ge "$END" ] && { echo "window complete after $N cycles"; break; }
+            REMAIN=$(( END - NOW ))
+            [ "$REMAIN" -lt 1800 ] && { echo "less than one cycle left; stopping after $N"; break; }
+            sleep 1800
+          done
