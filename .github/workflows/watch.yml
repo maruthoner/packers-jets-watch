@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 340
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # rebase/reset needs real history; shallow clones break publishing
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
@@ -37,6 +39,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
+          export FAILS=0
           END=$(( $(date +%s) + 19200 ))   # stop after 5h20m, inside the 340-min job cap
           N=0
           while :; do

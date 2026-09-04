@@ -54,12 +54,33 @@ case "$COUNT" in
   *) MATCHED=yes ;;
 esac
 
-# --- publish the status page (after the decision is safely captured) ---
-git add -A docs result.json 2>/dev/null || true
-if ! git diff --quiet --cached; then
+# --- publish the status page ---
+# The page and result are regenerated whole each cycle, so there is nothing to
+# merge: replay our files on top of whatever the remote has now. Rebase on a
+# shallow clone fails once another run pushes, which used to freeze the page
+# silently for a whole 5-hour window.
+PUBLISHED=no
+for attempt in 1 2 3; do
+  git fetch -q origin main || { sleep 5; continue; }
+  git reset -q --soft origin/main
+  git add -A docs result.json 2>/dev/null || true
+  if git diff --quiet --cached; then PUBLISHED=same; break; fi
   git commit -q -m "status: $(date -u '+%Y-%m-%d %H:%M UTC')"
-  git pull --rebase -q origin main || { echo "  rebase failed; aborting it"; git rebase --abort 2>/dev/null; }
-  git push -q origin main || echo "  (push failed, will retry next cycle)"
+  if git push -q origin HEAD:main 2>/dev/null; then PUBLISHED=yes; break; fi
+  echo "  push attempt $attempt rejected; refetching"
+  sleep 5
+done
+
+if [ "$PUBLISHED" = "no" ]; then
+  FAILS=$(( ${FAILS:-0} + 1 ))
+  echo "  PUBLISH FAILED ($FAILS in a row)"
+  # Do not let the page rot in silence — say so after two consecutive failures.
+  if [ "$FAILS" -ge 2 ]; then
+    fail_alert "the status page has not published for $FAILS cycles — checks are running but the page you see is stale"
+  fi
+  export FAILS
+else
+  export FAILS=0
 fi
 
 [ "$MATCHED" = "no" ] && { echo "  no match"; exit 0; }
