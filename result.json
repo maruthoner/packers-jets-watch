@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 4, 2026, 1:26 PM",
-  "whenISO": "2026-09-04T17:26:12.194Z",
-  "listings": 10607,
+  "when": "Sep 4, 2026, 1:57 PM",
+  "whenISO": "2026-09-04T17:57:07.352Z",
+  "listings": 11119,
   "matches": [],
   "nears": [
     {
@@ -33,11 +33,11 @@
       "label": "Upper deck · Packers sideline"
     },
     {
-      "sec": 337,
-      "row": 2,
+      "sec": 340,
+      "row": 3,
       "price": 204,
-      "qty": 5,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a9876fe8dee14c2a9d064ed%3Fseat_count%3D0",
+      "qty": 2,
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16921855782%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "target": "B",
       "label": "Upper deck · Packers sideline"
     }
