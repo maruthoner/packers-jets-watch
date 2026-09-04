@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 4, 2026, 6:01 AM",
-  "whenISO": "2026-09-04T10:01:04.751Z",
-  "listings": 9266,
+  "when": "Sep 4, 2026, 11:17 AM",
+  "whenISO": "2026-09-04T15:17:59.643Z",
+  "listings": 10990,
   "matches": [],
   "nears": [
     {
@@ -33,11 +33,11 @@
       "label": "Upper deck · Packers sideline"
     },
     {
-      "sec": 340,
-      "row": 4,
-      "price": 204.22,
-      "qty": 2,
-      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DYgJtk0NvbR6",
+      "sec": 337,
+      "row": 2,
+      "price": 204,
+      "qty": 5,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a9876fe8dee14c2a9d064ed%3Fseat_count%3D0",
       "target": "B",
       "label": "Upper deck · Packers sideline"
     }
