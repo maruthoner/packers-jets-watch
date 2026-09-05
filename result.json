@@ -1,14 +1,14 @@
 {
   "ok": true,
-  "when": "Sep 5, 2026, 8:36 AM",
-  "whenISO": "2026-09-05T12:36:53.815Z",
-  "listings": 10705,
+  "when": "Sep 5, 2026, 9:07 AM",
+  "whenISO": "2026-09-05T13:07:43.252Z",
+  "listings": 10396,
   "matches": [],
   "nears": [
     {
       "sec": 135,
       "row": 25,
-      "price": 354,
+      "price": 350,
       "qty": 2,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16980787726%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "target": "A",
@@ -17,7 +17,7 @@
     {
       "sec": 135,
       "row": 25,
-      "price": 354.5,
+      "price": 351,
       "qty": 2,
       "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DeeacK8294dK",
       "target": "A",
