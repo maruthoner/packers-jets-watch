@@ -1,19 +1,9 @@
 {
   "ok": true,
-  "when": "Sep 6, 2026, 12:06 AM",
-  "whenISO": "2026-09-06T04:06:17.677Z",
-  "listings": 10310,
-  "matches": [
-    {
-      "sec": 142,
-      "row": 10,
-      "price": 358.52,
-      "qty": 2,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13636917311%26listingQty%3D",
-      "target": "A",
-      "label": "Lower bowl · Packers sideline"
-    }
-  ],
+  "when": "Sep 6, 2026, 12:37 AM",
+  "whenISO": "2026-09-06T04:37:07.423Z",
+  "listings": 9877,
+  "matches": [],
   "nears": [
     {
       "sec": 135,
