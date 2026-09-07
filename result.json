@@ -1,25 +1,25 @@
 {
   "ok": true,
-  "when": "Sep 6, 2026, 10:19 PM",
-  "whenISO": "2026-09-07T02:19:02.785Z",
-  "listings": 8505,
+  "when": "Sep 6, 2026, 10:49 PM",
+  "whenISO": "2026-09-07T02:49:55.828Z",
+  "listings": 8634,
   "matches": [],
   "nears": [
     {
       "sec": 135,
       "row": 25,
-      "price": 355,
+      "price": 354,
       "qty": 2,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17079521821%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "target": "A",
       "label": "Lower bowl · Packers sideline"
     },
     {
-      "sec": 142,
-      "row": 10,
-      "price": 382.78,
+      "sec": 135,
+      "row": 25,
+      "price": 407.77,
       "qty": 2,
-      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13636917311%26listingQty%3D",
+      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13949225186%26listingQty%3D",
       "target": "A",
       "label": "Lower bowl · Packers sideline"
     },
