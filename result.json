@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 6, 2026, 11:20 PM",
-  "whenISO": "2026-09-07T03:20:45.089Z",
-  "listings": 8555,
+  "when": "Sep 6, 2026, 11:51 PM",
+  "whenISO": "2026-09-07T03:51:36.429Z",
+  "listings": 8757,
   "matches": [],
   "nears": [
     {
@@ -16,10 +16,10 @@
     },
     {
       "sec": 142,
-      "row": 22,
-      "price": 409.42,
+      "row": 10,
+      "price": 382.78,
       "qty": 2,
-      "link": "https://www.events365.com/checkout/payment/3287862/6513364887?quantity=0&refid=MjM4NzItNDAwMzE%3D%0A",
+      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13636917311%26listingQty%3D",
       "target": "A",
       "label": "Lower bowl · Packers sideline"
     },
