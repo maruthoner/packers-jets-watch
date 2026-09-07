@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 6, 2026, 9:48 PM",
-  "whenISO": "2026-09-07T01:48:12.794Z",
-  "listings": 9522,
+  "when": "Sep 6, 2026, 10:19 PM",
+  "whenISO": "2026-09-07T02:19:02.785Z",
+  "listings": 8505,
   "matches": [],
   "nears": [
     {
@@ -15,11 +15,11 @@
       "label": "Lower bowl · Packers sideline"
     },
     {
-      "sec": 135,
-      "row": 25,
-      "price": 355.66,
+      "sec": 142,
+      "row": 10,
+      "price": 382.78,
       "qty": 2,
-      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DA6rs2KvdN2K",
+      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13636917311%26listingQty%3D",
       "target": "A",
       "label": "Lower bowl · Packers sideline"
     },
@@ -34,10 +34,10 @@
     },
     {
       "sec": 340,
-      "row": 4,
-      "price": 203.05,
+      "row": 3,
+      "price": 204,
       "qty": 2,
-      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DYgJtk0NvbR6",
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17061368098%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "target": "B",
       "label": "Upper deck · Packers sideline"
     }
