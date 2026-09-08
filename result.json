@@ -1,32 +1,33 @@
 {
   "ok": true,
-  "when": "Sep 8, 2026, 6:45 PM",
-  "whenISO": "2026-09-08T22:45:41.714Z",
-  "listings": 9024,
-  "matches": [],
-  "nears": [
+  "when": "Sep 8, 2026, 7:16 PM",
+  "whenISO": "2026-09-08T23:16:31.115Z",
+  "listings": 9754,
+  "matches": [
     {
       "sec": 142,
       "row": 10,
-      "price": 385,
+      "price": 355.51,
       "qty": 2,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVF2192496%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13636917311%26listingQty%3D",
       "target": "A",
       "label": "Lower bowl · Packers sideline"
     },
     {
-      "sec": 142,
-      "row": 22,
-      "price": 412.72,
-      "qty": 5,
-      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D861679892%26quantity%3D0",
+      "sec": 137,
+      "row": 12,
+      "price": 355.51,
+      "qty": 2,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13970249721%26listingQty%3D",
       "target": "A",
       "label": "Lower bowl · Packers sideline"
-    },
+    }
+  ],
+  "nears": [
     {
       "sec": 340,
       "row": 4,
-      "price": 192,
+      "price": 193,
       "qty": 2,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a849ccf9537199089fd646a%3Fseat_count%3D0",
       "target": "B",
@@ -35,7 +36,7 @@
     {
       "sec": 340,
       "row": 4,
-      "price": 196,
+      "price": 197,
       "qty": 2,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16899177555%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "target": "B",
