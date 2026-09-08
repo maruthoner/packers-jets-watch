@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 8, 2026, 3:08 PM",
-  "whenISO": "2026-09-08T19:08:20.613Z",
-  "listings": 9369,
+  "when": "Sep 8, 2026, 3:39 PM",
+  "whenISO": "2026-09-08T19:39:14.348Z",
+  "listings": 9059,
   "matches": [
     {
       "sec": 142,
@@ -27,7 +27,7 @@
     {
       "sec": 340,
       "row": 4,
-      "price": 193,
+      "price": 192,
       "qty": 2,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a849ccf9537199089fd646a%3Fseat_count%3D0",
       "target": "B",
@@ -36,7 +36,7 @@
     {
       "sec": 340,
       "row": 4,
-      "price": 197,
+      "price": 196,
       "qty": 2,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16899177555%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "target": "B",
