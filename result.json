@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 10, 2026, 5:27 AM",
-  "whenISO": "2026-09-10T09:27:23.457Z",
-  "listings": 8797,
+  "when": "Sep 10, 2026, 5:58 AM",
+  "whenISO": "2026-09-10T09:58:14.114Z",
+  "listings": 9680,
   "matches": [],
   "nears": [
     {
@@ -17,7 +17,7 @@
     {
       "sec": 142,
       "row": 14,
-      "price": 404.32,
+      "price": 407.67,
       "qty": 2,
       "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12729103483%26listingQty%3D",
       "target": "A",
