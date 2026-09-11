@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 11, 2026, 3:11 AM",
-  "whenISO": "2026-09-11T07:11:43.593Z",
-  "listings": 9271,
+  "when": "Sep 11, 2026, 3:42 AM",
+  "whenISO": "2026-09-11T07:42:38.218Z",
+  "listings": 9378,
   "matches": [
     {
       "sec": 142,
@@ -25,7 +25,7 @@
     {
       "sec": 142,
       "row": 9,
-      "price": 343.65,
+      "price": 340.76,
       "qty": 2,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13997238006%26listingQty%3D",
       "target": "A",
