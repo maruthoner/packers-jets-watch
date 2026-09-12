@@ -1,13 +1,13 @@
 {
   "ok": true,
-  "when": "Sep 12, 2026, 4:25 PM",
-  "whenISO": "2026-09-12T20:25:20.325Z",
-  "listings": 10061,
+  "when": "Sep 12, 2026, 4:56 PM",
+  "whenISO": "2026-09-12T20:56:12.170Z",
+  "listings": 10083,
   "matches": [
     {
       "sec": 142,
       "row": 13,
-      "price": 344.97,
+      "price": 347.9,
       "qty": 2,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14019926615%26listingQty%3D",
       "target": "A",
@@ -21,15 +21,6 @@
       "price": 313.39,
       "qty": 2,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14021581802%26listingQty%3D",
-      "target": "A",
-      "label": "Lower bowl · Packers sideline"
-    },
-    {
-      "sec": 142,
-      "row": 25,
-      "price": 337.42,
-      "qty": 2,
-      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14021581802%26listingQty%3D",
       "target": "A",
       "label": "Lower bowl · Packers sideline"
     },
