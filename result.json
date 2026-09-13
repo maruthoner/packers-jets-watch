@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 13, 2026, 12:05 PM",
-  "whenISO": "2026-09-13T16:05:44.228Z",
-  "listings": 9903,
+  "when": "Sep 13, 2026, 12:36 PM",
+  "whenISO": "2026-09-13T16:36:39.645Z",
+  "listings": 10229,
   "matches": [
     {
       "sec": 142,
@@ -27,7 +27,7 @@
     {
       "sec": 142,
       "row": 25,
-      "price": 313.39,
+      "price": 316.04,
       "qty": 2,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14021581802%26listingQty%3D",
       "target": "A",
@@ -36,7 +36,7 @@
     {
       "sec": 142,
       "row": 25,
-      "price": 340.21,
+      "price": 337.42,
       "qty": 2,
       "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14021581802%26listingQty%3D",
       "target": "A",
@@ -45,18 +45,18 @@
     {
       "sec": 340,
       "row": 4,
-      "price": 196,
+      "price": 193.12,
       "qty": 2,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16899177555%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12691196826%26listingQty%3D",
       "target": "B",
       "label": "Upper deck · Packers sideline"
     },
     {
       "sec": 340,
       "row": 4,
-      "price": 197.22,
+      "price": 196,
       "qty": 2,
-      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DYgJtk0NvbR6",
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16899177555%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "target": "B",
       "label": "Upper deck · Packers sideline"
     }
