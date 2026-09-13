@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 13, 2026, 5:16 PM",
-  "whenISO": "2026-09-13T21:16:07.272Z",
-  "listings": 9116,
+  "when": "Sep 13, 2026, 5:47 PM",
+  "whenISO": "2026-09-13T21:47:04.580Z",
+  "listings": 9153,
   "matches": [
     {
       "sec": 142,
@@ -18,7 +18,7 @@
     {
       "sec": 142,
       "row": 25,
-      "price": 313.39,
+      "price": 310.73,
       "qty": 2,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14021581802%26listingQty%3D",
       "target": "A",
@@ -27,7 +27,7 @@
     {
       "sec": 340,
       "row": 4,
-      "price": 207.32,
+      "price": 209.08,
       "qty": 2,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12691196826%26listingQty%3D",
       "target": "B",
@@ -36,9 +36,9 @@
     {
       "sec": 340,
       "row": 4,
-      "price": 210,
+      "price": 213.84,
       "qty": 2,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16899177555%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711218%26quantity%3D0",
       "target": "B",
       "label": "Upper deck · Packers sideline"
     }
