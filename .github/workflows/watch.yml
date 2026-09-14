@@ -4,13 +4,18 @@ on:
   schedule:
     - cron: '0,30 * * * *'
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'One cycle per game, no publishing and no issues'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
   issues: write
 
 concurrency:
-  group: seat-watch
+  group: seat-watch-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -20,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 0   # rebase/reset needs real history; shallow clones break publishing
+          fetch-depth: 0   # history operations need real history; shallow clones broke publishing
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
@@ -33,23 +38,27 @@ jobs:
           git config user.email "noreply@github.com"
 
       # GitHub's scheduler throttles */30 badly — observed ~1 run per 5 hours.
-      # So one run stays alive and checks on its own clock instead.
+      # One run stays alive and checks every game on its own 30-minute clock.
       - name: Watch loop
         env:
           GH_TOKEN: ${{ github.token }}
           GITHUB_RUN_ID: ${{ github.run_id }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
         run: |
-          export FAILS=0
-          END=$(( $(date +%s) + 19200 ))   # stop after 5h20m, inside the 340-min job cap
+          WATCHERS=$(node -e "import('./watchers.mjs').then(m=>console.log(Object.keys(m.WATCHERS).join(' ')))")
+          echo "watching: $WATCHERS"
+          END=$(( $(date +%s) + 19200 ))   # 5h20m, inside the 340-minute job cap
           N=0
           while :; do
             N=$((N+1))
-            echo "::group::cycle $N — $(date -u '+%H:%M UTC')"
-            ./cycle.sh
-            echo "::endgroup::"
+            for W in $WATCHERS; do
+              echo "::group::cycle $N · $W — $(date -u '+%H:%M UTC')"
+              ./cycle.sh "$W"
+              echo "::endgroup::"
+            done
+            [ "$DRY_RUN" = "1" ] && { echo "dry run: one cycle only"; break; }
             NOW=$(date +%s)
             [ "$NOW" -ge "$END" ] && { echo "window complete after $N cycles"; break; }
-            REMAIN=$(( END - NOW ))
-            [ "$REMAIN" -lt 1800 ] && { echo "less than one cycle left; stopping after $N"; break; }
+            [ $(( END - NOW )) -lt 1800 ] && { echo "less than one cycle left; stopping after $N"; break; }
             sleep 1800
           done
