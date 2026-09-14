@@ -3,26 +3,25 @@
   "watcher": "jets",
   "title": "Packers at Jets",
   "alertLabel": "Jets",
-  "when": "Sep 14, 2026, 5:33 PM",
-  "whenISO": "2026-09-14T21:33:09.007Z",
+  "when": "Sep 14, 2026, 5:44 PM",
+  "whenISO": "2026-09-14T21:44:50.806Z",
   "quantity": 2,
-  "listings": 10156,
-  "matches": [
+  "listings": 10434,
+  "matches": [],
+  "nears": [
     {
       "secLabel": "142",
       "rowLabel": "14",
-      "price": 359.72,
+      "price": 384.11,
       "splits": [
         2
       ],
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12729103483%26listingQty%3D",
+      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12729103483%26listingQty%3D",
       "sec": 142,
       "row": 14,
       "target": "A",
       "label": "Lower bowl · Packers sideline"
-    }
-  ],
-  "nears": [
+    },
     {
       "secLabel": "Lower Level 142",
       "rowLabel": "10",
@@ -39,11 +38,11 @@
     {
       "secLabel": "340",
       "rowLabel": "4",
-      "price": 202.4,
+      "price": 196.77,
       "splits": [
         2
       ],
-      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711218%26quantity%3D0",
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12691196826%26listingQty%3D",
       "sec": 340,
       "row": 4,
       "target": "B",
@@ -52,11 +51,11 @@
     {
       "secLabel": "340",
       "rowLabel": "4",
-      "price": 204,
+      "price": 202.4,
       "splits": [
         2
       ],
-      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D385711218",
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711218%26quantity%3D0",
       "sec": 340,
       "row": 4,
       "target": "B",
