@@ -3,10 +3,10 @@
   "watcher": "jets",
   "title": "Packers at Jets",
   "alertLabel": "Jets",
-  "when": "Sep 14, 2026, 6:16 PM",
-  "whenISO": "2026-09-14T22:16:33.213Z",
+  "when": "Sep 14, 2026, 6:48 PM",
+  "whenISO": "2026-09-14T22:48:28.233Z",
   "quantity": 2,
-  "listings": 11572,
+  "listings": 11143,
   "matches": [
     {
       "secLabel": "142",
@@ -24,15 +24,15 @@
   ],
   "nears": [
     {
-      "secLabel": "142",
-      "rowLabel": "8",
-      "price": 381,
+      "secLabel": "Lower Level 142",
+      "rowLabel": "10",
+      "price": 385,
       "splits": [
         2
       ],
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa7201029f0223329d0fccc%3Fseat_count%3D0",
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVF2192496%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "sec": 142,
-      "row": 8,
+      "row": 10,
       "target": "A",
       "label": "Lower bowl · Packers sideline"
     },
