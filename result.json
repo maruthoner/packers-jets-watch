@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "when": "Sep 14, 2026, 2:25 PM",
-  "whenISO": "2026-09-14T18:25:23.435Z",
-  "listings": 8884,
+  "when": "Sep 14, 2026, 2:56 PM",
+  "whenISO": "2026-09-14T18:56:13.422Z",
+  "listings": 9480,
   "matches": [
     {
       "sec": 142,
@@ -25,13 +25,13 @@
       "label": "Lower bowl · Packers sideline"
     },
     {
-      "sec": 142,
-      "row": 25,
-      "price": 345.78,
+      "sec": 340,
+      "row": 4,
+      "price": 196.77,
       "qty": 2,
-      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14021581802%26listingQty%3D",
-      "target": "A",
-      "label": "Lower bowl · Packers sideline"
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12691196826%26listingQty%3D",
+      "target": "B",
+      "label": "Upper deck · Packers sideline"
     },
     {
       "sec": 340,
@@ -39,15 +39,6 @@
       "price": 202.4,
       "qty": 2,
       "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711218%26quantity%3D0",
-      "target": "B",
-      "label": "Upper deck · Packers sideline"
-    },
-    {
-      "sec": 340,
-      "row": 4,
-      "price": 204,
-      "qty": 2,
-      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D385711218",
       "target": "B",
       "label": "Upper deck · Packers sideline"
     }
