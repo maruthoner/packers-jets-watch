@@ -3,15 +3,15 @@
   "watcher": "jets",
   "title": "Packers at Jets",
   "alertLabel": "Jets",
-  "when": "Sep 14, 2026, 6:48 PM",
-  "whenISO": "2026-09-14T22:48:28.233Z",
+  "when": "Sep 14, 2026, 7:20 PM",
+  "whenISO": "2026-09-14T23:20:28.526Z",
   "quantity": 2,
-  "listings": 11143,
+  "listings": 11379,
   "matches": [
     {
       "secLabel": "142",
       "rowLabel": "14",
-      "price": 356.67,
+      "price": 359.72,
       "splits": [
         2
       ],
@@ -39,11 +39,11 @@
     {
       "secLabel": "340",
       "rowLabel": "4",
-      "price": 196.77,
+      "price": 202.4,
       "splits": [
         2
       ],
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D12691196826%26listingQty%3D",
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711218%26quantity%3D0",
       "sec": 340,
       "row": 4,
       "target": "B",
@@ -52,11 +52,11 @@
     {
       "secLabel": "340",
       "rowLabel": "4",
-      "price": 202.4,
+      "price": 204,
       "splits": [
         2
       ],
-      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711218%26quantity%3D0",
+      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D385711218",
       "sec": 340,
       "row": 4,
       "target": "B",
