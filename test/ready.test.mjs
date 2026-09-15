@@ -44,3 +44,36 @@ test('count still moving is not ready', () => {
 test('a good sample after a refreshing one is not ready yet', () => {
   assert.equal(isReady(s({ label: 'Refreshing Marketplaces' }), s(), 2), false);
 });
+
+import { classifyFeed, feedSite, feedsPending, feedsFailed } from '../lib/ready.mjs';
+
+const answer = (o = {}) => JSON.stringify({ count: 2, site_name: 'event365', platform_stats: [{ status: 200, tickets_num: 2 }],
+  ticketnetwork_map_tickets: [{}, {}], status: 200, message: 'Fetched successfully', ...o });
+
+test('a successful marketplace answer counts its tickets', () => {
+  assert.deepEqual(classifyFeed({ httpStatus: 200, body: answer() }), { ok: true, tickets: 2 });
+});
+
+test('zero tickets is a valid answer, not a failure', () => {
+  assert.deepEqual(classifyFeed({ httpStatus: 200, body: answer({ ticketnetwork_map_tickets: [], platform_stats: [{ status: 200 }] }) }), { ok: true, tickets: 0 });
+});
+
+test('marketplace answers that did not deliver are failures', () => {
+  assert.equal(classifyFeed({ httpStatus: 502, body: '' }).ok, false);
+  assert.equal(classifyFeed({ httpStatus: 200, body: '<html>' }).ok, false);
+  assert.equal(classifyFeed({ httpStatus: 200, body: 'null' }).ok, false);
+  assert.match(classifyFeed({ httpStatus: 200, body: answer({ status: 500, message: 'upstream timeout' }) }).why, /upstream timeout/);
+  assert.equal(classifyFeed({ httpStatus: 200, body: answer({ platform_stats: [{ status: 504 }] }) }).ok, false);
+  assert.equal(classifyFeed({ httpStatus: 200, body: answer({ ticketnetwork_map_tickets: undefined }) }).ok, false);
+});
+
+test('marketplace name comes from the request, case-insensitively', () => {
+  assert.equal(feedSite('https://api-v2.ticketwhiz.com/data/real-time-platform/?site_name=TicketNetwork&event_id=x&seats=0'), 'ticketnetwork');
+  assert.equal(feedSite('not a url'), null);
+});
+
+test('pending and failed marketplaces are listed', () => {
+  const feeds = { stubhub: { state: 'ok', tickets: 3 }, viagogo: { state: 'pending' }, event365: { state: 'failed', why: 'HTTP 502' } };
+  assert.deepEqual(feedsPending(feeds), ['viagogo']);
+  assert.deepEqual(feedsFailed(feeds), [{ site: 'event365', why: 'HTTP 502' }]);
+});

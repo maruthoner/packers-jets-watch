@@ -2,10 +2,14 @@
 // Reads one game's full TicketWhiz market from the page's own React state and writes
 // the raw listings plus the readiness evidence. Makes no decisions. Exits non-zero with
 // {ok:false, reason} when a trustworthy read was not possible.
+//
+// Completeness comes from each marketplace's own answer to the page (see lib/ready.mjs).
+// A marketplace that fails is retried with a fresh page load; one that still fails after
+// the last try is reported in `missing`, so the status page can say what was not checked.
 import { chromium } from 'playwright';
 import { writeFileSync } from 'fs';
 import { WATCHERS } from './watchers.mjs';
-import { isReady, notReadyReason, sameMarket } from './lib/ready.mjs';
+import { isReady, notReadyReason, sameMarket, FEED_PATH, feedSite, classifyFeed, feedsPending, feedsFailed } from './lib/ready.mjs';
 
 const [id, outFile] = process.argv.slice(2);
 const W = WATCHERS[id];
@@ -15,7 +19,9 @@ if (!W || !outFile) {
 }
 
 const POLL_MS = 3000;
-const READY_DEADLINE_MS = 150000;
+const LOAD_ATTEMPTS = 3;
+const FEED_WAIT_MS = 60000;       // a marketplace with no answer after this is treated as failed
+const READY_DEADLINE_MS = 220000; // all attempts together; cycle.mjs kills the process at 300s
 
 // Runs inside the page. One function so a sample and its raw data come from the same instant.
 function snapshotInPage({ quantity, withRaw }) {
@@ -86,10 +92,74 @@ async function setQuantity(page, qty) {
   await page.keyboard.press('Escape').catch(() => {});
 }
 
+// Follow every marketplace request the page makes and classify its answer.
+function trackFeeds(page) {
+  const feeds = {};
+  const isFeed = (r) => r.method() === 'GET' && r.url().includes(FEED_PATH) && feedSite(r.url());
+  page.on('request', (r) => { if (isFeed(r)) feeds[feedSite(r.url())] = { state: 'pending' }; });
+  page.on('requestfailed', (r) => {
+    if (isFeed(r)) feeds[feedSite(r.url())] = { state: 'failed', why: r.failure()?.errorText || 'request failed' };
+  });
+  page.on('response', async (r) => {
+    if (!isFeed(r.request())) return;
+    const site = feedSite(r.url());
+    let body;
+    try { body = await r.text(); } catch { feeds[site] = { state: 'failed', why: 'answer cut off' }; return; }
+    const c = classifyFeed({ httpStatus: r.status(), body });
+    feeds[site] = c.ok ? { state: 'ok', tickets: c.tickets } : { state: 'failed', why: c.why };
+  });
+  return feeds;
+}
+
 const finish = (payload, code) => {
   writeFileSync(outFile, JSON.stringify({ watcher: W.id, whenISO: new Date().toISOString(), ...payload }));
   process.exit(code);
 };
+
+// One page load. Resolves { done: {sample, raw, feeds, missing} } or { retry: reason }.
+async function attemptRead(ctx, attempt, started) {
+  const page = await ctx.newPage();
+  const feeds = trackFeeds(page);
+  try {
+    const resp = await page.goto(W.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    if (resp && resp.status() >= 400) throw new Error(`page returned HTTP ${resp.status()}`);
+    await setQuantity(page, W.quantity);
+    const loaded = Date.now();
+    let prev = null, cur = null;
+    while (Date.now() - started < READY_DEADLINE_MS) {
+      await page.waitForTimeout(POLL_MS);
+      cur = (await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: false })).sample;
+      const secs = Math.round((Date.now() - started) / 1000);
+      let pending = feedsPending(feeds);
+      if (pending.length && Date.now() - loaded > FEED_WAIT_MS) {
+        for (const site of pending) feeds[site] = { state: 'failed', why: `no answer after ${FEED_WAIT_MS / 1000}s` };
+        pending = [];
+      }
+      const failed = feedsFailed(feeds);
+      const asked = Object.keys(feeds).length;
+      console.log(`  [${W.id}] try ${attempt} +${secs}s n=${cur.n} ${cur.label ?? '-'} qty=${cur.qtyText ?? '-'} sources=${cur.sources.length} unsellable=${cur.unsellable}`
+        + ` marketplaces: ${asked - pending.length - failed.length} answered, ${pending.length} waiting, ${failed.length} failed`);
+      if (asked > 0 && pending.length === 0 && isReady(prev, cur, W.quantity)) {
+        if (failed.length && attempt < LOAD_ATTEMPTS) {
+          return { retry: failed.map((f) => `${f.site} (${f.why})`).join(', ') };
+        }
+        const snap = await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: true });
+        if (feedsPending(feeds).length === 0 && notReadyReason(snap.sample, W.quantity) === null && sameMarket(cur, snap.sample)) {
+          const answered = Object.fromEntries(Object.entries(feeds).filter(([, f]) => f.state === 'ok').map(([k, f]) => [k, f.tickets]));
+          return { done: { sample: snap.sample, raw: snap.raw, feeds: answered, missing: feedsFailed(feeds) }, secs };
+        }
+        cur = snap.sample; // market moved between the two reads; keep polling
+      }
+      prev = cur;
+    }
+    const why = asked === 0 ? 'the page never asked any marketplace'
+      : feedsPending(feeds).length ? `still waiting on ${feedsPending(feeds).join(', ')}`
+        : (notReadyReason(cur, W.quantity) ?? 'market still changing');
+    throw new Error(`page never settled within ${READY_DEADLINE_MS / 1000}s — last state: ${why}`);
+  } finally {
+    await page.close().catch(() => {});
+  }
+}
 
 let browser;
 try {
@@ -98,30 +168,16 @@ try {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
     viewport: { width: 1280, height: 900 }, locale: 'en-US', timezoneId: 'America/New_York',
   });
-  const page = await ctx.newPage();
-  const resp = await page.goto(W.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  if (resp && resp.status() >= 400) throw new Error(`page returned HTTP ${resp.status()}`);
-  await setQuantity(page, W.quantity);
-
   const started = Date.now();
-  let prev = null, cur = null;
-  while (Date.now() - started < READY_DEADLINE_MS) {
-    await page.waitForTimeout(POLL_MS);
-    cur = (await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: false })).sample;
-    const secs = Math.round((Date.now() - started) / 1000);
-    console.log(`  [${W.id}] +${secs}s n=${cur.n} ${cur.label ?? '-'} qty=${cur.qtyText ?? '-'} sources=${cur.sources.length} unsellable=${cur.unsellable}`);
-    if (isReady(prev, cur, W.quantity)) {
-      const snap = await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: true });
-      if (notReadyReason(snap.sample, W.quantity) === null && sameMarket(cur, snap.sample)) {
-        await browser.close();
-        console.log(`  [${W.id}] ready after ${secs}s: ${snap.raw.length} listings from ${snap.sample.sources.join(', ')}`);
-        finish({ ok: true, sample: snap.sample, raw: snap.raw, readySeconds: secs }, 0);
-      }
-      cur = snap.sample; // market moved between the two reads; keep polling
-    }
-    prev = cur;
+  for (let attempt = 1; attempt <= LOAD_ATTEMPTS; attempt++) {
+    const r = await attemptRead(ctx, attempt, started);
+    if (r.retry) { console.log(`  [${W.id}] marketplaces failed: ${r.retry} — reloading (try ${attempt + 1} of ${LOAD_ATTEMPTS})`); continue; }
+    await browser.close();
+    const { sample, raw, feeds, missing } = r.done;
+    console.log(`  [${W.id}] ready after ${r.secs}s: ${raw.length} listings from ${sample.sources.join(', ')}`
+      + (missing.length ? ` — NOT INCLUDED: ${missing.map((m) => `${m.site} (${m.why})`).join(', ')}` : ''));
+    finish({ ok: true, sample, raw, feeds, missing, readySeconds: r.secs }, 0);
   }
-  throw new Error(`page never settled within ${READY_DEADLINE_MS / 1000}s — last state: ${notReadyReason(cur, W.quantity) ?? 'market still changing'}`);
 } catch (e) {
   if (browser) await browser.close().catch(() => {});
   finish({ ok: false, reason: String(e.message || e).split('\n')[0] }, 1);

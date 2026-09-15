@@ -75,3 +75,14 @@ test('an empty preferred list says so and shows the cheapest there', () => {
   assert.match(html, /No pair in your preferred sections at this price right now/);
   assert.match(html, /\$40\.00 over your \$100\.00 limit/);
 });
+
+test('a marketplace left out of the check is named on the page', () => {
+  const html = renderPage(W, { result: result({ missing: [{ site: 'event365', why: 'HTTP 502' }] }), state: {}, others: [] });
+  assert.match(html, /Not included in this check: <b>event365<\/b>/);
+  assert.match(html, /HTTP 502/);
+});
+
+test('a complete check shows no missing-marketplace note', () => {
+  assert.ok(!renderPage(W, { result: result({ missing: [] }), state: {}, others: [] }).includes('Not included'));
+  assert.ok(!renderPage(W, { result: result(), state: {}, others: [] }).includes('Not included'));
+});

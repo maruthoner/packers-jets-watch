@@ -15,7 +15,7 @@ const DRY = process.argv.includes('--dry-run') || process.env.DRY_RUN === '1';
 const REPO = process.env.GITHUB_REPOSITORY || 'maruthoner/packers-jets-watch';
 const OWNER = process.env.GITHUB_REPOSITORY_OWNER || REPO.split('/')[0];
 const RUN_URL = `https://github.com/${REPO}/actions/runs/${process.env.GITHUB_RUN_ID || 'local'}`;
-const WATCH_TIMEOUT_MS = 240000; // a hung browser must not stall every other game
+const WATCH_TIMEOUT_MS = 300000; // a hung browser must not stall every other game
 const TEMP = process.env.RUNNER_TEMP || tmpdir();
 
 const log = (msg) => console.log(msg);
@@ -114,7 +114,7 @@ async function cycleOne(w) {
       result = {
         watcher: w.id, whenISO: read.whenISO, when: fmt(read.whenISO), quantity: w.quantity,
         priceMax: w.priceMax, listings: listings.length, rejected, sources: read.sample.sources,
-        readySeconds: read.readySeconds,
+        readySeconds: read.readySeconds, feeds: read.feeds ?? null, missing: read.missing ?? [],
         matches: decided.general.matches, closest: decided.general.closest,
         preferred: decided.preferred && { sections: w.preferred.sections, priceMax: preferredSpec(w).priceMax, ...decided.preferred },
       };
@@ -122,7 +122,7 @@ async function cycleOne(w) {
     }
   }
   log(outcome.ok
-    ? `  [${w.id}] ${result.listings} listings — ${result.preferred ? `preferred: ${result.preferred.matches.length}, ` : ''}general: ${result.matches.length}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
+    ? `  [${w.id}] ${result.listings} listings${result.missing.length ? ` (not included: ${result.missing.map((m) => m.site).join(', ')})` : ''} — ${result.preferred ? `preferred: ${result.preferred.matches.length}, ` : ''}general: ${result.matches.length}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
     : `  [${w.id}] CHECK FAILED: ${outcome.reason}`);
 
   const planned = plan(prevState, outcome, alertSpec(w), { owner: OWNER, runUrl: RUN_URL });
