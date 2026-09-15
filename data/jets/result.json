@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-15T07:15:57.909Z",
-  "when": "Sep 15, 2026, 3:15 AM ET",
+  "whenISO": "2026-09-15T07:45:45.725Z",
+  "when": "Sep 15, 2026, 3:45 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 11909,
+  "listings": 12271,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 23,
+  "readySeconds": 10,
   "matches": [
     {
       "id": "6aa44d4eb79ea20b62e538d3gametime",
@@ -139,15 +139,6 @@
       "unassigned": false
     },
     {
-      "id": "14045682040viagogo",
-      "source": "viagogo",
-      "secLabel": "GOLD2",
-      "rowLabel": "",
-      "price": 94.62,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14045682040%26listingQty%3D",
-      "unassigned": true
-    },
-    {
       "id": "6aa8145261570ebf02f659bcgametime",
       "source": "gametime",
       "secLabel": "326",
@@ -155,6 +146,15 @@
       "price": 95,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa8145261570ebf02f659bc%3Fseat_count%3D0",
       "unassigned": false
+    },
+    {
+      "id": "14045682040viagogo",
+      "source": "viagogo",
+      "secLabel": "GOLD2",
+      "rowLabel": "",
+      "price": 95.41,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14045682040%26listingQty%3D",
+      "unassigned": true
     },
     {
       "id": "6aa81453bfe2c18b7e253b64gametime",
