@@ -58,7 +58,7 @@ test('games with preferred sections render the preferred list first, labelled as
     }),
     state: {}, others: [],
   });
-  const pref = html.indexOf('Preferred sections'), general = html.indexOf('Any other section');
+  const pref = html.indexOf('Preferred sections'), general = html.indexOf('Other sections');
   assert.ok(pref > 0 && general > pref, 'preferred section comes first');
   assert.ok(!/email alerts|page only/.test(html), 'no alert labels on the headings');
   assert.match(html.slice(pref, general), /339 &middot; Row 24/);
@@ -88,4 +88,12 @@ test('a complete check shows no missing-marketplace note', () => {
 
 test('seat cards show the price without an "all-in, each" suffix', () => {
   assert.ok(!renderPage(W, { result: result(), state: {}, others: [] }).includes('all-in'));
+});
+
+test('empty preferred list reads as one sentence under an "Other sections" split', () => {
+  const w = { ...W, preferred: { sections: [339], priceMax: 100 } };
+  const html = renderPage(w, { result: result({ preferred: { priceMax: 100, matches: [], closest: [] } }), state: {}, others: [] });
+  assert.match(html, /No pair in your preferred sections at this price right now\.<\/div>/);
+  assert.ok(!html.includes('Cheapest there'));
+  assert.match(html, /<h2>Other sections<\/h2>/);
 });
