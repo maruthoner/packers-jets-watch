@@ -76,8 +76,13 @@ else
   PUBLISHED=no
   for attempt in 1 2 3; do
     git fetch -q origin main || { sleep 5; continue; }
-    git reset -q --soft origin/main
+    # --mixed, not --soft: reset the index to the remote so this commit carries ONLY
+    # the status files. --soft kept the run's stale copy of every other file staged,
+    # which silently reverted any change pushed while the run was alive.
+    git reset -q --mixed origin/main
     git add -A "$OUTDIR" "$RESULT" 2>/dev/null || true
+    STRAY=$(git diff --cached --name-only | grep -vE "^($OUTDIR/|$RESULT$)" || true)
+    if [ -n "$STRAY" ]; then echo "  refusing to commit non-status files: $STRAY"; git reset -q --mixed origin/main; break; fi
     if git diff --quiet --cached; then PUBLISHED=same; break; fi
     git commit -q -m "status [$WID]: $(date -u '+%Y-%m-%d %H:%M UTC')"
     if git push -q origin HEAD:main 2>/dev/null; then PUBLISHED=yes; break; fi
