@@ -48,3 +48,30 @@ test('unassigned seats are labelled on the page', () => {
   const html = renderPage(W, { result: result({ matches: [listing({ secLabel: '301–306–OR–346–350', rowLabel: 'TBD', unassigned: true })] }), state: {}, others: [] });
   assert.match(html, /exact seats not assigned yet/);
 });
+
+test('games with preferred sections render the preferred list first, labelled as the one that emails', () => {
+  const w = { ...W, preferred: { sections: [339, 137], priceMax: 100 }, alertOn: 'preferred' };
+  const html = renderPage(w, {
+    result: result({
+      preferred: { priceMax: 100, matches: [listing({ id: 'p', secLabel: '339', rowLabel: '24', price: 98 })], closest: [] },
+      matches: [listing({ id: 'g', secLabel: '327', price: 90 })],
+    }),
+    state: {}, others: [],
+  });
+  const pref = html.indexOf('Preferred sections'), general = html.indexOf('Any other section');
+  assert.ok(pref > 0 && general > pref, 'preferred section comes first');
+  assert.match(html.slice(pref, general), /email alerts/);
+  assert.match(html.slice(general), /page only/);
+  assert.match(html.slice(pref, general), /339 &middot; Row 24/);
+  assert.ok(!html.slice(pref, general).includes('327'), 'general seat not in preferred section');
+});
+
+test('an empty preferred list says so and shows the cheapest there', () => {
+  const w = { ...W, preferred: { sections: [339], priceMax: 100 } };
+  const html = renderPage(w, {
+    result: result({ preferred: { priceMax: 100, matches: [], closest: [listing({ id: 'c', secLabel: '339', price: 140 })] } }),
+    state: {}, others: [],
+  });
+  assert.match(html, /No pair in your preferred sections at this price right now/);
+  assert.match(html, /\$40\.00 over your \$100\.00 limit/);
+});

@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { WATCHERS } from './watchers.mjs';
-import { normalize, validate, decide } from './lib/decide.mjs';
+import { normalize, validate, decideAll, alertList, preferredSpec } from './lib/decide.mjs';
 import { plan, initialState, matchTitle, failTitle } from './lib/alerts.mjs';
 import { renderPage, fmt } from './lib/page.mjs';
 import { publish } from './lib/publish.mjs';
@@ -22,6 +22,13 @@ const log = (msg) => console.log(msg);
 const readJson = (path, fallback) => { try { return JSON.parse(readFileSync(path, 'utf8')); } catch { return fallback; } };
 const writeJson = (path, value) => { mkdirSync(join(path, '..'), { recursive: true }); writeFileSync(path, JSON.stringify(value, null, 2) + '\n'); };
 const sitePath = (w) => w.outDir.replace(/^docs\/?/, '');
+
+// The criteria alerts are judged against: the preferred list when a game has one.
+export function alertSpec(w) {
+  const spec = preferredSpec(w);
+  if (!spec || w.alertOn === 'general') return w;
+  return { ...spec, matchLabel: `${w.alertLabel} preferred sections` };
+}
 
 export function paths(w) {
   return { page: `${w.outDir}/index.html`, result: `data/${w.id}/result.json`, state: `data/${w.id}/state.json` };
@@ -103,20 +110,22 @@ async function cycleOne(w) {
     if (problem) {
       outcome = { ok: false, reason: problem, whenISO: read.whenISO };
     } else {
-      const { matches, closest } = decide(listings, w);
+      const decided = decideAll(listings, w);
       result = {
         watcher: w.id, whenISO: read.whenISO, when: fmt(read.whenISO), quantity: w.quantity,
         priceMax: w.priceMax, listings: listings.length, rejected, sources: read.sample.sources,
-        readySeconds: read.readySeconds, matches, closest,
+        readySeconds: read.readySeconds,
+        matches: decided.general.matches, closest: decided.general.closest,
+        preferred: decided.preferred && { sections: w.preferred.sections, priceMax: preferredSpec(w).priceMax, ...decided.preferred },
       };
-      outcome = { ok: true, whenISO: read.whenISO, when: result.when, matches };
+      outcome = { ok: true, whenISO: read.whenISO, when: result.when, matches: alertList(w, decided).matches };
     }
   }
   log(outcome.ok
-    ? `  [${w.id}] ${result.listings} listings, ${outcome.matches.length} match(es)${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
+    ? `  [${w.id}] ${result.listings} listings — ${result.preferred ? `preferred: ${result.preferred.matches.length}, ` : ''}general: ${result.matches.length}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
     : `  [${w.id}] CHECK FAILED: ${outcome.reason}`);
 
-  const planned = plan(prevState, outcome, w, { owner: OWNER, runUrl: RUN_URL });
+  const planned = plan(prevState, outcome, alertSpec(w), { owner: OWNER, runUrl: RUN_URL });
   let state = executeActions(planned.actions, planned.state, githubClient(), { dry: DRY });
 
   if (outcome.ok) writeJson(p.result, result);
@@ -147,7 +156,7 @@ async function cycleOne(w) {
     if (n >= 2) {
       const again = plan({ ...state, failStreak: Math.max(state.failStreak, 1) },
         { ok: false, reason: `the status page has not published for ${n} cycles (${pub.detail})`, whenISO: new Date().toISOString() },
-        w, { owner: OWNER, runUrl: RUN_URL });
+        alertSpec(w), { owner: OWNER, runUrl: RUN_URL });
       executeActions(again.actions, again.state, githubClient());
     }
   } else {
@@ -171,7 +180,7 @@ async function main() {
         const p = paths(w);
         const failed = plan(readJson(p.state, initialState()),
           { ok: false, reason: `the check crashed: ${String(e.message || e).split('\n')[0]}`, whenISO: new Date().toISOString() },
-          w, { owner: OWNER, runUrl: RUN_URL });
+          alertSpec(w), { owner: OWNER, runUrl: RUN_URL });
         writeJson(p.state, executeActions(failed.actions, failed.state, githubClient(), { dry: DRY }));
       } catch (inner) { log(`  [${w.id}] could not record the crash: ${inner.message}`); }
     }

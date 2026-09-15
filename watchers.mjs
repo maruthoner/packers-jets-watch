@@ -6,6 +6,8 @@
 //   rowMax       optional: only rows 1..rowMax (omit for any row)
 //   minListings  sanity floor: fewer listings than this means the read is not trustworthy
 //   closest      how many near-misses to show on the page when nothing fits
+//   preferred    optional { sections, rowMax?, priceMax? }: shown first, and only there
+//   alertOn      'preferred' (default when preferred exists) or 'general': which list emails
 export const WATCHERS = {
   jets: {
     id: 'jets',
@@ -16,9 +18,14 @@ export const WATCHERS = {
     alertLabel: 'Jets',
     outDir: 'docs',
     quantity: 2,
-    priceMax: 100,             // any section, any row (Ruth, Sep 14)
+    priceMax: 100,             // general list: any section, any row (Ruth, Sep 14)
     minListings: 8000,         // 2-together market has run ~8,700-13,500
     closest: 3,
+    preferred: {               // Ruth, Sep 15: any row, emails only for these
+      sections: [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140],
+      priceMax: 100,
+    },
+    alertOn: 'preferred',
   },
 
   falcons: {

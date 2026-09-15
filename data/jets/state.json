@@ -3,9 +3,9 @@
   "failIssue": null,
   "failActive": false,
   "lastFailure": null,
-  "matchIssue": 23,
-  "matchActive": true,
-  "notifiedBest": 89,
+  "matchIssue": null,
+  "matchActive": false,
+  "notifiedBest": null,
   "emptyStreak": 0,
   "lastSuccessISO": "2026-09-15T15:32:44.186Z"
 }
