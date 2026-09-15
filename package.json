@@ -2,5 +2,10 @@
   "name": "packers-jets-watch",
   "private": true,
   "type": "module",
-  "devDependencies": { "playwright": "^1.49.0" }
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
 }

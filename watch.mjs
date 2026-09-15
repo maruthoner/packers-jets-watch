@@ -1,174 +1,128 @@
-// Usage: node watch.mjs <watcher-id>
-// Reads the full TicketWhiz market from React state for one game, decides matches,
-// and writes that game's result JSON and status page. Exits non-zero when the read
-// cannot be trusted, so the caller reports a broken check instead of "no match".
+// Usage: node watch.mjs <watcher-id> <out.json>
+// Reads one game's full TicketWhiz market from the page's own React state and writes
+// the raw listings plus the readiness evidence. Makes no decisions. Exits non-zero with
+// {ok:false, reason} when a trustworthy read was not possible.
 import { chromium } from 'playwright';
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync } from 'fs';
 import { WATCHERS } from './watchers.mjs';
+import { isReady, notReadyReason, sameMarket } from './lib/ready.mjs';
 
-const W = WATCHERS[process.argv[2]];
-if (!W) { console.error(`unknown watcher "${process.argv[2]}"; known: ${Object.keys(WATCHERS).join(', ')}`); process.exit(2); }
+const [id, outFile] = process.argv.slice(2);
+const W = WATCHERS[id];
+if (!W || !outFile) {
+  console.error(`usage: node watch.mjs <${Object.keys(WATCHERS).join('|')}> <out.json>`);
+  process.exit(2);
+}
 
-const EXTRACT = `(() => {
-  function fiberOf(el){for(const k in el){if(k.startsWith('__reactFiber$'))return el[k];}return null;}
-  const el = document.getElementById('scrollable-ticket-list') || document.body;
-  let node = fiberOf(el), seen = new Set(), best = null, depth = 0;
-  const ok = v => Array.isArray(v) && v.length > 20 && v[0] && typeof v[0]==='object' && 'tgPrice' in v[0];
-  while (node && depth < 80) {
-    [node.memoizedProps, node.memoizedState, node.pendingProps].forEach(bag => {
-      if (!bag || typeof bag !== 'object') return;
-      const st = [[bag,0]];
-      while (st.length) {
-        const [o,d] = st.pop();
-        if (!o || typeof o !== 'object' || d > 5 || seen.has(o)) continue;
-        seen.add(o);
-        if (ok(o)) { if (!best || o.length > best.length) best = o; continue; }
-        for (const k in o) { try { const v = o[k]; if (v && typeof v==='object') st.push([v,d+1]); } catch(e){} }
+const POLL_MS = 3000;
+const READY_DEADLINE_MS = 150000;
+
+// Runs inside the page. One function so a sample and its raw data come from the same instant.
+function snapshotInPage({ quantity, withRaw }) {
+  const fiberOf = (el) => { for (const k in el) if (k.startsWith('__reactFiber$')) return el[k]; return null; };
+
+  // The listings array: the largest array of objects carrying tgAllInPrice.
+  const list = (() => {
+    const el = document.getElementById('scrollable-ticket-list') || document.body;
+    let node = fiberOf(el), best = null, depth = 0;
+    const seen = new Set();
+    const ok = (v) => Array.isArray(v) && v.length > 0 && v[0] && typeof v[0] === 'object' && 'tgAllInPrice' in v[0];
+    while (node && depth < 80) {
+      for (const bag of [node.memoizedProps, node.memoizedState, node.pendingProps]) {
+        if (!bag || typeof bag !== 'object') continue;
+        const stack = [[bag, 0]];
+        while (stack.length) {
+          const [o, d] = stack.pop();
+          if (!o || typeof o !== 'object' || d > 5 || seen.has(o)) continue;
+          seen.add(o);
+          if (ok(o)) { if (!best || o.length > best.length) best = o; continue; }
+          for (const k in o) { try { const v = o[k]; if (v && typeof v === 'object') stack.push([v, d + 1]); } catch { /* getters */ } }
+        }
       }
-    });
-    node = node.return; depth++;
+      node = node.return; depth++;
+    }
+    return best || [];
+  })();
+
+  const labelEl = [...document.querySelectorAll('span')].find((e) => /^(live prices|refreshing marketplaces)$/i.test((e.textContent || '').trim()));
+  const qtyBtn = [...document.querySelectorAll('button')].find((b) => b.offsetParent !== null && /^\s*\d+\s*Seats?\s*$/.test(b.innerText || ''));
+  const names = ['vividseats', 'gametime', 'seatgeek', 'viagogo', 'stubhub', 'ticketnetwork', 'megaseats', 'event365', 'ticketmaster', 'tickpick', 'axs'];
+  const sources = new Set();
+  let unsellable = 0;
+  for (const t of list) {
+    const tid = String(t.tgID || '').toLowerCase();
+    sources.add(names.find((n) => tid.endsWith(n)) || 'other');
+    if (!(Array.isArray(t.splits) && t.splits.map(Number).includes(quantity))) unsellable++;
   }
-  if (!best) return { n: 0, rows: [] };
-  return { n: best.length, rows: best.map(t => ({
-    secLabel: String(t.tgUserSec || t.tgCanonSec || ''),
-    rowLabel: String(t.tgUserRow || ''),
-    price: t.tgPrice,
-    splits: Array.isArray(t.splits) ? t.splits : [],
-    link: String(t.tgCheckoutParams || ''),
-  })) };
-})()`;
+  const sample = {
+    label: labelEl ? labelEl.textContent.trim() : null,
+    qtyText: qtyBtn ? qtyBtn.innerText.trim() : null,
+    n: list.length,
+    sources: [...sources].sort(),
+    unsellable,
+  };
+  if (!withRaw) return { sample };
+  return {
+    sample,
+    raw: list.map((t) => ({
+      id: t.tgID, secLabel: t.tgUserSec || t.tgCanonSec || '', rowLabel: t.tgUserRow || '',
+      allIn: t.tgAllInPrice, splits: t.splits, link: t.tgCheckoutParams || '',
+    })),
+  };
+}
 
 // TicketWhiz filters quantity on its server, so the page's own selector must be set.
 // Its trigger is a Radix popover that opens on pointer-down; Playwright's click sends
 // real pointer events, which a plain DOM .click() does not.
-async function ensureQuantity(page, qty) {
+async function setQuantity(page, qty) {
   const trigger = page.locator('button').filter({ hasText: /^\s*\d+\s*Seats?\s*$/ }).locator('visible=true').first();
   await trigger.waitFor({ timeout: 30000 });
-  const current = (await trigger.innerText()).trim();
-  if (current === `${qty} Seats` || current === `${qty} Seat`) return current;
+  if (new RegExp(`^${qty} Seats?$`).test((await trigger.innerText()).trim())) return;
   await trigger.click();
   const option = page.locator('[role=dialog] button, [data-radix-popper-content-wrapper] button')
     .filter({ hasText: new RegExp(`^\\s*${qty}\\s*$`) }).locator('visible=true').first();
   await option.waitFor({ timeout: 15000 });
   await option.click();
   await page.keyboard.press('Escape').catch(() => {});
-  await page.waitForTimeout(2000);
-  return (await trigger.innerText()).trim();
 }
 
-const browser = await chromium.launch();
-const ctx = await browser.newContext({
-  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-  viewport: { width: 1280, height: 900 }, locale: 'en-US', timezoneId: 'America/New_York',
-});
-const page = await ctx.newPage();
-const fail = async (msg) => {
-  console.log(`FAILED [${W.id}]: ${msg}`);
-  writeFileSync(W.resultFile, JSON.stringify({ ok: false, watcher: W.id, reason: msg, whenISO: new Date().toISOString() }, null, 2));
-  await browser.close();
-  process.exit(1);
+const finish = (payload, code) => {
+  writeFileSync(outFile, JSON.stringify({ watcher: W.id, whenISO: new Date().toISOString(), ...payload }));
+  process.exit(code);
 };
 
-await page.goto(W.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+let browser;
+try {
+  browser = await chromium.launch();
+  const ctx = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+    viewport: { width: 1280, height: 900 }, locale: 'en-US', timezoneId: 'America/New_York',
+  });
+  const page = await ctx.newPage();
+  const resp = await page.goto(W.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  if (resp && resp.status() >= 400) throw new Error(`page returned HTTP ${resp.status()}`);
+  await setQuantity(page, W.quantity);
 
-let control;
-try { control = await ensureQuantity(page, W.quantity); }
-catch (e) { await fail(`could not set the seat selector to ${W.quantity}: ${e.message}`); }
-if (!new RegExp(`^${W.quantity} Seats?$`).test(control)) await fail(`seat selector reads "${control}", expected ${W.quantity}`);
-console.log(`  [${W.id}] seat selector: ${control}`);
-
-let data = { n: 0, rows: [] }, counts = [];
-for (let i = 0; i < 14; i++) {
-  await page.waitForTimeout(15000);
-  data = await page.evaluate(EXTRACT);
-  counts.push(data.n);
-  console.log(`  [${W.id}] +${(i + 1) * 15}s  ${data.n}`);
-  const c = counts;
-  if (data.n >= W.minListings && c.length >= 3 && c.at(-1) === c.at(-2) && c.at(-2) === c.at(-3)) break;
-}
-await browser.close();
-
-if (data.n < W.minListings) await fail(`only ${data.n} listings (floor ${W.minListings}) — load incomplete or blocked`);
-
-// Proof the quantity filter really applied: every listing must be sellable in this quantity.
-const wrongQty = data.rows.filter(r => !r.splits.includes(W.quantity)).length;
-if (wrongQty > 0) await fail(`${wrongQty} of ${data.n} listings cannot sell ${W.quantity} — quantity filter did not apply`);
-
-const num = s => { const m = String(s).match(/(\d{3})/); return m ? +m[1] : null; };
-const rowNum = s => (/^\d+$/.test(String(s)) ? +s : null);
-const rows = data.rows.map(r => ({ ...r, sec: num(r.secLabel), row: rowNum(r.rowLabel) }));
-
-let matches = [], nears = [];
-if (W.anySeat) {
-  const sorted = rows.slice().sort((a, b) => a.price - b.price);
-  matches = sorted.filter(r => r.price <= W.priceMax).slice(0, 5).map(r => ({ ...r, target: 'Any', label: `Any section · ${W.quantity} together` }));
-  nears = sorted.filter(r => r.price > W.priceMax).slice(0, W.closest || 3).map(r => ({ ...r, target: 'Any', label: `Cheapest ${W.quantity} together` }));
-} else {
-  const pick = (t, b) => rows
-    .filter(r => r.sec !== null && r.row !== null && t.secs.includes(r.sec) && r.row <= b.rowMax && r.price <= b.priceMax)
-    .sort((a, b2) => a.price - b2.price);
-  for (const t of W.targets) {
-    for (const r of pick(t, t).slice(0, 3)) matches.push({ ...r, target: t.id, label: t.label });
-    for (const r of pick(t, t.near).slice(0, 2)) {
-      if (!matches.some(m => m.secLabel === r.secLabel && m.rowLabel === r.rowLabel && m.price === r.price)) nears.push({ ...r, target: t.id, label: t.label });
+  const started = Date.now();
+  let prev = null, cur = null;
+  while (Date.now() - started < READY_DEADLINE_MS) {
+    await page.waitForTimeout(POLL_MS);
+    cur = (await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: false })).sample;
+    const secs = Math.round((Date.now() - started) / 1000);
+    console.log(`  [${W.id}] +${secs}s n=${cur.n} ${cur.label ?? '-'} qty=${cur.qtyText ?? '-'} sources=${cur.sources.length} unsellable=${cur.unsellable}`);
+    if (isReady(prev, cur, W.quantity)) {
+      const snap = await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: true });
+      if (notReadyReason(snap.sample, W.quantity) === null && sameMarket(cur, snap.sample)) {
+        await browser.close();
+        console.log(`  [${W.id}] ready after ${secs}s: ${snap.raw.length} listings from ${snap.sample.sources.join(', ')}`);
+        finish({ ok: true, sample: snap.sample, raw: snap.raw, readySeconds: secs }, 0);
+      }
+      cur = snap.sample; // market moved between the two reads; keep polling
     }
+    prev = cur;
   }
+  throw new Error(`page never settled within ${READY_DEADLINE_MS / 1000}s — last state: ${notReadyReason(cur, W.quantity) ?? 'market still changing'}`);
+} catch (e) {
+  if (browser) await browser.close().catch(() => {});
+  finish({ ok: false, reason: String(e.message || e).split('\n')[0] }, 1);
 }
-
-const when = new Date().toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' });
-writeFileSync(W.resultFile, JSON.stringify({
-  ok: true, watcher: W.id, title: W.title, alertLabel: W.alertLabel,
-  when, whenISO: new Date().toISOString(), quantity: W.quantity,
-  listings: data.n, matches, nears,
-}, null, 2));
-
-// ---------- status page ----------
-const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-const seatText = r => `${esc(r.secLabel || 'Section ?')} &middot; Row ${esc(r.rowLabel || '?')}`;
-const card = (r, hit) => `<article class="find${hit ? ' hit' : ''}"><span class="pill">${hit ? 'Match' : (W.anySeat ? 'Closest' : 'Near miss')}</span>
-<div><p class="seat">${seatText(r)} &middot; <b>$${r.price.toFixed(2)}</b> <span class="ea">all-in, each${W.anySeat ? '' : ` &middot; Target ${r.target}`}</span></p>
-<p class="why">${esc(r.label)}${W.anySeat && !hit ? ` &mdash; $${(r.price - W.priceMax).toFixed(2)} over your $${W.priceMax} cap` : ''}</p></div>
-<a class="buy" href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">Buy &rarr;</a></article>`;
-
-// Pages are served from docs/, so docs/falcons/index.html lives at <site>/falcons/.
-const sitePath = o => o.outDir.replace(/^docs\/?/, '');            // '' or 'falcons'
-const toRoot = '../'.repeat(sitePath(W).split('/').filter(Boolean).length);
-const others = Object.values(WATCHERS).filter(o => o.id !== W.id)
-  .map(o => `<a href="${toRoot}${sitePath(o) ? sitePath(o) + '/' : ''}">${esc(o.title)}</a>`).join(' &middot; ');
-
-const criteria = W.anySeat
-  ? `${W.quantity} seats together &middot; any section &middot; $${W.priceMax} or less each`
-  : W.targets.map(t => `<b>${t.id}</b> ${esc(t.label)}`).join(' &middot; ');
-
-mkdirSync(W.outDir, { recursive: true });
-writeFileSync(`${W.outDir}/index.html`, `<!doctype html><html><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(W.title)} Seat Watch</title>
-<style>:root{--g:#203731;--gold:#FFB612;--bg:#ECEFE9;--s:#fff;--ink:#16241E;--ink2:#3D4F47;--rule:#CBD4C8;--hit:#1B6A4A;--near:#94480F;--nearbg:#F7E4CE;--hitbg:#D8EBE0}
-@media(prefers-color-scheme:dark){:root{--bg:#101B16;--s:#1A2A23;--ink:#E9EFE9;--ink2:#AFBFB6;--rule:#2B3B33;--hit:#6FD3A0;--near:#EFA167;--nearbg:#352113;--hitbg:#153126}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,sans-serif}
-header{background:var(--g);color:#F2F5F0;padding:28px 0;border-bottom:5px solid var(--gold)}
-h1{margin:0;font-size:2rem;letter-spacing:-.01em}/* one column, one left edge: every section shares the same width and inset */
-.hd,.meta,.crit,.wrap,nav{max-width:900px;margin:0 auto;padding-left:24px;padding-right:24px}
-.sub{color:var(--gold);font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;margin-top:6px}
-.meta{padding-top:18px;color:var(--ink2);font-size:.93rem}.crit{padding-top:6px;color:var(--ink2);font-size:.88rem}
-.wrap{padding-bottom:40px}
-.find{background:var(--s);border:1px solid var(--rule);border-left:4px solid var(--near);border-radius:3px;padding:14px 18px;margin:10px 0;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
-.find.hit{border-left-color:var(--hit)}.pill{background:var(--nearbg);color:var(--near);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px;white-space:nowrap}
-.find.hit .pill{background:var(--hitbg);color:var(--hit)}.seat{margin:0}.ea{color:var(--ink2);font-size:.85rem;font-weight:400}
-.why{margin:2px 0 0;color:var(--ink2);font-size:.88rem}.buy{background:var(--gold);color:#203731;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:7px 13px;border-radius:2px;white-space:nowrap}
-.none{background:var(--s);border:1px solid var(--rule);border-left:4px solid var(--rule);border-radius:3px;padding:14px 18px;color:var(--ink2);margin:14px 0 4px}
-nav{padding-bottom:32px;font-size:.88rem;color:var(--ink2)}nav a{color:var(--ink2)}
-@media(max-width:620px){.find{grid-template-columns:1fr}}</style></head><body>
-<header><div class="hd"><h1>${esc(W.title)}</h1><div class="sub">${esc(W.subtitle)}</div></div></header>
-<p class="meta">Last check <b>${esc(when)}</b> &middot; <b>${data.n.toLocaleString()}</b> listings for ${W.quantity} together &middot; checks every 30 minutes</p>
-<p class="crit">Watching for: ${criteria}</p>
-<div class="wrap">
-${matches.length ? matches.map(r => card(r, true)).join('\n') : '<div class="none">No exact match this check.</div>'}
-${nears.map(r => card(r, false)).join('\n')}
-</div>
-${others ? `<nav>Also watching: ${others}</nav>` : ''}
-</body></html>`);
-
-console.log(`\n[${W.id}] listings: ${data.n}  matches: ${matches.length}  shown below cap: ${nears.length}`);
-for (const m of matches) console.log(`  MATCH  ${m.secLabel} Row ${m.rowLabel}  $${m.price}`);
-for (const n of nears) console.log(`  close  ${n.secLabel} Row ${n.rowLabel}  $${n.price}`);

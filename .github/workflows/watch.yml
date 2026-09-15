@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'One cycle per game, no publishing and no issues'
+        description: 'One cycle per game: no issues, no publishing'
         type: boolean
         default: false
 
@@ -15,50 +15,65 @@ permissions:
   issues: write
 
 concurrency:
-  group: seat-watch-${{ github.ref_name }}
+  group: seat-watch
   cancel-in-progress: false
 
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 340
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 0   # history operations need real history; shallow clones broke publishing
+          fetch-depth: 0   # publishing replays files onto the remote; that needs real history
+
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
-      - run: npm install
-      - run: npx playwright install --with-deps chromium
+          cache: npm
 
-      - name: Configure git
+      - name: Any games left to watch?
+        id: games
+        run: node -e "import('./watchers.mjs').then(m=>console.log('active='+Object.values(m.WATCHERS).filter(w=>Date.now()<Date.parse(w.kickoff)).length))" >> "$GITHUB_OUTPUT"
+
+      - if: steps.games.outputs.active != '0'
+        run: npm ci
+
+      - if: steps.games.outputs.active != '0'
+        name: Tests must pass before anything is checked or published
+        run: npm test
+
+      - if: steps.games.outputs.active != '0'
+        run: npx playwright install --with-deps chromium
+
+      - if: steps.games.outputs.active != '0'
+        name: Configure git
         run: |
           git config user.name "seat-watch"
           git config user.email "noreply@github.com"
 
-      # GitHub's scheduler throttles */30 badly — observed ~1 run per 5 hours.
-      # One run stays alive and checks every game on its own 30-minute clock.
-      - name: Watch loop
+      # GitHub's scheduler throttles */30 hard (observed ~1 run per 5 hours), so one job
+      # stays alive and keeps its own 30-minute clock. Every cycle first moves to the
+      # latest main, so criteria or code changes apply within one cycle, not one window.
+      - if: steps.games.outputs.active != '0'
+        name: Watch loop
         env:
           GH_TOKEN: ${{ github.token }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
         run: |
-          WATCHERS=$(node -e "import('./watchers.mjs').then(m=>console.log(Object.keys(m.WATCHERS).join(' ')))")
-          echo "watching: $WATCHERS"
-          END=$(( $(date +%s) + 19200 ))   # 5h20m, inside the 340-minute job cap
-          N=0
+          END=$(( $(date +%s) + 19800 ))           # 5h30m, inside the 350-minute job cap
+          LOCK=$(sha1sum package-lock.json)
           while :; do
-            N=$((N+1))
-            for W in $WATCHERS; do
-              echo "::group::cycle $N · $W — $(date -u '+%H:%M UTC')"
-              ./cycle.sh "$W"
-              echo "::endgroup::"
-            done
+            START=$(date +%s)
+            git fetch -q origin main && git reset -q --hard origin/main
+            if [ "$(sha1sum package-lock.json)" != "$LOCK" ]; then
+              echo "dependencies changed — reinstalling"
+              npm ci && npx playwright install chromium && LOCK=$(sha1sum package-lock.json)
+            fi
+            node cycle.mjs; RC=$?
+            [ "$RC" -eq 3 ] && { echo "no games left; stopping"; break; }
             [ "$DRY_RUN" = "1" ] && { echo "dry run: one cycle only"; break; }
-            NOW=$(date +%s)
-            [ "$NOW" -ge "$END" ] && { echo "window complete after $N cycles"; break; }
-            [ $(( END - NOW )) -lt 1800 ] && { echo "less than one cycle left; stopping after $N"; break; }
-            sleep 1800
+            NEXT=$(( START + 1800 )); NOW=$(date +%s)
+            [ "$NEXT" -ge "$END" ] && { echo "window ends before the next cycle; stopping"; break; }
+            [ "$NEXT" -gt "$NOW" ] && sleep $(( NEXT - NOW ))
           done

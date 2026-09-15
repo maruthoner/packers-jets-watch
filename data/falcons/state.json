@@ -1,0 +1,11 @@
+{
+  "failStreak": 0,
+  "failIssue": null,
+  "failActive": false,
+  "lastFailure": null,
+  "matchIssue": null,
+  "matchActive": false,
+  "notifiedBest": null,
+  "emptyStreak": 0,
+  "lastSuccessISO": null
+}
