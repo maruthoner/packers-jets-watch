@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-15T06:45:51.941Z",
-  "when": "Sep 15, 2026, 2:45 AM ET",
+  "whenISO": "2026-09-15T07:15:57.909Z",
+  "when": "Sep 15, 2026, 3:15 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 11688,
+  "listings": 11909,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 16,
+  "readySeconds": 23,
   "matches": [
     {
       "id": "6aa44d4eb79ea20b62e538d3gametime",
