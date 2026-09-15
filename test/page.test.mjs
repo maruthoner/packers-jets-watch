@@ -60,8 +60,7 @@ test('games with preferred sections render the preferred list first, labelled as
   });
   const pref = html.indexOf('Preferred sections'), general = html.indexOf('Any other section');
   assert.ok(pref > 0 && general > pref, 'preferred section comes first');
-  assert.match(html.slice(pref, general), /email alerts/);
-  assert.match(html.slice(general), /page only/);
+  assert.ok(!/email alerts|page only/.test(html), 'no alert labels on the headings');
   assert.match(html.slice(pref, general), /339 &middot; Row 24/);
   assert.ok(!html.slice(pref, general).includes('327'), 'general seat not in preferred section');
 });
