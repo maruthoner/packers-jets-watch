@@ -1,7 +1,7 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-15T22:46:26.331Z",
-  "when": "Sep 15, 2026, 6:46 PM ET",
+  "whenISO": "2026-09-15T23:16:41.649Z",
+  "when": "Sep 15, 2026, 7:16 PM ET",
   "quantity": 3,
   "priceMax": 130,
   "listings": 657,
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 9,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 616,
-    "ticketnetwork": 978,
-    "megaseats": 978,
-    "seatgeek": 226,
-    "vividseats": 854,
-    "gametime": 1101,
-    "stubhub": 354,
-    "viagogo": 519,
+    "event365": 617,
+    "ticketnetwork": 980,
+    "megaseats": 977,
+    "seatgeek": 228,
+    "vividseats": 853,
+    "gametime": 1098,
+    "stubhub": 255,
+    "viagogo": 511,
     "ticketmaster": 0
   },
   "missing": [],
@@ -53,12 +53,12 @@
       "unassigned": false
     },
     {
-      "id": "625818474megaseats",
-      "source": "megaseats",
+      "id": "6a5e29bbb6bace957b864c59gametime",
+      "source": "gametime",
       "secLabel": "349",
       "rowLabel": "7",
-      "price": 212.5,
-      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D625818474",
+      "price": 212,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F695cb0255a70588e3051bdbb%2Flistings%2F6a5e29bbb6bace957b864c59%3Fseat_count%3D0",
       "unassigned": false
     }
   ],
