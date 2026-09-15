@@ -12,9 +12,11 @@ export const WATCHERS = {
     outDir: 'docs',
     resultFile: 'result.json',
     alertLabel: 'Jets',
-    anySeat: true,              // any section, any row — only price and quantity matter (Ruth, Sep 14)
-    priceMax: 100,              // per ticket, all-in
-    closest: 3,                 // show the cheapest few so the gap to $100 is visible
+    targets: [
+      { id: 'A', label: 'Lower bowl · Packers sideline', secs: [135,137,139,140,142], rowMax: 20, priceMax: 360, near: { rowMax: 25, priceMax: 430 } },
+      { id: 'B', label: 'Upper deck · Packers sideline', secs: [337,338,339,340],     rowMax: 1,  priceMax: 250, near: { rowMax: 4,  priceMax: 300 } },
+      { id: 'C', label: 'Upper deck · Jets sideline',    secs: [311,312,313,314,315,316], rowMax: 1, priceMax: 149.99, near: { rowMax: 4, priceMax: 180 } },
+    ],
   },
 
   falcons: {
