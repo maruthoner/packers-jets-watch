@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-15T11:15:46.533Z",
-  "when": "Sep 15, 2026, 7:15 AM ET",
+  "whenISO": "2026-09-15T11:45:51.578Z",
+  "when": "Sep 15, 2026, 7:45 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 12090,
+  "listings": 11478,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 12,
+  "readySeconds": 16,
   "matches": [
     {
       "id": "6aa44d4eb79ea20b62e538d3gametime",
@@ -514,6 +514,15 @@
       "rowLabel": "15",
       "price": 100,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa8145330e519e0a547b505%3Fseat_count%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "6aa8a35350d436446c93f11agametime",
+      "source": "gametime",
+      "secLabel": "321",
+      "rowLabel": "16",
+      "price": 100,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa8a35350d436446c93f11a%3Fseat_count%3D0",
       "unassigned": false
     },
     {
