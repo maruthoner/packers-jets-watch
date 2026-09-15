@@ -3,10 +3,10 @@
   "watcher": "jets",
   "title": "Packers at Jets",
   "alertLabel": "Jets",
-  "when": "Sep 14, 2026, 7:52 PM",
-  "whenISO": "2026-09-14T23:52:17.310Z",
+  "when": "Sep 14, 2026, 8:24 PM",
+  "whenISO": "2026-09-15T00:24:20.499Z",
   "quantity": 2,
-  "listings": 11608,
+  "listings": 11855,
   "matches": [],
   "nears": [
     {
@@ -38,7 +38,7 @@
     {
       "secLabel": "340",
       "rowLabel": "4",
-      "price": 198.44,
+      "price": 196.77,
       "splits": [
         2
       ],
