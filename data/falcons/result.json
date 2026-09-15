@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-15T02:45:10.470Z",
-  "when": "Sep 14, 2026, 10:45 PM ET",
+  "whenISO": "2026-09-15T03:15:01.347Z",
+  "when": "Sep 14, 2026, 11:15 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 643,
+  "listings": 644,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 9,
+  "readySeconds": 7,
   "matches": [],
   "closest": [
     {
