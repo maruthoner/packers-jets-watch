@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-15T12:32:59.119Z",
-  "when": "Sep 15, 2026, 8:32 AM ET",
+  "whenISO": "2026-09-15T13:02:57.307Z",
+  "when": "Sep 15, 2026, 9:02 AM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 624,
+  "listings": 617,
   "rejected": {
     "price": 0,
     "quantity": 0
