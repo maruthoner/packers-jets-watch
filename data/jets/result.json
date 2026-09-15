@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-15T05:44:58.904Z",
-  "when": "Sep 15, 2026, 1:44 AM ET",
+  "whenISO": "2026-09-15T06:14:55.333Z",
+  "when": "Sep 15, 2026, 2:14 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 12012,
+  "listings": 12420,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 27,
+  "readySeconds": 23,
   "matches": [
     {
       "id": "6aa44d4eb79ea20b62e538d3gametime",
@@ -382,15 +382,6 @@
       "unassigned": false
     },
     {
-      "id": "14045682040stubhub",
-      "source": "stubhub",
-      "secLabel": "GOLD2",
-      "rowLabel": "",
-      "price": 98.52,
-      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14045682040%26listingQty%3D",
-      "unassigned": true
-    },
-    {
       "id": "14043019538viagogo",
       "source": "viagogo",
       "secLabel": "329",
@@ -487,15 +478,6 @@
       "rowLabel": "20",
       "price": 99.36,
       "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3Dxb9imMoMmjX",
-      "unassigned": false
-    },
-    {
-      "id": "14043110916viagogo",
-      "source": "viagogo",
-      "secLabel": "322",
-      "rowLabel": "20",
-      "price": 99.73,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14043110916%26listingQty%3D",
       "unassigned": false
     },
     {
