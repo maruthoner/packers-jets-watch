@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-15T08:45:53.186Z",
-  "when": "Sep 15, 2026, 4:45 AM ET",
+  "whenISO": "2026-09-15T09:15:51.748Z",
+  "when": "Sep 15, 2026, 5:15 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 12290,
+  "listings": 12149,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -546,12 +546,12 @@
       "unassigned": false
     },
     {
-      "id": "14043110916viagogo",
+      "id": "14045122415viagogo",
       "source": "viagogo",
-      "secLabel": "322",
-      "rowLabel": "20",
+      "secLabel": "321",
+      "rowLabel": "19",
       "price": 100.56,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14043110916%26listingQty%3D",
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14045122415%26listingQty%3D",
       "unassigned": false
     }
   ]
