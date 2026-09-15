@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-15T17:45:03.145Z",
-  "when": "Sep 15, 2026, 1:45 PM ET",
+  "whenISO": "2026-09-15T18:15:10.262Z",
+  "when": "Sep 15, 2026, 2:15 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 623,
+  "listings": 622,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,46 +19,46 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 9,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 605,
-    "ticketnetwork": 952,
-    "megaseats": 952,
-    "seatgeek": 224,
+    "event365": 603,
+    "ticketnetwork": 951,
+    "megaseats": 951,
+    "seatgeek": 222,
     "vividseats": 851,
-    "gametime": 1102,
-    "stubhub": 307,
-    "viagogo": 254,
+    "gametime": 1099,
+    "stubhub": 303,
+    "viagogo": 244,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "1008085347TicketNetwork",
-      "source": "ticketnetwork",
-      "secLabel": "105",
-      "rowLabel": "52",
-      "price": 236.72,
-      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D1008085347%26quantity%3D0",
+      "id": "13406323395viagogo",
+      "source": "viagogo",
+      "secLabel": "349",
+      "rowLabel": "7",
+      "price": 220.03,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13406323395%26listingQty%3D",
       "unassigned": false
     },
     {
-      "id": "1008085347megaseats",
+      "id": "625818474TicketNetwork",
+      "source": "ticketnetwork",
+      "secLabel": "349",
+      "rowLabel": "7",
+      "price": 221.76,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D625818474%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "625818474megaseats",
       "source": "megaseats",
-      "secLabel": "105",
-      "rowLabel": "52",
-      "price": 238,
-      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D1008085347",
-      "unassigned": false
-    },
-    {
-      "id": "842238799TicketNetwork",
-      "source": "ticketnetwork",
-      "secLabel": "741S",
-      "rowLabel": "17",
-      "price": 242,
-      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D842238799%26quantity%3D0",
+      "secLabel": "349",
+      "rowLabel": "7",
+      "price": 223.55,
+      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D625818474",
       "unassigned": false
     }
   ],
