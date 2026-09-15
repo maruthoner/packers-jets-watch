@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-15T06:46:04.241Z",
-  "when": "Sep 15, 2026, 2:46 AM ET",
+  "whenISO": "2026-09-15T07:16:13.608Z",
+  "when": "Sep 15, 2026, 3:16 AM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 623,
+  "listings": 628,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,11 +19,11 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 6,
+  "readySeconds": 9,
   "matches": [],
   "closest": [
     {
-      "id": "842238799ticketnetwork",
+      "id": "842238799TicketNetwork",
       "source": "ticketnetwork",
       "secLabel": "741S",
       "rowLabel": "17",
@@ -41,7 +41,7 @@
       "unassigned": false
     },
     {
-      "id": "753984079ticketnetwork",
+      "id": "753984079TicketNetwork",
       "source": "ticketnetwork",
       "secLabel": "336",
       "rowLabel": "8",
