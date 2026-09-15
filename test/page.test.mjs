@@ -85,3 +85,7 @@ test('a complete check shows no missing-marketplace note', () => {
   assert.ok(!renderPage(W, { result: result({ missing: [] }), state: {}, others: [] }).includes('Not included'));
   assert.ok(!renderPage(W, { result: result(), state: {}, others: [] }).includes('Not included'));
 });
+
+test('seat cards show the price without an "all-in, each" suffix', () => {
+  assert.ok(!renderPage(W, { result: result(), state: {}, others: [] }).includes('all-in'));
+});
