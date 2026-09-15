@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-15T15:32:57.555Z",
-  "when": "Sep 15, 2026, 11:32 AM ET",
+  "whenISO": "2026-09-15T15:45:12.259Z",
+  "when": "Sep 15, 2026, 11:45 AM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 614,
+  "listings": 617,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 6,
+  "readySeconds": 9,
   "matches": [],
   "closest": [
     {
@@ -49,5 +49,6 @@
       "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fgreen-bay-packers-tickets%2F9-24-2026-green-bay-wisconsin-lambeau-field%2Fnfl%2F18016552%3Fquantity%3D0%23listing%3DGAaI60Admwo",
       "unassigned": false
     }
-  ]
+  ],
+  "preferred": null
 }
