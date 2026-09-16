@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T21:52:01.436Z",
-  "when": "Sep 16, 2026, 5:52 PM ET",
+  "whenISO": "2026-09-16T22:22:17.809Z",
+  "when": "Sep 16, 2026, 6:22 PM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 8188,
+  "listings": 7864,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 14,
+  "readySeconds": 31,
   "feeds": {
-    "event365": 2273,
-    "seatgeek": 1048,
-    "ticketnetwork": 1450,
-    "megaseats": 1444,
-    "vividseats": 1716,
-    "gametime": 895,
-    "stubhub": 420,
-    "viagogo": 791,
+    "event365": 2270,
+    "seatgeek": 1047,
+    "ticketnetwork": 1452,
+    "megaseats": 1440,
+    "vividseats": 1709,
+    "gametime": 887,
+    "stubhub": 394,
+    "viagogo": 461,
     "ticketmaster": 0
   },
   "missing": [],
@@ -133,21 +133,21 @@
       "unassigned": false
     },
     {
+      "id": "DdwHkw7q8mjseatgeek",
+      "source": "seatgeek",
+      "secLabel": "327",
+      "rowLabel": "15",
+      "price": 99.63,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DDdwHkw7q8mj",
+      "unassigned": false
+    },
+    {
       "id": "6aaa97f93a417e05b80cb5c6gametime",
       "source": "gametime",
       "secLabel": "350",
       "rowLabel": "23",
       "price": 100,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97f93a417e05b80cb5c6%3Fseat_count%3D0",
-      "unassigned": false
-    },
-    {
-      "id": "6aaa97ff8274562505b957a9gametime",
-      "source": "gametime",
-      "secLabel": "327",
-      "rowLabel": "20",
-      "price": 100,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97ff8274562505b957a9%3Fseat_count%3D0",
       "unassigned": false
     },
     {
@@ -169,15 +169,6 @@
       "unassigned": false
     },
     {
-      "id": "6aaac90b36f62b212b5dd579gametime",
-      "source": "gametime",
-      "secLabel": "327",
-      "rowLabel": "19",
-      "price": 100,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaac90b36f62b212b5dd579%3Fseat_count%3D0",
-      "unassigned": false
-    },
-    {
       "id": "6aaae38dfb85b06946b6a632gametime",
       "source": "gametime",
       "secLabel": "328",
@@ -196,12 +187,12 @@
       "unassigned": false
     },
     {
-      "id": "VB17194464164vividseats",
+      "id": "VB17195088315vividseats",
       "source": "vividseats",
-      "secLabel": "Upper Level 327",
+      "secLabel": "Upper Level 329",
       "rowLabel": "20",
       "price": 100,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17194464164%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17195088315%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "unassigned": false
     }
   ],
@@ -225,12 +216,12 @@
       "unassigned": false
     },
     {
-      "id": "6aaa98023c938baacc1744e5gametime",
+      "id": "6aaa97fa5c61bf16e25a4217gametime",
       "source": "gametime",
-      "secLabel": "323",
-      "rowLabel": "20",
+      "secLabel": "327",
+      "rowLabel": "17",
       "price": 101,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa98023c938baacc1744e5%3Fseat_count%3D0",
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97fa5c61bf16e25a4217%3Fseat_count%3D0",
       "unassigned": false
     }
   ],
