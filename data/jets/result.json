@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T03:47:11.608Z",
-  "when": "Sep 15, 2026, 11:47 PM ET",
+  "whenISO": "2026-09-16T04:17:15.221Z",
+  "when": "Sep 16, 2026, 12:17 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 8741,
+  "listings": 8944,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 8,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 2067,
+    "event365": 1983,
     "seatgeek": 868,
-    "ticketnetwork": 1842,
-    "megaseats": 1841,
-    "vividseats": 1585,
-    "gametime": 921,
-    "stubhub": 496,
-    "viagogo": 264,
+    "ticketnetwork": 1754,
+    "megaseats": 1756,
+    "vividseats": 1584,
+    "gametime": 914,
+    "stubhub": 473,
+    "viagogo": 761,
     "ticketmaster": 0
   },
   "missing": [],
@@ -59,6 +59,15 @@
       "price": 89,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa44d4fb79ea20b62e538dc%3Fseat_count%3D0",
       "unassigned": true
+    },
+    {
+      "id": "MAeIPXPnZ9Xseatgeek",
+      "source": "seatgeek",
+      "secLabel": "331",
+      "rowLabel": "13",
+      "price": 98.26,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DMAeIPXPnZ9X",
+      "unassigned": false
     },
     {
       "id": "6a9876fabd7087abe00cef00gametime",
@@ -117,15 +126,6 @@
   ],
   "closest": [
     {
-      "id": "MAeIPXPnZ9Xseatgeek",
-      "source": "seatgeek",
-      "secLabel": "331",
-      "rowLabel": "13",
-      "price": 100.27,
-      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DMAeIPXPnZ9X",
-      "unassigned": false
-    },
-    {
       "id": "6a4add61239cabfa2c1d790egametime",
       "source": "gametime",
       "secLabel": "325",
@@ -141,6 +141,15 @@
       "rowLabel": "17",
       "price": 101,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a55114163d38d17e7b4dc13%3Fseat_count%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "6aa0156d2a5db90194ba83a6gametime",
+      "source": "gametime",
+      "secLabel": "322",
+      "rowLabel": "14",
+      "price": 101,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa0156d2a5db90194ba83a6%3Fseat_count%3D0",
       "unassigned": false
     }
   ],
