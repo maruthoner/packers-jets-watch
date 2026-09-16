@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T13:49:34.542Z",
-  "when": "Sep 16, 2026, 9:49 AM ET",
+  "whenISO": "2026-09-16T14:19:30.912Z",
+  "when": "Sep 16, 2026, 10:19 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 8873,
+  "listings": 9407,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 15,
+  "readySeconds": 11,
   "feeds": {
-    "event365": 2169,
-    "seatgeek": 1001,
-    "ticketnetwork": 1888,
-    "megaseats": 1877,
-    "vividseats": 1705,
-    "gametime": 914,
-    "stubhub": 327,
-    "viagogo": 275,
+    "event365": 2168,
+    "seatgeek": 1004,
+    "ticketnetwork": 1886,
+    "megaseats": 1886,
+    "vividseats": 1709,
+    "gametime": 918,
+    "stubhub": 427,
+    "viagogo": 812,
     "ticketmaster": 0
   },
   "missing": [],
@@ -198,6 +198,15 @@
   ],
   "closest": [
     {
+      "id": "V4KU0ePEo57seatgeek",
+      "source": "seatgeek",
+      "secLabel": "348",
+      "rowLabel": "15",
+      "price": 100.04,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DV4KU0ePEo57",
+      "unassigned": false
+    },
+    {
       "id": "6aaa97f925fb48f18f0cc7b2gametime",
       "source": "gametime",
       "secLabel": "301",
@@ -213,15 +222,6 @@
       "rowLabel": "22",
       "price": 101,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97f9b92827a89e81940f%3Fseat_count%3D0",
-      "unassigned": false
-    },
-    {
-      "id": "6aaa98023c938baacc1744e5gametime",
-      "source": "gametime",
-      "secLabel": "323",
-      "rowLabel": "20",
-      "price": 101,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa98023c938baacc1744e5%3Fseat_count%3D0",
       "unassigned": false
     }
   ],
