@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-16T21:52:16.810Z",
-  "when": "Sep 16, 2026, 5:52 PM ET",
+  "whenISO": "2026-09-16T22:22:39.212Z",
+  "when": "Sep 16, 2026, 6:22 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 720,
+  "listings": 715,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,23 +19,23 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 13,
+  "readySeconds": 19,
   "feeds": {
-    "event365": 1024,
-    "ticketnetwork": 1033,
-    "megaseats": 1032,
-    "seatgeek": 213,
-    "vividseats": 892,
-    "gametime": 1099,
-    "stubhub": 311,
-    "viagogo": 491,
+    "event365": 1040,
+    "ticketnetwork": 1035,
+    "megaseats": 1035,
+    "seatgeek": 211,
+    "vividseats": 889,
+    "gametime": 1100,
+    "stubhub": 153,
+    "viagogo": 499,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "842238799ticketnetwork",
+      "id": "842238799TicketNetwork",
       "source": "ticketnetwork",
       "secLabel": "741S",
       "rowLabel": "17",
@@ -53,13 +53,13 @@
       "unassigned": false
     },
     {
-      "id": "VB17173428260vividseats",
-      "source": "vividseats",
-      "secLabel": "Lower Level 135",
-      "rowLabel": "24",
-      "price": 259,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fgreen-bay-packers-tickets-green-bay-lambeau-field-3-4-2026%2Fproduction%2F6489939%3FshowDetails%3DVB17173428260%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-      "unassigned": false
+      "id": "1019362585TicketNetwork",
+      "source": "ticketnetwork",
+      "secLabel": "SRO",
+      "rowLabel": "GA",
+      "price": 244.64,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D1019362585%26quantity%3D0",
+      "unassigned": true
     }
   ],
   "preferred": null
