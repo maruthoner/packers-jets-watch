@@ -106,7 +106,7 @@ async function cycleOne(w) {
     outcome = { ok: false, reason: read.reason, whenISO: new Date().toISOString() };
   } else {
     const { listings, rejected } = normalize(read.raw, w.quantity);
-    const problem = validate({ rawCount: read.raw.length, rejected }, w);
+    const problem = validate({ rawCount: read.raw.length, rejected, missing: read.missing ?? [] }, w);
     if (problem) {
       outcome = { ok: false, reason: problem, whenISO: read.whenISO };
     } else {

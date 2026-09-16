@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { normalize, validate, decide, sourceOf, isSafeLink, isUnassigned } from '../lib/decide.mjs';
 
 const raw = (o = {}) => ({ id: 'X1vividseats', secLabel: '327', rowLabel: '19', allIn: 90, splits: [2], link: 'https://example.com/buy', ...o });
-const W = { id: 't', quantity: 2, priceMax: 100, minListings: 3, closest: 3 };
+const W = { id: 't', quantity: 2, priceMax: 100, closest: 3 };
 
 test('a missing price is rejected, never a $0 match', () => {
   const { listings, rejected } = normalize([raw({ allIn: null }), raw({ allIn: undefined }), raw({ allIn: NaN }), raw({ allIn: 0 }), raw({ allIn: -5 }), raw({ allIn: '' })], 2);
@@ -26,8 +26,18 @@ test('splits given as strings still count', () => {
   assert.equal(normalize([raw({ splits: ['2', '4'] })], 2).listings.length, 1);
 });
 
-test('too few listings fails validation', () => {
-  assert.match(validate({ rawCount: 2, rejected: { price: 0, quantity: 0 } }, W), /only 2 listings/);
+test('a small market is valid: listings shrink as seats sell', () => {
+  assert.equal(validate({ rawCount: 2, rejected: { price: 0, quantity: 0 } }, W), null);
+});
+
+test('an empty read fails validation', () => {
+  assert.match(validate({ rawCount: 0, rejected: { price: 0, quantity: 0 } }, W), /no listings/);
+});
+
+test('one missing marketplace is allowed; two is too much unchecked', () => {
+  const clean = { price: 0, quantity: 0 };
+  assert.equal(validate({ rawCount: 500, rejected: clean, missing: [{ site: 'event365', why: 'HTTP 502' }] }, W), null);
+  assert.match(validate({ rawCount: 500, rejected: clean, missing: [{ site: 'event365' }, { site: 'viagogo' }] }, W), /2 marketplaces did not answer \(event365, viagogo\)/);
 });
 
 test('more than 1% unpriced listings fails; a stray one does not', () => {
