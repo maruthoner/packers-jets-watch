@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T00:46:33.294Z",
-  "when": "Sep 15, 2026, 8:46 PM ET",
+  "whenISO": "2026-09-16T01:16:15.475Z",
+  "when": "Sep 15, 2026, 9:16 PM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 8814,
+  "listings": 9230,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 28,
+  "readySeconds": 11,
   "feeds": {
-    "event365": 2155,
-    "seatgeek": 890,
-    "ticketnetwork": 1866,
-    "megaseats": 1867,
-    "vividseats": 1619,
-    "gametime": 913,
-    "stubhub": 388,
-    "viagogo": 294,
+    "event365": 2147,
+    "seatgeek": 881,
+    "ticketnetwork": 1843,
+    "megaseats": 1845,
+    "vividseats": 1593,
+    "gametime": 908,
+    "stubhub": 455,
+    "viagogo": 757,
     "ticketmaster": 0
   },
   "missing": [],
@@ -185,7 +185,7 @@
         "source": "gametime",
         "secLabel": "340",
         "rowLabel": "25",
-        "price": 132,
+        "price": 133,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a5a1d81a6fccc64df698852%3Fseat_count%3D0",
         "unassigned": false
       },
@@ -194,7 +194,7 @@
         "source": "vividseats",
         "secLabel": "Upper Level 337",
         "rowLabel": "26",
-        "price": 137,
+        "price": 138,
         "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16952967692%26wsUser%3D1180%26groupId%3D%26qty%3D0",
         "unassigned": false
       },
@@ -203,7 +203,7 @@
         "source": "vividseats",
         "secLabel": "Upper Level 340",
         "rowLabel": "25",
-        "price": 138,
+        "price": 139,
         "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17162388278%26wsUser%3D1180%26groupId%3D%26qty%3D0",
         "unassigned": false
       }
