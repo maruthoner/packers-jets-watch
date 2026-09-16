@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T07:18:31.463Z",
-  "when": "Sep 16, 2026, 3:18 AM ET",
+  "whenISO": "2026-09-16T07:48:31.860Z",
+  "when": "Sep 16, 2026, 3:48 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 9116,
+  "listings": 9089,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 16,
+  "readySeconds": 17,
   "feeds": {
-    "event365": 2185,
+    "event365": 2186,
     "seatgeek": 865,
-    "ticketnetwork": 1772,
-    "megaseats": 1772,
+    "ticketnetwork": 1810,
+    "megaseats": 1800,
     "vividseats": 1584,
-    "gametime": 921,
-    "stubhub": 443,
-    "viagogo": 748,
+    "gametime": 920,
+    "stubhub": 402,
+    "viagogo": 755,
     "ticketmaster": 0
   },
   "missing": [],
@@ -172,21 +172,21 @@
         "unassigned": false
       },
       {
+        "id": "6a5e2e54b7404080b614454dgametime",
+        "source": "gametime",
+        "secLabel": "337",
+        "rowLabel": "26",
+        "price": 130,
+        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a5e2e54b7404080b614454d%3Fseat_count%3D0",
+        "unassigned": false
+      },
+      {
         "id": "VB16952967692vividseats",
         "source": "vividseats",
         "secLabel": "Upper Level 337",
         "rowLabel": "26",
         "price": 136,
         "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16952967692%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-        "unassigned": false
-      },
-      {
-        "id": "VB17162388278vividseats",
-        "source": "vividseats",
-        "secLabel": "Upper Level 340",
-        "rowLabel": "25",
-        "price": 136,
-        "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17162388278%26wsUser%3D1180%26groupId%3D%26qty%3D0",
         "unassigned": false
       }
     ]
