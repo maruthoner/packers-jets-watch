@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T10:18:29.499Z",
-  "when": "Sep 16, 2026, 6:18 AM ET",
+  "whenISO": "2026-09-16T10:48:30.273Z",
+  "when": "Sep 16, 2026, 6:48 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 9058,
+  "listings": 9243,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -21,14 +21,14 @@
   ],
   "readySeconds": 15,
   "feeds": {
-    "event365": 2160,
-    "seatgeek": 860,
-    "ticketnetwork": 1911,
-    "megaseats": 1911,
-    "vividseats": 1578,
-    "gametime": 923,
-    "stubhub": 422,
-    "viagogo": 536,
+    "event365": 2162,
+    "seatgeek": 859,
+    "ticketnetwork": 1905,
+    "megaseats": 1905,
+    "vividseats": 1577,
+    "gametime": 920,
+    "stubhub": 425,
+    "viagogo": 743,
     "ticketmaster": 0
   },
   "missing": [],
@@ -104,6 +104,15 @@
       "price": 100,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17192930782%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "unassigned": false
+    },
+    {
+      "id": "VB17193368147vividseats",
+      "source": "vividseats",
+      "secLabel": "Upper Level 322",
+      "rowLabel": "15",
+      "price": 100,
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17193368147%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "unassigned": false
     }
   ],
   "closest": [
@@ -126,12 +135,12 @@
       "unassigned": false
     },
     {
-      "id": "6aa0156d2a5db90194ba83a6gametime",
+      "id": "6aa19f6444baedfa2f571a8agametime",
       "source": "gametime",
-      "secLabel": "322",
-      "rowLabel": "14",
+      "secLabel": "321",
+      "rowLabel": "15",
       "price": 101,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa0156d2a5db90194ba83a6%3Fseat_count%3D0",
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa19f6444baedfa2f571a8a%3Fseat_count%3D0",
       "unassigned": false
     }
   ],
