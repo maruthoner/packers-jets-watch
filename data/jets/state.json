@@ -1,10 +1,10 @@
 {
-  "failStreak": 4,
+  "failStreak": 5,
   "failIssue": 24,
   "failActive": true,
   "lastFailure": {
-    "reason": "only 7253 listings (floor 8000) — load incomplete or blocked",
-    "whenISO": "2026-09-16T17:21:12.315Z"
+    "reason": "only 7225 listings (floor 8000) — load incomplete or blocked",
+    "whenISO": "2026-09-16T17:51:06.600Z"
   },
   "matchIssue": null,
   "matchActive": false,
