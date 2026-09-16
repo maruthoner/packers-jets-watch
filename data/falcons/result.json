@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-16T16:51:09.449Z",
-  "when": "Sep 16, 2026, 12:51 PM ET",
+  "whenISO": "2026-09-16T17:21:26.882Z",
+  "when": "Sep 16, 2026, 1:21 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 686,
+  "listings": 683,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,30 +19,21 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 10,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 606,
-    "ticketnetwork": 1022,
-    "megaseats": 1020,
-    "seatgeek": 220,
-    "vividseats": 846,
-    "gametime": 1103,
-    "stubhub": 203,
-    "viagogo": 502,
+    "event365": 594,
+    "ticketnetwork": 1024,
+    "megaseats": 1023,
+    "seatgeek": 219,
+    "vividseats": 851,
+    "gametime": 1104,
+    "stubhub": 311,
+    "viagogo": 242,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
-    {
-      "id": "14044465253viagogo",
-      "source": "viagogo",
-      "secLabel": "115",
-      "rowLabel": "59",
-      "price": 204.35,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14044465253%26listingQty%3D",
-      "unassigned": false
-    },
     {
       "id": "13406323395viagogo",
       "source": "viagogo",
@@ -53,12 +44,21 @@
       "unassigned": false
     },
     {
-      "id": "625818474ticketnetwork",
+      "id": "625818474TicketNetwork",
       "source": "ticketnetwork",
       "secLabel": "349",
       "rowLabel": "7",
       "price": 211.2,
       "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D625818474%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "625818474megaseats",
+      "source": "megaseats",
+      "secLabel": "349",
+      "rowLabel": "7",
+      "price": 212.5,
+      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D625818474",
       "unassigned": false
     }
   ],
