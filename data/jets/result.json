@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T07:48:31.860Z",
-  "when": "Sep 16, 2026, 3:48 AM ET",
+  "whenISO": "2026-09-16T08:18:25.791Z",
+  "when": "Sep 16, 2026, 4:18 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 9089,
+  "listings": 9050,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,29 +19,20 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 17,
+  "readySeconds": 11,
   "feeds": {
-    "event365": 2186,
-    "seatgeek": 865,
-    "ticketnetwork": 1810,
-    "megaseats": 1800,
+    "event365": 2188,
+    "seatgeek": 860,
+    "ticketnetwork": 1823,
+    "megaseats": 1823,
     "vividseats": 1584,
-    "gametime": 920,
-    "stubhub": 402,
-    "viagogo": 755,
+    "gametime": 918,
+    "stubhub": 331,
+    "viagogo": 745,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [
-    {
-      "id": "6a9db8ddb046fc5bf4723a3dgametime",
-      "source": "gametime",
-      "secLabel": "321–331",
-      "rowLabel": "TBD",
-      "price": 86,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a9db8ddb046fc5bf4723a3d%3Fseat_count%3D0",
-      "unassigned": true
-    },
     {
       "id": "6a9db8de252b9cb374ddb5f5gametime",
       "source": "gametime",
