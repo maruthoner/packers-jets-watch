@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-16T14:49:53.135Z",
-  "when": "Sep 16, 2026, 10:49 AM ET",
+  "whenISO": "2026-09-16T15:19:39.271Z",
+  "when": "Sep 16, 2026, 11:19 AM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 663,
+  "listings": 653,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,15 +19,15 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 13,
+  "readySeconds": 9,
   "feeds": {
-    "event365": 606,
-    "ticketnetwork": 1003,
-    "megaseats": 1003,
+    "event365": 601,
+    "ticketnetwork": 1001,
+    "megaseats": 1001,
     "seatgeek": 228,
-    "vividseats": 864,
-    "gametime": 1103,
-    "stubhub": 273,
+    "vividseats": 847,
+    "gametime": 1105,
+    "stubhub": 345,
     "viagogo": 499,
     "ticketmaster": 0
   },
@@ -35,30 +35,30 @@
   "matches": [],
   "closest": [
     {
-      "id": "VB17194410929vividseats",
-      "source": "vividseats",
-      "secLabel": "Section 734S",
-      "rowLabel": "2",
-      "price": 182,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fgreen-bay-packers-tickets-green-bay-lambeau-field-3-4-2026%2Fproduction%2F6489939%3FshowDetails%3DVB17194410929%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-      "unassigned": false
-    },
-    {
-      "id": "VB17171413983vividseats",
-      "source": "vividseats",
-      "secLabel": "Section 750S",
-      "rowLabel": "13",
-      "price": 203,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fgreen-bay-packers-tickets-green-bay-lambeau-field-3-4-2026%2Fproduction%2F6489939%3FshowDetails%3DVB17171413983%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-      "unassigned": false
-    },
-    {
       "id": "13406323395viagogo",
       "source": "viagogo",
       "secLabel": "349",
       "rowLabel": "7",
       "price": 208.83,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D13406323395%26listingQty%3D",
+      "unassigned": false
+    },
+    {
+      "id": "625818474TicketNetwork",
+      "source": "ticketnetwork",
+      "secLabel": "349",
+      "rowLabel": "7",
+      "price": 211.2,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D625818474%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "6a5e29bbb6bace957b864c59gametime",
+      "source": "gametime",
+      "secLabel": "349",
+      "rowLabel": "7",
+      "price": 212,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F695cb0255a70588e3051bdbb%2Flistings%2F6a5e29bbb6bace957b864c59%3Fseat_count%3D0",
       "unassigned": false
     }
   ],
