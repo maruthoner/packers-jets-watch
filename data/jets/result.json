@@ -1,7 +1,7 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T06:47:13.691Z",
-  "when": "Sep 16, 2026, 2:47 AM ET",
+  "whenISO": "2026-09-16T06:48:26.398Z",
+  "when": "Sep 16, 2026, 2:48 AM ET",
   "quantity": 2,
   "priceMax": 100,
   "listings": 8610,
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 11,
+  "readySeconds": 10,
   "feeds": {
     "event365": 2185,
     "seatgeek": 865,
