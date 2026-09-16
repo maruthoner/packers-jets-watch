@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T11:49:35.422Z",
-  "when": "Sep 16, 2026, 7:49 AM ET",
+  "whenISO": "2026-09-16T12:19:30.830Z",
+  "when": "Sep 16, 2026, 8:19 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 8749,
+  "listings": 8655,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 16,
+  "readySeconds": 11,
   "feeds": {
-    "event365": 2164,
-    "seatgeek": 857,
-    "ticketnetwork": 1900,
-    "megaseats": 1901,
-    "vividseats": 1573,
-    "gametime": 927,
-    "stubhub": 410,
-    "viagogo": 216,
+    "event365": 2168,
+    "seatgeek": 855,
+    "ticketnetwork": 1915,
+    "megaseats": 1911,
+    "vividseats": 1572,
+    "gametime": 920,
+    "stubhub": 224,
+    "viagogo": 285,
     "ticketmaster": 0
   },
   "missing": [],
@@ -212,7 +212,7 @@
         "source": "gametime",
         "secLabel": "337",
         "rowLabel": "26",
-        "price": 129,
+        "price": 128,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a5e2e54b7404080b614454d%3Fseat_count%3D0",
         "unassigned": false
       },
@@ -221,7 +221,7 @@
         "source": "gametime",
         "secLabel": "340",
         "rowLabel": "25",
-        "price": 130,
+        "price": 129,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a5a1d81a6fccc64df698852%3Fseat_count%3D0",
         "unassigned": false
       },
@@ -230,7 +230,7 @@
         "source": "vividseats",
         "secLabel": "Upper Level 337",
         "rowLabel": "26",
-        "price": 136,
+        "price": 135,
         "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16952967692%26wsUser%3D1180%26groupId%3D%26qty%3D0",
         "unassigned": false
       }
