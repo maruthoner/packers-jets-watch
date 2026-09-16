@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-16T09:48:44.686Z",
-  "when": "Sep 16, 2026, 5:48 AM ET",
+  "whenISO": "2026-09-16T10:18:29.499Z",
+  "when": "Sep 16, 2026, 6:18 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 9092,
+  "listings": 9058,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 29,
+  "readySeconds": 15,
   "feeds": {
-    "event365": 2176,
-    "seatgeek": 862,
-    "ticketnetwork": 1815,
-    "megaseats": 1815,
+    "event365": 2160,
+    "seatgeek": 860,
+    "ticketnetwork": 1911,
+    "megaseats": 1911,
     "vividseats": 1578,
-    "gametime": 921,
-    "stubhub": 401,
-    "viagogo": 743,
+    "gametime": 923,
+    "stubhub": 422,
+    "viagogo": 536,
     "ticketmaster": 0
   },
   "missing": [],
@@ -163,21 +163,21 @@
         "unassigned": false
       },
       {
+        "id": "6a5e2e54b7404080b614454dgametime",
+        "source": "gametime",
+        "secLabel": "337",
+        "rowLabel": "26",
+        "price": 130,
+        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a5e2e54b7404080b614454d%3Fseat_count%3D0",
+        "unassigned": false
+      },
+      {
         "id": "VB16952967692vividseats",
         "source": "vividseats",
         "secLabel": "Upper Level 337",
         "rowLabel": "26",
         "price": 136,
         "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB16952967692%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-        "unassigned": false
-      },
-      {
-        "id": "VB17162388278vividseats",
-        "source": "vividseats",
-        "secLabel": "Upper Level 340",
-        "rowLabel": "25",
-        "price": 136,
-        "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17162388278%26wsUser%3D1180%26groupId%3D%26qty%3D0",
         "unassigned": false
       }
     ]
