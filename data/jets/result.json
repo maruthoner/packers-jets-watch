@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-17T08:54:13.281Z",
-  "when": "Sep 17, 2026, 4:54 AM ET",
+  "whenISO": "2026-09-17T09:24:16.397Z",
+  "when": "Sep 17, 2026, 5:24 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7619,
+  "listings": 7563,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 13,
+  "readySeconds": 15,
   "feeds": {
-    "event365": 2291,
+    "event365": 2290,
     "seatgeek": 1029,
-    "ticketnetwork": 1456,
-    "megaseats": 1456,
+    "ticketnetwork": 1476,
+    "megaseats": 1476,
     "vividseats": 1695,
     "gametime": 876,
-    "stubhub": 390,
-    "viagogo": 248,
+    "stubhub": 508,
+    "viagogo": 2,
     "ticketmaster": 0
   },
   "missing": [],
@@ -106,6 +106,24 @@
       "unassigned": true
     },
     {
+      "id": "EroUXDjaRkNseatgeek",
+      "source": "seatgeek",
+      "secLabel": "327",
+      "rowLabel": "17",
+      "price": 95.41,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DEroUXDjaRkN",
+      "unassigned": false
+    },
+    {
+      "id": "MAeIPX8bzLOseatgeek",
+      "source": "seatgeek",
+      "secLabel": "329",
+      "rowLabel": "15",
+      "price": 96.49,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DMAeIPX8bzLO",
+      "unassigned": false
+    },
+    {
       "id": "6aaaab70e547d41d6443f9efgametime",
       "source": "gametime",
       "secLabel": "328",
@@ -130,6 +148,15 @@
       "rowLabel": "15",
       "price": 97,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aab464dd1f0773b3e1e248c%3Fseat_count%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "PX0sg7V2R9Rseatgeek",
+      "source": "seatgeek",
+      "secLabel": "331",
+      "rowLabel": "13",
+      "price": 97.64,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DPX0sg7V2R9R",
       "unassigned": false
     },
     {
