@@ -1,7 +1,7 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-17T17:55:33.491Z",
-  "when": "Sep 17, 2026, 1:55 PM ET",
+  "whenISO": "2026-09-17T17:56:41.395Z",
+  "when": "Sep 17, 2026, 1:56 PM ET",
   "quantity": 3,
   "priceMax": 130,
   "listings": 760,
@@ -44,7 +44,7 @@
       "unassigned": true
     },
     {
-      "id": "1023523182TicketNetwork",
+      "id": "1023523182ticketnetwork",
       "source": "ticketnetwork",
       "secLabel": "400 STANDING ROOM ONLY",
       "rowLabel": "ga",
