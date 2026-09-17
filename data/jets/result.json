@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-17T17:25:23.192Z",
-  "when": "Sep 17, 2026, 1:25 PM ET",
+  "whenISO": "2026-09-17T17:55:18.940Z",
+  "when": "Sep 17, 2026, 1:55 PM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7852,
+  "listings": 8200,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 16,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 2318,
+    "event365": 2322,
     "seatgeek": 1038,
-    "ticketnetwork": 1544,
-    "megaseats": 1549,
-    "vividseats": 1712,
-    "gametime": 881,
-    "stubhub": 529,
-    "viagogo": 228,
+    "ticketnetwork": 1541,
+    "megaseats": 1550,
+    "vividseats": 1710,
+    "gametime": 871,
+    "stubhub": 604,
+    "viagogo": 578,
     "ticketmaster": 0
   },
   "missing": [],
@@ -403,6 +403,15 @@
       "unassigned": false
     },
     {
+      "id": "14070028783viagogo",
+      "source": "viagogo",
+      "secLabel": "346",
+      "rowLabel": "23",
+      "price": 98.55,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14070028783%26listingQty%3D",
+      "unassigned": false
+    },
+    {
       "id": "GAaI6bPAY67seatgeek",
       "source": "seatgeek",
       "secLabel": "328",
@@ -676,21 +685,21 @@
         "unassigned": false
       },
       {
-        "id": "6a2b1e55d4cd5a899560beffgametime",
-        "source": "gametime",
-        "secLabel": "340",
-        "rowLabel": "23",
-        "price": 131,
-        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a2b1e55d4cd5a899560beff%3Fseat_count%3D0",
-        "unassigned": false
-      },
-      {
         "id": "6a5a1d81a6fccc64df698852gametime",
         "source": "gametime",
         "secLabel": "340",
         "rowLabel": "25",
         "price": 131,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a5a1d81a6fccc64df698852%3Fseat_count%3D0",
+        "unassigned": false
+      },
+      {
+        "id": "6a2b1e55d4cd5a899560beffgametime",
+        "source": "gametime",
+        "secLabel": "340",
+        "rowLabel": "23",
+        "price": 134,
+        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a2b1e55d4cd5a899560beff%3Fseat_count%3D0",
         "unassigned": false
       }
     ]
