@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-17T23:30:25.218Z",
-  "when": "Sep 17, 2026, 7:30 PM ET",
+  "whenISO": "2026-09-17T23:59:06.302Z",
+  "when": "Sep 17, 2026, 7:59 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 644,
+  "listings": 656,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -18,28 +18,28 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 64,
+  "readySeconds": 37,
   "feeds": {
-    "event365": 1065,
+    "event365": 1051,
     "ticketnetwork": 0,
-    "megaseats": 1051,
-    "seatgeek": 222,
-    "vividseats": 937,
-    "gametime": 1107,
-    "stubhub": 423,
-    "viagogo": 239,
+    "megaseats": 1047,
+    "seatgeek": 220,
+    "vividseats": 947,
+    "gametime": 1108,
+    "stubhub": 409,
+    "viagogo": 500,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "14075319435viagogo",
+      "id": "14075319129viagogo",
       "source": "viagogo",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "",
       "price": 150.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319435%26listingQty%3D",
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319129%26listingQty%3D",
       "unassigned": true
     },
     {
@@ -52,12 +52,12 @@
       "unassigned": true
     },
     {
-      "id": "14075319435stubhub",
+      "id": "14075319129stubhub",
       "source": "stubhub",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "",
       "price": 168.26,
-      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319435%26listingQty%3D",
+      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319129%26listingQty%3D",
       "unassigned": true
     }
   ],
