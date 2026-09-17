@@ -77,3 +77,18 @@ test('pending and failed marketplaces are listed', () => {
   assert.deepEqual(feedsPending(feeds), ['viagogo']);
   assert.deepEqual(feedsFailed(feeds), [{ site: 'event365', why: 'HTTP 502' }]);
 });
+
+import { emptyPageReason } from '../lib/ready.mjs';
+
+test('an empty page after every marketplace settled says which side was empty', () => {
+  const empty = { ...s(), n: 0, sources: [] };
+  assert.match(emptyPageReason({ a: { state: 'ok', tickets: 0 }, b: { state: 'ok', tickets: 0 } }, empty), /every marketplace answered with 0 tickets/);
+  assert.match(emptyPageReason({ a: { state: 'ok', tickets: 0 }, b: { state: 'failed', why: 'HTTP 502' } }, empty), /1 marketplace failed/);
+  assert.match(emptyPageReason({ a: { state: 'ok', tickets: 1200 }, b: { state: 'ok', tickets: 34 } }, empty), /returned 1,234 tickets but the page listed none/);
+});
+
+test('not an empty-page failure while listings exist or marketplaces are still answering', () => {
+  assert.equal(emptyPageReason({ a: { state: 'ok', tickets: 5 } }, s()), null);
+  assert.equal(emptyPageReason({ a: { state: 'pending' } }, { ...s(), n: 0 }), null);
+  assert.equal(emptyPageReason({}, { ...s(), n: 0 }), null);
+});

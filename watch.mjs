@@ -9,7 +9,7 @@
 import { chromium } from 'playwright';
 import { writeFileSync } from 'fs';
 import { WATCHERS } from './watchers.mjs';
-import { isReady, notReadyReason, sameMarket, FEED_PATH, feedSite, classifyFeed, feedsPending, feedsFailed } from './lib/ready.mjs';
+import { isReady, notReadyReason, sameMarket, FEED_PATH, feedSite, classifyFeed, feedsPending, feedsFailed, emptyPageReason } from './lib/ready.mjs';
 
 const [id, outFile] = process.argv.slice(2);
 const W = WATCHERS[id];
@@ -20,7 +20,8 @@ if (!W || !outFile) {
 
 const POLL_MS = 3000;
 const LOAD_ATTEMPTS = 3;
-const FEED_WAIT_MS = 60000;       // a marketplace with no answer after this is treated as failed
+const FEED_WAIT_MS = 60000;
+const EMPTY_WAIT_MS = 20000;      // page still empty this long after every marketplace settled       // a marketplace with no answer after this is treated as failed
 const READY_DEADLINE_MS = 220000; // all attempts together; cycle.mjs kills the process at 300s
 
 // Runs inside the page. One function so a sample and its raw data come from the same instant.
@@ -125,7 +126,7 @@ async function attemptRead(ctx, attempt, started) {
     if (resp && resp.status() >= 400) throw new Error(`page returned HTTP ${resp.status()}`);
     await setQuantity(page, W.quantity);
     const loaded = Date.now();
-    let prev = null, cur = null;
+    let prev = null, cur = null, asked = 0, emptySince = null;
     while (Date.now() - started < READY_DEADLINE_MS) {
       await page.waitForTimeout(POLL_MS);
       cur = (await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: false })).sample;
@@ -136,12 +137,19 @@ async function attemptRead(ctx, attempt, started) {
         pending = [];
       }
       const failed = feedsFailed(feeds);
-      const asked = Object.keys(feeds).length;
+      asked = Object.keys(feeds).length;
+      const tickets = Object.values(feeds).reduce((t, f) => t + (f.state === 'ok' ? f.tickets : 0), 0);
       console.log(`  [${W.id}] try ${attempt} +${secs}s n=${cur.n} ${cur.label ?? '-'} qty=${cur.qtyText ?? '-'} sources=${cur.sources.length} unsellable=${cur.unsellable}`
-        + ` marketplaces: ${asked - pending.length - failed.length} answered, ${pending.length} waiting, ${failed.length} failed`);
+        + ` marketplaces: ${asked - pending.length - failed.length} answered, ${pending.length} waiting, ${failed.length} failed, ${tickets} tickets`);
+      const empty = emptyPageReason(feeds, cur);
+      emptySince = empty ? (emptySince ?? Date.now()) : null;
+      if (empty && Date.now() - emptySince >= EMPTY_WAIT_MS) {
+        if (attempt < LOAD_ATTEMPTS) return { retry: empty };
+        throw new Error(`${empty} (after ${LOAD_ATTEMPTS} page loads)`);
+      }
       if (asked > 0 && pending.length === 0 && isReady(prev, cur, W.quantity)) {
         if (failed.length && attempt < LOAD_ATTEMPTS) {
-          return { retry: failed.map((f) => `${f.site} (${f.why})`).join(', ') };
+          return { retry: `marketplaces failed: ${failed.map((f) => `${f.site} (${f.why})`).join(', ')}` };
         }
         const snap = await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: true });
         if (feedsPending(feeds).length === 0 && notReadyReason(snap.sample, W.quantity) === null && sameMarket(cur, snap.sample)) {
@@ -171,7 +179,7 @@ try {
   const started = Date.now();
   for (let attempt = 1; attempt <= LOAD_ATTEMPTS; attempt++) {
     const r = await attemptRead(ctx, attempt, started);
-    if (r.retry) { console.log(`  [${W.id}] marketplaces failed: ${r.retry} — reloading (try ${attempt + 1} of ${LOAD_ATTEMPTS})`); continue; }
+    if (r.retry) { console.log(`  [${W.id}] ${r.retry} — reloading (try ${attempt + 1} of ${LOAD_ATTEMPTS})`); continue; }
     await browser.close();
     const { sample, raw, feeds, missing } = r.done;
     console.log(`  [${W.id}] ready after ${r.secs}s: ${raw.length} listings from ${sample.sources.join(', ')}`
