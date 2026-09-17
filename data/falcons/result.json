@@ -1,7 +1,7 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-17T01:52:13.083Z",
-  "when": "Sep 16, 2026, 9:52 PM ET",
+  "whenISO": "2026-09-17T02:22:17.267Z",
+  "when": "Sep 16, 2026, 10:22 PM ET",
   "quantity": 3,
   "priceMax": 130,
   "listings": 711,
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 12,
+  "readySeconds": 11,
   "feeds": {
-    "event365": 1026,
-    "ticketnetwork": 993,
-    "megaseats": 993,
+    "event365": 1050,
+    "ticketnetwork": 995,
+    "megaseats": 995,
     "seatgeek": 210,
-    "vividseats": 876,
-    "gametime": 1104,
-    "stubhub": 294,
-    "viagogo": 489,
+    "vividseats": 886,
+    "gametime": 1102,
+    "stubhub": 313,
+    "viagogo": 497,
     "ticketmaster": 0
   },
   "missing": [],
@@ -44,21 +44,21 @@
       "unassigned": false
     },
     {
+      "id": "14070526350stubhub",
+      "source": "stubhub",
+      "secLabel": "400 Standing Room Only",
+      "rowLabel": "",
+      "price": 235.45,
+      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14070526350%26listingQty%3D",
+      "unassigned": true
+    },
+    {
       "id": "842238799TicketNetwork",
       "source": "ticketnetwork",
       "secLabel": "741S",
       "rowLabel": "17",
       "price": 242,
       "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D842238799%26quantity%3D0",
-      "unassigned": false
-    },
-    {
-      "id": "842238799megaseats",
-      "source": "megaseats",
-      "secLabel": "741S",
-      "rowLabel": "17",
-      "price": 243.95,
-      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D842238799",
       "unassigned": false
     }
   ],
