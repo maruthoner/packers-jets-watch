@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-17T11:24:11.175Z",
-  "when": "Sep 17, 2026, 7:24 AM ET",
+  "whenISO": "2026-09-17T11:54:14.477Z",
+  "when": "Sep 17, 2026, 7:54 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7676,
+  "listings": 7854,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 10,
+  "readySeconds": 14,
   "feeds": {
-    "event365": 2292,
-    "seatgeek": 1029,
-    "ticketnetwork": 1451,
-    "megaseats": 1451,
-    "vividseats": 1696,
-    "gametime": 875,
-    "stubhub": 441,
-    "viagogo": 245,
+    "event365": 2280,
+    "seatgeek": 1024,
+    "ticketnetwork": 1457,
+    "megaseats": 1456,
+    "vividseats": 1684,
+    "gametime": 869,
+    "stubhub": 433,
+    "viagogo": 470,
     "ticketmaster": 0
   },
   "missing": [],
@@ -104,6 +104,60 @@
       "price": 90,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aab2cc062594a552f002874%3Fseat_count%3D0",
       "unassigned": true
+    },
+    {
+      "id": "383615296TicketNetwork",
+      "source": "ticketnetwork",
+      "secLabel": "309",
+      "rowLabel": "16",
+      "price": 96.8,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D383615296%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "383615298TicketNetwork",
+      "source": "ticketnetwork",
+      "secLabel": "318",
+      "rowLabel": "16",
+      "price": 96.8,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D383615298%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "383615303TicketNetwork",
+      "source": "ticketnetwork",
+      "secLabel": "334",
+      "rowLabel": "14",
+      "price": 96.8,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D383615303%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "383615296megaseats",
+      "source": "megaseats",
+      "secLabel": "309",
+      "rowLabel": "16",
+      "price": 96.9,
+      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D383615296",
+      "unassigned": false
+    },
+    {
+      "id": "383615298megaseats",
+      "source": "megaseats",
+      "secLabel": "318",
+      "rowLabel": "16",
+      "price": 96.9,
+      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D383615298",
+      "unassigned": false
+    },
+    {
+      "id": "383615303megaseats",
+      "source": "megaseats",
+      "secLabel": "334",
+      "rowLabel": "14",
+      "price": 96.9,
+      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D383615303",
+      "unassigned": false
     },
     {
       "id": "6aaaab70e547d41d6443f9efgametime",
@@ -232,15 +286,6 @@
       "unassigned": false
     },
     {
-      "id": "6aaa98023c938baacc1744e5gametime",
-      "source": "gametime",
-      "secLabel": "323",
-      "rowLabel": "20",
-      "price": 100,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa98023c938baacc1744e5%3Fseat_count%3D0",
-      "unassigned": false
-    },
-    {
       "id": "6aaa9802fc43e66181490a26gametime",
       "source": "gametime",
       "secLabel": "303",
@@ -274,6 +319,15 @@
       "rowLabel": "22",
       "price": 100,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aab46bbeda613b38ec7282a%3Fseat_count%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "6aabd0e762594a552f014535gametime",
+      "source": "gametime",
+      "secLabel": "323",
+      "rowLabel": "21",
+      "price": 100,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aabd0e762594a552f014535%3Fseat_count%3D0",
       "unassigned": false
     },
     {
