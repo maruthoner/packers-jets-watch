@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-17T02:53:21.328Z",
-  "when": "Sep 16, 2026, 10:53 PM ET",
+  "whenISO": "2026-09-17T03:23:20.975Z",
+  "when": "Sep 16, 2026, 11:23 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 715,
+  "listings": 711,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,46 +19,46 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 10,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 1044,
-    "ticketnetwork": 993,
-    "megaseats": 993,
-    "seatgeek": 207,
-    "vividseats": 887,
-    "gametime": 1106,
-    "stubhub": 212,
-    "viagogo": 487,
+    "event365": 1053,
+    "ticketnetwork": 996,
+    "megaseats": 996,
+    "seatgeek": 208,
+    "vividseats": 886,
+    "gametime": 1107,
+    "stubhub": 333,
+    "viagogo": 236,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
+      "id": "VB17194410929vividseats",
+      "source": "vividseats",
+      "secLabel": "Section 734S",
+      "rowLabel": "2",
+      "price": 182,
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fgreen-bay-packers-tickets-green-bay-lambeau-field-3-4-2026%2Fproduction%2F6489939%3FshowDetails%3DVB17194410929%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "VB17171413983vividseats",
+      "source": "vividseats",
+      "secLabel": "Section 750S",
+      "rowLabel": "13",
+      "price": 203,
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fgreen-bay-packers-tickets-green-bay-lambeau-field-3-4-2026%2Fproduction%2F6489939%3FshowDetails%3DVB17171413983%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "unassigned": false
+    },
+    {
       "id": "14070526350viagogo",
       "source": "viagogo",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "N/A",
-      "price": 205.94,
+      "price": 207.77,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14070526350%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14070526350stubhub",
-      "source": "stubhub",
-      "secLabel": "400 Standing Room Only",
-      "rowLabel": "",
-      "price": 231.61,
-      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14070526350%26listingQty%3D",
-      "unassigned": true
-    },
-    {
-      "id": "842238799ticketnetwork",
-      "source": "ticketnetwork",
-      "secLabel": "741S",
-      "rowLabel": "17",
-      "price": 242,
-      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D842238799%26quantity%3D0",
       "unassigned": false
     }
   ],
