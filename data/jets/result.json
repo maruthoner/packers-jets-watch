@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-17T19:26:24.697Z",
-  "when": "Sep 17, 2026, 3:26 PM ET",
+  "whenISO": "2026-09-17T19:56:24.849Z",
+  "when": "Sep 17, 2026, 3:56 PM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7197,
+  "listings": 7630,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -21,14 +21,14 @@
   ],
   "readySeconds": 12,
   "feeds": {
-    "event365": 2146,
-    "seatgeek": 1037,
-    "ticketnetwork": 1376,
-    "megaseats": 1374,
-    "vividseats": 1763,
-    "gametime": 875,
-    "stubhub": 578,
-    "viagogo": 2,
+    "event365": 2162,
+    "seatgeek": 1043,
+    "ticketnetwork": 1364,
+    "megaseats": 1364,
+    "vividseats": 1674,
+    "gametime": 872,
+    "stubhub": 594,
+    "viagogo": 528,
     "ticketmaster": 0
   },
   "missing": [],
@@ -292,6 +292,15 @@
       "rowLabel": "16",
       "price": 97.68,
       "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D1026060808%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "14070028783viagogo",
+      "source": "viagogo",
+      "secLabel": "346",
+      "rowLabel": "23",
+      "price": 97.71,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14070028783%26listingQty%3D",
       "unassigned": false
     },
     {
