@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-17T13:25:37.016Z",
-  "when": "Sep 17, 2026, 9:25 AM ET",
+  "whenISO": "2026-09-17T13:55:34.603Z",
+  "when": "Sep 17, 2026, 9:55 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 8148,
+  "listings": 8009,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 29,
+  "readySeconds": 27,
   "feeds": {
-    "event365": 2300,
-    "seatgeek": 1047,
-    "ticketnetwork": 1465,
-    "megaseats": 1465,
-    "vividseats": 1723,
-    "gametime": 874,
-    "stubhub": 368,
-    "viagogo": 803,
+    "event365": 2319,
+    "seatgeek": 1058,
+    "ticketnetwork": 1472,
+    "megaseats": 1472,
+    "vividseats": 1722,
+    "gametime": 876,
+    "stubhub": 408,
+    "viagogo": 564,
     "ticketmaster": 0
   },
   "missing": [],
