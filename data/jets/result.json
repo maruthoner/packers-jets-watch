@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-17T04:53:15.497Z",
-  "when": "Sep 17, 2026, 12:53 AM ET",
+  "whenISO": "2026-09-17T07:53:06.790Z",
+  "when": "Sep 17, 2026, 3:53 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7610,
+  "listings": 7693,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 21,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 2294,
-    "seatgeek": 1034,
-    "ticketnetwork": 1411,
-    "megaseats": 1410,
-    "vividseats": 1702,
-    "gametime": 878,
-    "stubhub": 284,
-    "viagogo": 325,
+    "event365": 2297,
+    "seatgeek": 1030,
+    "ticketnetwork": 1482,
+    "megaseats": 1473,
+    "vividseats": 1697,
+    "gametime": 877,
+    "stubhub": 424,
+    "viagogo": 225,
     "ticketmaster": 0
   },
   "missing": [],
@@ -88,15 +88,6 @@
       "unassigned": true
     },
     {
-      "id": "6aaac90a7c66f647974e8a03gametime",
-      "source": "gametime",
-      "secLabel": "321–331",
-      "rowLabel": "TBD",
-      "price": 90,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaac90a7c66f647974e8a03%3Fseat_count%3D0",
-      "unassigned": true
-    },
-    {
       "id": "6aaac90b96b1c12294ab93b6gametime",
       "source": "gametime",
       "secLabel": "321–331",
@@ -113,24 +104,6 @@
       "price": 90,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aab2cc062594a552f002874%3Fseat_count%3D0",
       "unassigned": true
-    },
-    {
-      "id": "GAaI6bPXD9kseatgeek",
-      "source": "seatgeek",
-      "secLabel": "331",
-      "rowLabel": "18",
-      "price": 95.51,
-      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DGAaI6bPXD9k",
-      "unassigned": false
-    },
-    {
-      "id": "PX0sg7V2R9Rseatgeek",
-      "source": "seatgeek",
-      "secLabel": "331",
-      "rowLabel": "13",
-      "price": 96.66,
-      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DPX0sg7V2R9R",
-      "unassigned": false
     },
     {
       "id": "6aaaab70e547d41d6443f9efgametime",
@@ -223,12 +196,12 @@
       "unassigned": false
     },
     {
-      "id": "VB17203163791vividseats",
+      "id": "VB17203163801vividseats",
       "source": "vividseats",
       "secLabel": "Upper Level 327",
-      "rowLabel": "19",
+      "rowLabel": "18",
       "price": 98,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17203163791%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17203163801%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "unassigned": false
     },
     {
@@ -304,12 +277,12 @@
       "unassigned": false
     },
     {
-      "id": "VB17203163801vividseats",
+      "id": "VB17204224094vividseats",
       "source": "vividseats",
       "secLabel": "Upper Level 327",
-      "rowLabel": "18",
+      "rowLabel": "20",
       "price": 100,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17203163801%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17204224094%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "unassigned": false
     }
   ],
