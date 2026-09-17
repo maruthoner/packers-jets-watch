@@ -1,10 +1,10 @@
 {
-  "failStreak": 1,
+  "failStreak": 2,
   "failIssue": 25,
-  "failActive": false,
+  "failActive": true,
   "lastFailure": {
     "reason": "asked is not defined",
-    "whenISO": "2026-09-17T09:58:10.551Z"
+    "whenISO": "2026-09-17T10:27:55.978Z"
   },
   "matchIssue": null,
   "matchActive": false,
