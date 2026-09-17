@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-17T01:22:04.515Z",
-  "when": "Sep 16, 2026, 9:22 PM ET",
+  "whenISO": "2026-09-17T01:51:58.583Z",
+  "when": "Sep 16, 2026, 9:51 PM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 8019,
+  "listings": 7395,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,27 +19,36 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 17,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 2267,
-    "seatgeek": 1035,
-    "ticketnetwork": 1421,
-    "megaseats": 1421,
-    "vividseats": 1702,
-    "gametime": 884,
-    "stubhub": 378,
-    "viagogo": 780,
+    "event365": 2260,
+    "seatgeek": 1029,
+    "ticketnetwork": 1415,
+    "megaseats": 1414,
+    "vividseats": 1697,
+    "gametime": 888,
+    "stubhub": 188,
+    "viagogo": 220,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [
     {
-      "id": "6a9de18de90c87f056354035gametime",
+      "id": "6a9db8de252b9cb374ddb5f4gametime",
       "source": "gametime",
       "secLabel": "321–331",
       "rowLabel": "TBD",
-      "price": 90,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a9de18de90c87f056354035%3Fseat_count%3D0",
+      "price": 89,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a9db8de252b9cb374ddb5f4%3Fseat_count%3D0",
+      "unassigned": true
+    },
+    {
+      "id": "6aa44d50594843693b43ae20gametime",
+      "source": "gametime",
+      "secLabel": "301–306–OR–346–350",
+      "rowLabel": "TBD",
+      "price": 89,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa44d50594843693b43ae20%3Fseat_count%3D0",
       "unassigned": true
     },
     {
@@ -49,15 +58,6 @@
       "rowLabel": "TBD",
       "price": 90,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a9ef8ae3614ff981c345978%3Fseat_count%3D0",
-      "unassigned": true
-    },
-    {
-      "id": "6aa44d50594843693b43ae20gametime",
-      "source": "gametime",
-      "secLabel": "301–306–OR–346–350",
-      "rowLabel": "TBD",
-      "price": 90,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa44d50594843693b43ae20%3Fseat_count%3D0",
       "unassigned": true
     },
     {
@@ -115,12 +115,39 @@
       "unassigned": true
     },
     {
-      "id": "6aaa97f93a417e05b80cb5c6gametime",
+      "id": "6aab464dd1f0773b3e1e248cgametime",
       "source": "gametime",
-      "secLabel": "350",
-      "rowLabel": "23",
+      "secLabel": "328",
+      "rowLabel": "15",
+      "price": 99,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aab464dd1f0773b3e1e248c%3Fseat_count%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "DdwHkw7q8mjseatgeek",
+      "source": "seatgeek",
+      "secLabel": "327",
+      "rowLabel": "15",
+      "price": 99.63,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DDdwHkw7q8mj",
+      "unassigned": false
+    },
+    {
+      "id": "6aaa97f925fb48f18f0cc7b2gametime",
+      "source": "gametime",
+      "secLabel": "301",
+      "rowLabel": "21",
       "price": 100,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97f93a417e05b80cb5c6%3Fseat_count%3D0",
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97f925fb48f18f0cc7b2%3Fseat_count%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "6aaa98023c938baacc1744e5gametime",
+      "source": "gametime",
+      "secLabel": "323",
+      "rowLabel": "20",
+      "price": 100,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa98023c938baacc1744e5%3Fseat_count%3D0",
       "unassigned": false
     },
     {
@@ -139,15 +166,6 @@
       "rowLabel": "21",
       "price": 100,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaaab70e547d41d6443f9ef%3Fseat_count%3D0",
-      "unassigned": false
-    },
-    {
-      "id": "6aaae38dfb85b06946b6a632gametime",
-      "source": "gametime",
-      "secLabel": "328",
-      "rowLabel": "15",
-      "price": 100,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaae38dfb85b06946b6a632%3Fseat_count%3D0",
       "unassigned": false
     },
     {
@@ -187,15 +205,6 @@
       "unassigned": false
     },
     {
-      "id": "VB17197821624vividseats",
-      "source": "vividseats",
-      "secLabel": "Upper Level 328",
-      "rowLabel": "15",
-      "price": 100,
-      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17197821624%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-      "unassigned": false
-    },
-    {
       "id": "VB17200662267vividseats",
       "source": "vividseats",
       "secLabel": "Upper Level 327",
@@ -203,16 +212,25 @@
       "price": 100,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17200662267%26wsUser%3D1180%26groupId%3D%26qty%3D0",
       "unassigned": false
+    },
+    {
+      "id": "VB17200662268vividseats",
+      "source": "vividseats",
+      "secLabel": "Upper Level 327",
+      "rowLabel": "18",
+      "price": 100,
+      "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17200662268%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+      "unassigned": false
     }
   ],
   "closest": [
     {
-      "id": "6aaa97f925fb48f18f0cc7b2gametime",
+      "id": "6aa049985f05172c06a0cb8dgametime",
       "source": "gametime",
-      "secLabel": "301",
-      "rowLabel": "21",
+      "secLabel": "324",
+      "rowLabel": "17",
       "price": 101,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97f925fb48f18f0cc7b2%3Fseat_count%3D0",
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa049985f05172c06a0cb8d%3Fseat_count%3D0",
       "unassigned": false
     },
     {
@@ -225,12 +243,12 @@
       "unassigned": false
     },
     {
-      "id": "6aaa98023c938baacc1744e5gametime",
+      "id": "6aaa98009d78af2bc10a3a68gametime",
       "source": "gametime",
-      "secLabel": "323",
-      "rowLabel": "20",
+      "secLabel": "325",
+      "rowLabel": "21",
       "price": 101,
-      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa98023c938baacc1744e5%3Fseat_count%3D0",
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa98009d78af2bc10a3a68%3Fseat_count%3D0",
       "unassigned": false
     }
   ],
@@ -257,7 +275,7 @@
         "source": "gametime",
         "secLabel": "340",
         "rowLabel": "25",
-        "price": 134,
+        "price": 135,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a5a1d81a6fccc64df698852%3Fseat_count%3D0",
         "unassigned": false
       },
@@ -271,12 +289,12 @@
         "unassigned": false
       },
       {
-        "id": "6a2b1e55d4cd5a899560beffgametime",
+        "id": "6aaac90313ac7b7efbd2400bgametime",
         "source": "gametime",
         "secLabel": "340",
-        "rowLabel": "23",
-        "price": 137,
-        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a2b1e55d4cd5a899560beff%3Fseat_count%3D0",
+        "rowLabel": "18",
+        "price": 136,
+        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaac90313ac7b7efbd2400b%3Fseat_count%3D0",
         "unassigned": false
       }
     ]
