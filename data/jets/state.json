@@ -1,10 +1,10 @@
 {
-  "failStreak": 0,
+  "failStreak": 1,
   "failIssue": 24,
   "failActive": false,
   "lastFailure": {
-    "reason": "asked is not defined",
-    "whenISO": "2026-09-17T07:26:34.990Z"
+    "reason": "marketplaces returned 7,824 tickets but the page listed none (after 3 page loads)",
+    "whenISO": "2026-09-17T23:29:19.494Z"
   },
   "matchIssue": null,
   "matchActive": false,
