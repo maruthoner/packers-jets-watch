@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-18T00:59:10.034Z",
-  "when": "Sep 17, 2026, 8:59 PM ET",
+  "whenISO": "2026-09-18T01:29:13.054Z",
+  "when": "Sep 17, 2026, 9:29 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 645,
+  "listings": 651,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -18,28 +18,28 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 38,
+  "readySeconds": 40,
   "feeds": {
-    "event365": 1094,
+    "event365": 1097,
     "ticketnetwork": 0,
-    "megaseats": 1042,
-    "seatgeek": 217,
-    "vividseats": 927,
+    "megaseats": 1045,
+    "seatgeek": 218,
+    "vividseats": 928,
     "gametime": 1109,
-    "stubhub": 409,
-    "viagogo": 493,
+    "stubhub": 398,
+    "viagogo": 495,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "14075319129viagogo",
+      "id": "14075319435viagogo",
       "source": "viagogo",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "",
-      "price": 150.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319129%26listingQty%3D",
+      "price": 149.66,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319435%26listingQty%3D",
       "unassigned": true
     },
     {
@@ -52,13 +52,13 @@
       "unassigned": true
     },
     {
-      "id": "1024875155megaseats",
-      "source": "megaseats",
-      "secLabel": "742S",
-      "rowLabel": "17",
-      "price": 175.1,
-      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D1024875155",
-      "unassigned": false
+      "id": "14075319435stubhub",
+      "source": "stubhub",
+      "secLabel": "400 Standing Room Only",
+      "rowLabel": "",
+      "price": 168.26,
+      "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319435%26listingQty%3D",
+      "unassigned": true
     }
   ],
   "preferred": null
