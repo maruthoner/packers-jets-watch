@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-18T08:00:04.889Z",
-  "when": "Sep 18, 2026, 4:00 AM ET",
+  "whenISO": "2026-09-18T08:30:11.248Z",
+  "when": "Sep 18, 2026, 4:30 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7814,
+  "listings": 7773,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 13,
+  "readySeconds": 20,
   "feeds": {
-    "event365": 2078,
+    "event365": 2076,
     "seatgeek": 1129,
-    "ticketnetwork": 1394,
-    "megaseats": 1395,
-    "vividseats": 1756,
+    "ticketnetwork": 1436,
+    "megaseats": 1436,
+    "vividseats": 1757,
     "gametime": 875,
-    "stubhub": 645,
-    "viagogo": 588,
+    "stubhub": 609,
+    "viagogo": 493,
     "ticketmaster": 0
   },
   "missing": [],
@@ -250,39 +250,12 @@
       "unassigned": false
     },
     {
-      "id": "14082856002viagogo",
-      "source": "viagogo",
-      "secLabel": "329",
-      "rowLabel": "26",
-      "price": 93.72,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856002%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14085874136viagogo",
-      "source": "viagogo",
-      "secLabel": "348",
-      "rowLabel": "23",
-      "price": 93.72,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14085874136%26listingQty%3D",
-      "unassigned": false
-    },
-    {
       "id": "VB17213000135vividseats",
       "source": "vividseats",
       "secLabel": "Upper Level 348",
       "rowLabel": "18",
       "price": 94,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17213000135%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-      "unassigned": false
-    },
-    {
-      "id": "14084353631viagogo",
-      "source": "viagogo",
-      "secLabel": "332",
-      "rowLabel": "19",
-      "price": 94.06,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14084353631%26listingQty%3D",
       "unassigned": false
     },
     {
@@ -310,24 +283,6 @@
       "rowLabel": "22",
       "price": 94.31,
       "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3Dw3Jsea2R685",
-      "unassigned": false
-    },
-    {
-      "id": "14085874145viagogo",
-      "source": "viagogo",
-      "secLabel": "348",
-      "rowLabel": "22",
-      "price": 94.8,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14085874145%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14086387594viagogo",
-      "source": "viagogo",
-      "secLabel": "321",
-      "rowLabel": "25",
-      "price": 94.8,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14086387594%26listingQty%3D",
       "unassigned": false
     },
     {
@@ -481,24 +436,6 @@
       "rowLabel": "23",
       "price": 95.46,
       "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DYgJtkDRjJ6m",
-      "unassigned": false
-    },
-    {
-      "id": "14082856015viagogo",
-      "source": "viagogo",
-      "secLabel": "329",
-      "rowLabel": "22",
-      "price": 95.89,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856015%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082857372viagogo",
-      "source": "viagogo",
-      "secLabel": "348",
-      "rowLabel": "18",
-      "price": 95.89,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082857372%26listingQty%3D",
       "unassigned": false
     },
     {
@@ -682,60 +619,6 @@
       "unassigned": false
     },
     {
-      "id": "14061866847viagogo",
-      "source": "viagogo",
-      "secLabel": "350",
-      "rowLabel": "23",
-      "price": 96.97,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14061866847%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082856026viagogo",
-      "source": "viagogo",
-      "secLabel": "328",
-      "rowLabel": "21",
-      "price": 96.97,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856026%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082856271viagogo",
-      "source": "viagogo",
-      "secLabel": "328",
-      "rowLabel": "23",
-      "price": 96.97,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856271%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082973228viagogo",
-      "source": "viagogo",
-      "secLabel": "331",
-      "rowLabel": "25",
-      "price": 96.97,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082973228%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14084458538viagogo",
-      "source": "viagogo",
-      "secLabel": "329",
-      "rowLabel": "20",
-      "price": 96.97,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14084458538%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14086619300viagogo",
-      "source": "viagogo",
-      "secLabel": "327",
-      "rowLabel": "22",
-      "price": 96.97,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14086619300%26listingQty%3D",
-      "unassigned": false
-    },
-    {
       "id": "6aa8145161570ebf02f659b1gametime",
       "source": "gametime",
       "secLabel": "324",
@@ -877,6 +760,15 @@
       "rowLabel": "16",
       "price": 97.68,
       "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D1026060808%26quantity%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "7KntAn9zDgGseatgeek",
+      "source": "seatgeek",
+      "secLabel": "346",
+      "rowLabel": "10",
+      "price": 97.71,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3D7KntAn9zDgG",
       "unassigned": false
     },
     {
@@ -1039,33 +931,6 @@
       "rowLabel": "16",
       "price": 98,
       "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17215945007%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-      "unassigned": false
-    },
-    {
-      "id": "14082856547viagogo",
-      "source": "viagogo",
-      "secLabel": "327",
-      "rowLabel": "18",
-      "price": 98.05,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856547%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082856647viagogo",
-      "source": "viagogo",
-      "secLabel": "331",
-      "rowLabel": "20",
-      "price": 98.05,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856647%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082856704viagogo",
-      "source": "viagogo",
-      "secLabel": "301",
-      "rowLabel": "21",
-      "price": 98.05,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856704%26listingQty%3D",
       "unassigned": false
     },
     {
@@ -1483,39 +1348,12 @@
       "unassigned": false
     },
     {
-      "id": "14082856051viagogo",
-      "source": "viagogo",
-      "secLabel": "323",
-      "rowLabel": "19",
-      "price": 99.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856051%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082857003viagogo",
-      "source": "viagogo",
-      "secLabel": "349",
-      "rowLabel": "15",
-      "price": 99.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082857003%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14082857303viagogo",
-      "source": "viagogo",
-      "secLabel": "305",
+      "id": "EroUXDJjw0Gseatgeek",
+      "source": "seatgeek",
+      "secLabel": "334",
       "rowLabel": "16",
-      "price": 99.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082857303%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14086619345viagogo",
-      "source": "viagogo",
-      "secLabel": "327",
-      "rowLabel": "16",
-      "price": 99.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14086619345%26listingQty%3D",
+      "price": 99.71,
+      "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DEroUXDJjw0G",
       "unassigned": false
     },
     {
