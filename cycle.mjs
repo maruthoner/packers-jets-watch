@@ -114,13 +114,13 @@ async function cycleOne(w) {
         watcher: w.id, whenISO: read.whenISO, when: fmt(read.whenISO), quantity: w.quantity,
         priceMax: w.priceMax, listings: listings.length, rejected, sources: read.sample.sources,
         readySeconds: read.readySeconds, feeds: read.feeds ?? null, missing: read.missing ?? [],
-        matches: decided.general.matches, closest: decided.general.closest, lists: decided.lists,
+        matches: decided.general?.matches ?? [], closest: decided.general?.closest ?? [], lists: decided.lists,
       };
       outcome = { ok: true, whenISO: read.whenISO, when: result.when, matches: alertList(w, decided).matches };
     }
   }
   log(outcome.ok
-    ? `  [${w.id}] ${result.listings} listings${result.missing.length ? ` (not included: ${result.missing.map((m) => m.site).join(', ')})` : ''} — ${result.lists.map((l) => `${l.id}: ${l.matches.length}, `).join('')}general: ${result.matches.length}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
+    ? `  [${w.id}] ${result.listings} listings${result.missing.length ? ` (not included: ${result.missing.map((m) => m.site).join(', ')})` : ''} — ${result.lists.map((l) => `${l.id}: ${l.matches.length}, `).join('')}${w.otherSections === false ? 'other sections: not listed' : `general: ${result.matches.length}`}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
     : `  [${w.id}] CHECK FAILED: ${outcome.reason}`);
 
   const planned = plan(prevState, outcome, alertSpec(w), { owner: OWNER, runUrl: RUN_URL });

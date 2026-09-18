@@ -50,17 +50,17 @@ test('unassigned seats are labelled on the page', () => {
 });
 
 const lists = (o = {}) => [
-  { id: 'row1', label: 'Preferred sections, row 1', sections: [339, 137], rowMax: 1, priceMax: 150,
+  { id: 'row1', label: 'Row 1', sections: [339, 137], rowMax: 1, priceMax: 150,
     matches: [listing({ id: 'r', secLabel: '339', rowLabel: '1', price: 128 })], closest: [], ...(o.row1 ?? {}) },
-  { id: 'rows', label: 'Preferred sections, any other row', sections: [339, 137], rowMin: 2, priceMax: 150,
+  { id: 'rows', label: 'Any row', sections: [339, 137], rowMin: 2, priceMax: 150,
     matches: [listing({ id: 'p', secLabel: '137', rowLabel: '24', price: 98 })], closest: [], ...(o.rows ?? {}) },
 ];
 
 test('each preferred list gets its own heading and criteria, in order, above other sections', () => {
   const w = { ...W, preferred: [{}, {}] };
   const html = renderPage(w, { result: result({ lists: lists(), matches: [listing({ id: 'g', secLabel: '327', price: 90 })] }), state: {}, others: [] });
-  const row1 = html.indexOf('Preferred sections, row 1');
-  const rows = html.indexOf('Preferred sections, any other row');
+  const row1 = html.indexOf('<h2>Row 1</h2>');
+  const rows = html.indexOf('<h2>Any row</h2>');
   const general = html.indexOf('Other sections');
   assert.ok(row1 > 0 && rows > row1 && general > rows, 'row 1, then other rows, then other sections');
   assert.match(html.slice(row1, rows), /row 1 only/);
@@ -72,11 +72,21 @@ test('each preferred list gets its own heading and criteria, in order, above oth
   assert.match(html.slice(row1, general), /\$150\.00 or less each/);
 });
 
-test('an empty preferred list names itself', () => {
+test('an empty list says so and still shows the closest seats', () => {
   const w = { ...W, preferred: [{}] };
   const html = renderPage(w, { result: result({ lists: [{ ...lists()[0], matches: [], closest: [listing({ id: 'c', secLabel: '339', rowLabel: '1', price: 190 })] }] }), state: {}, others: [] });
-  assert.match(html, /No pair in preferred sections, row 1 at this price right now\./);
+  assert.match(html, /No 2 seats together fit this right now\./);
   assert.match(html, /\$40\.00 over your \$150\.00 limit/);
+});
+
+test('otherSections false drops the catch-all list from the page entirely', () => {
+  const w = { ...W, preferred: [{}, {}], otherSections: false };
+  const html = renderPage(w, { result: result({ lists: lists(), matches: [listing({ id: 'g', secLabel: '327', price: 90 })] }), state: {}, others: [] });
+  assert.ok(!html.includes('Other sections'), 'no other-sections heading');
+  assert.ok(!html.includes('any other section'), 'no other-sections criteria line');
+  assert.ok(!html.includes('327'), 'no seat from outside the preferred sections');
+  assert.match(html, /<h2>Row 1<\/h2>/);
+  assert.match(html, /<h2>Any row<\/h2>/);
 });
 
 test('a marketplace left out of the check is named on the page', () => {

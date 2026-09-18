@@ -145,12 +145,22 @@ test('an unassigned listing naming preferred sections is still not preferred', (
   assert.ok(decideAll(market(), PREF).general.matches.some((m) => m.id === 'z1'));
 });
 
+test('otherSections false leaves no general list, and seats outside the sections are dropped', () => {
+  const d = decideAll(market(), { ...PREF, otherSections: false });
+  assert.equal(d.general, null);
+  assert.deepEqual(d.lists.map((l) => l.id), ['row1', 'rows']);
+  const shown = d.lists.flatMap((l) => [...l.matches, ...l.closest]).map((m) => m.id);
+  assert.ok(!shown.includes('g1') && !shown.includes('z1'), 'nothing from outside the preferred sections');
+});
+
 test('alerts follow the list marked alerts, and only it', () => {
   const d = decideAll(market(), PREF);
   assert.equal(alertList(PREF, d), d.lists[0]);
   const noAlertFlag = { ...PREF, preferred: PREF.preferred.map((l) => ({ ...l, alerts: false })) };
   const d2 = decideAll(market(), noAlertFlag);
   assert.equal(alertList(noAlertFlag, d2), d2.general);
+  const noneAtAll = decideAll(market(), { ...PREF, otherSections: false, preferred: PREF.preferred.map((l) => ({ ...l, alerts: false })) });
+  assert.deepEqual(alertList({ otherSections: false }, noneAtAll).matches, []);
   const noPref = decideAll(market(), W);
   assert.deepEqual(noPref.lists, []);
   assert.equal(alertList(W, noPref), noPref.general);
