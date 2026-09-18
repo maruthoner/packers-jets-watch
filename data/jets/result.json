@@ -1,7 +1,7 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-18T09:00:06.542Z",
-  "when": "Sep 18, 2026, 5:00 AM ET",
+  "whenISO": "2026-09-18T09:01:19.287Z",
+  "when": "Sep 18, 2026, 5:01 AM ET",
   "quantity": 2,
   "priceMax": 100,
   "listings": 7547,
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 15,
+  "readySeconds": 10,
   "feeds": {
     "event365": 2077,
     "seatgeek": 1131,
@@ -259,7 +259,7 @@
       "unassigned": false
     },
     {
-      "id": "1030071514TicketNetwork",
+      "id": "1030071514ticketnetwork",
       "source": "ticketnetwork",
       "secLabel": "332",
       "rowLabel": "19",
@@ -745,7 +745,7 @@
       "unassigned": false
     },
     {
-      "id": "1026057776TicketNetwork",
+      "id": "1026057776ticketnetwork",
       "source": "ticketnetwork",
       "secLabel": "322",
       "rowLabel": "14",
@@ -754,7 +754,7 @@
       "unassigned": false
     },
     {
-      "id": "1026060808TicketNetwork",
+      "id": "1026060808ticketnetwork",
       "source": "ticketnetwork",
       "secLabel": "329",
       "rowLabel": "16",
