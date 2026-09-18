@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-18T01:28:30.466Z",
-  "when": "Sep 17, 2026, 9:28 PM ET",
+  "whenISO": "2026-09-18T01:58:27.689Z",
+  "when": "Sep 17, 2026, 9:58 PM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 6937,
+  "listings": 6891,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -18,16 +18,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 45,
+  "readySeconds": 43,
   "feeds": {
-    "event365": 2076,
-    "seatgeek": 1137,
+    "event365": 2082,
+    "seatgeek": 1136,
     "ticketnetwork": 0,
-    "megaseats": 1443,
-    "vividseats": 1769,
+    "megaseats": 1415,
+    "vividseats": 1776,
     "gametime": 887,
-    "stubhub": 562,
-    "viagogo": 813,
+    "stubhub": 534,
+    "viagogo": 799,
     "ticketmaster": 0
   },
   "missing": [],
@@ -204,6 +204,15 @@
       "unassigned": false
     },
     {
+      "id": "1030071514megaseats",
+      "source": "megaseats",
+      "secLabel": "332",
+      "rowLabel": "19",
+      "price": 95.2,
+      "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D1030071514",
+      "unassigned": false
+    },
+    {
       "id": "NrqUvmOLK4Rseatgeek",
       "source": "seatgeek",
       "secLabel": "329",
@@ -237,6 +246,15 @@
       "rowLabel": "21",
       "price": 96,
       "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aac7938907ebf4f2ca888ce%3Fseat_count%3D0",
+      "unassigned": false
+    },
+    {
+      "id": "6aac793d62594a552f02c873gametime",
+      "source": "gametime",
+      "secLabel": "327",
+      "rowLabel": "18",
+      "price": 96,
+      "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aac793d62594a552f02c873%3Fseat_count%3D0",
       "unassigned": false
     },
     {
@@ -936,21 +954,21 @@
         "unassigned": false
       },
       {
+        "id": "6a2b1e55d4cd5a899560beffgametime",
+        "source": "gametime",
+        "secLabel": "340",
+        "rowLabel": "23",
+        "price": 133,
+        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a2b1e55d4cd5a899560beff%3Fseat_count%3D0",
+        "unassigned": false
+      },
+      {
         "id": "6aaa97fa8367e75c285feffbgametime",
         "source": "gametime",
         "secLabel": "340",
         "rowLabel": "17",
         "price": 134,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97fa8367e75c285feffb%3Fseat_count%3D0",
-        "unassigned": false
-      },
-      {
-        "id": "6aac7937d94ea8d9ec1887c0gametime",
-        "source": "gametime",
-        "secLabel": "338",
-        "rowLabel": "25",
-        "price": 136,
-        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aac7937d94ea8d9ec1887c0%3Fseat_count%3D0",
         "unassigned": false
       }
     ]
