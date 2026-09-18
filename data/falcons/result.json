@@ -1,7 +1,7 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-18T09:00:28.743Z",
-  "when": "Sep 18, 2026, 5:00 AM ET",
+  "whenISO": "2026-09-18T09:01:32.518Z",
+  "when": "Sep 18, 2026, 5:01 AM ET",
   "quantity": 3,
   "priceMax": 130,
   "listings": 741,
@@ -19,7 +19,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 19,
+  "readySeconds": 11,
   "feeds": {
     "event365": 1098,
     "ticketnetwork": 1067,
@@ -44,7 +44,7 @@
       "unassigned": true
     },
     {
-      "id": "1023523182TicketNetwork",
+      "id": "1023523182ticketnetwork",
       "source": "ticketnetwork",
       "secLabel": "400 STANDING ROOM ONLY",
       "rowLabel": "ga",
