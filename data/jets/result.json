@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-18T05:00:15.835Z",
-  "when": "Sep 18, 2026, 1:00 AM ET",
+  "whenISO": "2026-09-18T05:30:03.357Z",
+  "when": "Sep 18, 2026, 1:30 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7572,
+  "listings": 7732,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 24,
+  "readySeconds": 12,
   "feeds": {
-    "event365": 2093,
-    "seatgeek": 1133,
-    "ticketnetwork": 1359,
-    "megaseats": 1359,
-    "vividseats": 1762,
-    "gametime": 881,
-    "stubhub": 549,
-    "viagogo": 344,
+    "event365": 2099,
+    "seatgeek": 1132,
+    "ticketnetwork": 1348,
+    "megaseats": 1348,
+    "vividseats": 1763,
+    "gametime": 882,
+    "stubhub": 541,
+    "viagogo": 578,
     "ticketmaster": 0
   },
   "missing": [],
@@ -772,6 +772,15 @@
       "unassigned": false
     },
     {
+      "id": "14084605994viagogo",
+      "source": "viagogo",
+      "secLabel": "327",
+      "rowLabel": "21",
+      "price": 99.14,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14084605994%26listingQty%3D",
+      "unassigned": false
+    },
+    {
       "id": "14082856015viagogo",
       "source": "viagogo",
       "secLabel": "329",
@@ -781,12 +790,30 @@
       "unassigned": false
     },
     {
+      "id": "14082856643viagogo",
+      "source": "viagogo",
+      "secLabel": "327",
+      "rowLabel": "22",
+      "price": 99.98,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082856643%26listingQty%3D",
+      "unassigned": false
+    },
+    {
       "id": "14082857372viagogo",
       "source": "viagogo",
       "secLabel": "348",
       "rowLabel": "18",
       "price": 99.98,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082857372%26listingQty%3D",
+      "unassigned": false
+    },
+    {
+      "id": "14082973228viagogo",
+      "source": "viagogo",
+      "secLabel": "331",
+      "rowLabel": "25",
+      "price": 99.98,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FAmerican-Football-Road-Games%2FNew-York-Jets-Tickets%2FE-160417387%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14082973228%26listingQty%3D",
       "unassigned": false
     },
     {
@@ -982,21 +1009,21 @@
         "unassigned": false
       },
       {
-        "id": "6a2b1e55d4cd5a899560beffgametime",
-        "source": "gametime",
-        "secLabel": "340",
-        "rowLabel": "23",
-        "price": 133,
-        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a2b1e55d4cd5a899560beff%3Fseat_count%3D0",
-        "unassigned": false
-      },
-      {
         "id": "6aaa97fa8367e75c285feffbgametime",
         "source": "gametime",
         "secLabel": "340",
         "rowLabel": "17",
         "price": 134,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97fa8367e75c285feffb%3Fseat_count%3D0",
+        "unassigned": false
+      },
+      {
+        "id": "6aac7937d94ea8d9ec1887c0gametime",
+        "source": "gametime",
+        "secLabel": "338",
+        "rowLabel": "25",
+        "price": 136,
+        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aac7937d94ea8d9ec1887c0%3Fseat_count%3D0",
         "unassigned": false
       }
     ]
