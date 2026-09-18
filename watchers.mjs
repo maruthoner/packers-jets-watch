@@ -10,8 +10,8 @@
 //                the list marked `alerts` is the only one that sends email
 //   otherSections  false: show only the lists above; seats elsewhere are not listed at all
 
-// Ruth, Sep 15: exactly these, in this order (136, 138, 142, 238, 336 are skipped on purpose)
-const PREFERRED_SECTIONS = [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140];
+// Ruth, Sep 18: exactly these, in this order (135 and 236 dropped; 136, 138, 142, 238, 336 never included)
+const PREFERRED_SECTIONS = [337, 338, 339, 340, 237, 239, 240, 137, 139, 140];
 
 export const WATCHERS = {
   jets: {
