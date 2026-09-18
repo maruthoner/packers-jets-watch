@@ -21,7 +21,7 @@ export const WATCHERS = {
     closest: 3,
     preferred: {               // Ruth, Sep 15: any row, emails only for these
       sections: [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140],
-      priceMax: 100,
+      priceMax: 150,           // Ruth, Sep 18: preferred sections only; other sections stay $100
     },
     alertOn: 'preferred',
   },
