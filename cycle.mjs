@@ -103,7 +103,7 @@ async function cycleOne(w) {
   let outcome;
   let result = lastResult;
   if (!read.ok) {
-    outcome = { ok: false, reason: read.reason, whenISO: new Date().toISOString() };
+    outcome = { ok: false, reason: read.reason, diagnostics: read.diagnostics ?? null, whenISO: new Date().toISOString() };
   } else {
     const { listings, rejected } = normalize(read.raw, w.quantity);
     const problem = validate({ rawCount: read.raw.length, rejected, missing: read.missing ?? [] }, w);

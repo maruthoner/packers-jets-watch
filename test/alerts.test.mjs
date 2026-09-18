@@ -126,3 +126,22 @@ test('the preferred alert issue has its own title; failures keep the game title'
   s = plan(s, fail(), spec, CTX).state;
   assert.equal(plan(s, fail(), spec, CTX).actions[0].title, 'Jets: seat watch checks are failing');
 });
+
+test('an empty-page failure carries what the page showed into the alert and the state', () => {
+  const diagnostics = { listBox: true, listBoxRows: 3, ticketArrays: [], pageText: 'No tickets match your filters',
+    sample: { label: 'Live Prices', qtyText: '2 Seats' } };
+  const first = plan(initialState(), { ok: false, reason: 'page listed none', diagnostics, whenISO: '2026-09-18T01:00:00Z' }, W, CTX);
+  assert.deepEqual(first.state.lastFailure.diagnostics, diagnostics);
+  const second = plan(first.state, { ok: false, reason: 'page listed none', diagnostics, whenISO: '2026-09-18T01:30:00Z' }, W, CTX);
+  const opened = second.actions.find((a) => a.type === 'open');
+  assert.match(opened.body, /What the page showed:/);
+  assert.match(opened.body, /ticket list box present with 3 elements/);
+  assert.match(opened.body, /No tickets match your filters/);
+});
+
+test('an ordinary failure carries no diagnostics line', () => {
+  const s1 = plan(initialState(), { ok: false, reason: 'blocked', whenISO: '2026-09-18T01:00:00Z' }, W, CTX);
+  const s2 = plan(s1.state, { ok: false, reason: 'blocked', whenISO: '2026-09-18T01:30:00Z' }, W, CTX);
+  assert.ok(!s2.actions.find((a) => a.type === 'open').body.includes('What the page showed'));
+  assert.equal(s1.state.lastFailure.diagnostics, undefined);
+});

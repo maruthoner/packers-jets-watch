@@ -9,7 +9,7 @@
 import { chromium } from 'playwright';
 import { writeFileSync } from 'fs';
 import { WATCHERS } from './watchers.mjs';
-import { isReady, notReadyReason, sameMarket, FEED_PATH, feedSite, classifyFeed, feedsPending, feedsFailed, emptyPageReason } from './lib/ready.mjs';
+import { isReady, notReadyReason, sameMarket, FEED_PATH, feedSite, classifyFeed, feedsPending, feedsFailed, emptyPageReason, summarizeDiagnostics } from './lib/ready.mjs';
 
 const [id, outFile] = process.argv.slice(2);
 const W = WATCHERS[id];
@@ -21,17 +21,18 @@ if (!W || !outFile) {
 const POLL_MS = 3000;
 const LOAD_ATTEMPTS = 3;
 const FEED_WAIT_MS = 60000;
-const EMPTY_WAIT_MS = 20000;      // page still empty this long after every marketplace settled       // a marketplace with no answer after this is treated as failed
+const EMPTY_WAIT_MS = 20000;      // page still empty this long after every marketplace settled
 const READY_DEADLINE_MS = 220000; // all attempts together; cycle.mjs kills the process at 300s
 
 // Runs inside the page. One function so a sample and its raw data come from the same instant.
-function snapshotInPage({ quantity, withRaw }) {
+function snapshotInPage({ quantity, withRaw, withDiag }) {
   const fiberOf = (el) => { for (const k in el) if (k.startsWith('__reactFiber$')) return el[k]; return null; };
 
   // The listings array: the largest array of objects carrying tgAllInPrice.
   const list = (() => {
     const el = document.getElementById('scrollable-ticket-list') || document.body;
     let node = fiberOf(el), best = null, depth = 0;
+    const census = [];
     const seen = new Set();
     const ok = (v) => Array.isArray(v) && v.length > 0 && v[0] && typeof v[0] === 'object' && 'tgAllInPrice' in v[0];
     while (node && depth < 80) {
@@ -42,12 +43,13 @@ function snapshotInPage({ quantity, withRaw }) {
           const [o, d] = stack.pop();
           if (!o || typeof o !== 'object' || d > 5 || seen.has(o)) continue;
           seen.add(o);
-          if (ok(o)) { if (!best || o.length > best.length) best = o; continue; }
+          if (ok(o)) { census.push(o.length); if (!best || o.length > best.length) best = o; continue; }
           for (const k in o) { try { const v = o[k]; if (v && typeof v === 'object') stack.push([v, d + 1]); } catch { /* getters */ } }
         }
       }
       node = node.return; depth++;
     }
+    window.__census = census;
     return best || [];
   })();
 
@@ -68,9 +70,21 @@ function snapshotInPage({ quantity, withRaw }) {
     sources: [...sources].sort(),
     unsellable,
   };
-  if (!withRaw) return { sample };
+  const diag = withDiag ? (() => {
+    const box = document.getElementById('scrollable-ticket-list');
+    const text = ((document.querySelector('main') || document.body).innerText || '').replace(/\s+/g, ' ').trim();
+    return {
+      url: location.href,
+      title: document.title,
+      listBox: !!box,
+      listBoxRows: box ? box.querySelectorAll('*').length : null,
+      ticketArrays: (window.__census || []).slice().sort((a, b) => b - a).slice(0, 5),
+      pageText: text.slice(0, 600),
+    };
+  })() : null;
+  if (!withRaw) return { sample, diag };
   return {
-    sample,
+    sample, diag,
     raw: list.map((t) => ({
       id: t.tgID, secLabel: t.tgUserSec || t.tgCanonSec || '', rowLabel: t.tgUserRow || '',
       allIn: t.tgAllInPrice, splits: t.splits, link: t.tgCheckoutParams || '',
@@ -145,7 +159,9 @@ async function attemptRead(ctx, attempt, started) {
       emptySince = empty ? (emptySince ?? Date.now()) : null;
       if (empty && Date.now() - emptySince >= EMPTY_WAIT_MS) {
         if (attempt < LOAD_ATTEMPTS) return { retry: empty };
-        throw new Error(`${empty} (after ${LOAD_ATTEMPTS} page loads)`);
+        // Last try: record what the page actually showed, so the cause is not guesswork.
+        const { diag } = await page.evaluate(snapshotInPage, { quantity: W.quantity, withRaw: false, withDiag: true });
+        return { fail: { reason: `${empty} (after ${LOAD_ATTEMPTS} page loads)`, diagnostics: { ...diag, feeds, sample: cur } } };
       }
       if (asked > 0 && pending.length === 0 && isReady(prev, cur, W.quantity)) {
         if (failed.length && attempt < LOAD_ATTEMPTS) {
@@ -180,6 +196,11 @@ try {
   for (let attempt = 1; attempt <= LOAD_ATTEMPTS; attempt++) {
     const r = await attemptRead(ctx, attempt, started);
     if (r.retry) { console.log(`  [${W.id}] ${r.retry} — reloading (try ${attempt + 1} of ${LOAD_ATTEMPTS})`); continue; }
+    if (r.fail) {
+      await browser.close();
+      console.log(`  [${W.id}] CHECK FAILED: ${r.fail.reason}\n  [${W.id}] page at the time: ${summarizeDiagnostics(r.fail.diagnostics)}`);
+      finish({ ok: false, ...r.fail }, 1);
+    }
     await browser.close();
     const { sample, raw, feeds, missing } = r.done;
     console.log(`  [${W.id}] ready after ${r.secs}s: ${raw.length} listings from ${sample.sources.join(', ')}`
