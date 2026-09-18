@@ -5,8 +5,13 @@
 //   sections     optional: only these section numbers (omit for any section)
 //   rowMax       optional: only rows 1..rowMax (omit for any row)
 //   closest      how many near-misses to show on the page when nothing fits
-//   preferred    optional { sections, rowMax?, priceMax? }: shown first, and only there
-//   alertOn      'preferred' (default when preferred exists) or 'general': which list emails
+//   preferred    optional [{ id, label, sections, rowMax?, rowMin?, priceMax?, alerts? }]
+//                ordered: a seat belongs to the first list it fits and appears only there;
+//                the list marked `alerts` is the only one that sends email
+
+// Ruth, Sep 15: exactly these, in this order (136, 138, 142, 238, 336 are skipped on purpose)
+const PREFERRED_SECTIONS = [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140];
+
 export const WATCHERS = {
   jets: {
     id: 'jets',
@@ -19,11 +24,12 @@ export const WATCHERS = {
     quantity: 2,
     priceMax: 100,             // general list: any section, any row (Ruth, Sep 14)
     closest: 3,
-    preferred: {               // Ruth, Sep 15: any row, emails only for these
-      sections: [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140],
-      priceMax: 150,           // Ruth, Sep 18: preferred sections only; other sections stay $100
-    },
-    alertOn: 'preferred',
+    preferred: [               // Ruth, Sep 18: same sections, split by row; row 1 alone emails
+      { id: 'row1', label: 'Preferred sections, row 1',
+        sections: PREFERRED_SECTIONS, rowMax: 1, priceMax: 150, alerts: true },
+      { id: 'rows', label: 'Preferred sections, any other row',
+        sections: PREFERRED_SECTIONS, rowMin: 2, priceMax: 150 },
+    ],
   },
 
   falcons: {

@@ -117,10 +117,13 @@ test('unassigned seats are called out in the alert text', () => {
 
 test('the preferred alert issue has its own title; failures keep the game title', async () => {
   const { alertSpec } = await import('../cycle.mjs');
-  const game = { ...W, preferred: { sections: [339], priceMax: 100 }, alertOn: 'preferred' };
+  const game = { ...W, preferred: [
+    { id: 'row1', label: 'Preferred sections, row 1', sections: [339], rowMax: 1, priceMax: 150, alerts: true },
+    { id: 'rows', label: 'Preferred sections, any other row', sections: [339], rowMin: 2, priceMax: 150 },
+  ] };
   const spec = alertSpec(game);
   const opened = plan(initialState(), ok([seat(95)]), spec, CTX).actions[0];
-  assert.equal(opened.title, 'Jets preferred sections: 2 seats together at $100.00 or less');
+  assert.equal(opened.title, 'Jets preferred sections, row 1: 2 seats together at $150.00 or less');
   assert.match(opened.body, /sections 339/);
   let s = initialState();
   s = plan(s, fail(), spec, CTX).state;

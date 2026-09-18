@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { WATCHERS } from './watchers.mjs';
-import { normalize, validate, decideAll, alertList, preferredSpec } from './lib/decide.mjs';
+import { normalize, validate, decideAll, alertList, listSpecs } from './lib/decide.mjs';
 import { plan, initialState, matchTitle, failTitle } from './lib/alerts.mjs';
 import { renderPage, fmt } from './lib/page.mjs';
 import { publish } from './lib/publish.mjs';
@@ -23,11 +23,10 @@ const readJson = (path, fallback) => { try { return JSON.parse(readFileSync(path
 const writeJson = (path, value) => { mkdirSync(join(path, '..'), { recursive: true }); writeFileSync(path, JSON.stringify(value, null, 2) + '\n'); };
 const sitePath = (w) => w.outDir.replace(/^docs\/?/, '');
 
-// The criteria alerts are judged against: the preferred list when a game has one.
+// The criteria alerts are judged against: the list marked `alerts`, else the game itself.
 export function alertSpec(w) {
-  const spec = preferredSpec(w);
-  if (!spec || w.alertOn === 'general') return w;
-  return { ...spec, matchLabel: `${w.alertLabel} preferred sections` };
+  const spec = listSpecs(w).find((s) => s.alerts);
+  return spec ? { ...spec, matchLabel: `${w.alertLabel} ${spec.label.toLowerCase()}` } : w;
 }
 
 export function paths(w) {
@@ -115,14 +114,13 @@ async function cycleOne(w) {
         watcher: w.id, whenISO: read.whenISO, when: fmt(read.whenISO), quantity: w.quantity,
         priceMax: w.priceMax, listings: listings.length, rejected, sources: read.sample.sources,
         readySeconds: read.readySeconds, feeds: read.feeds ?? null, missing: read.missing ?? [],
-        matches: decided.general.matches, closest: decided.general.closest,
-        preferred: decided.preferred && { sections: w.preferred.sections, priceMax: preferredSpec(w).priceMax, ...decided.preferred },
+        matches: decided.general.matches, closest: decided.general.closest, lists: decided.lists,
       };
       outcome = { ok: true, whenISO: read.whenISO, when: result.when, matches: alertList(w, decided).matches };
     }
   }
   log(outcome.ok
-    ? `  [${w.id}] ${result.listings} listings${result.missing.length ? ` (not included: ${result.missing.map((m) => m.site).join(', ')})` : ''} — ${result.preferred ? `preferred: ${result.preferred.matches.length}, ` : ''}general: ${result.matches.length}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
+    ? `  [${w.id}] ${result.listings} listings${result.missing.length ? ` (not included: ${result.missing.map((m) => m.site).join(', ')})` : ''} — ${result.lists.map((l) => `${l.id}: ${l.matches.length}, `).join('')}general: ${result.matches.length}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
     : `  [${w.id}] CHECK FAILED: ${outcome.reason}`);
 
   const planned = plan(prevState, outcome, alertSpec(w), { owner: OWNER, runUrl: RUN_URL });

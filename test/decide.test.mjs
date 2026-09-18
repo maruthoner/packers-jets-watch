@@ -100,47 +100,72 @@ test('without section or row filters, every located or unassigned seat counts', 
   assert.equal(decide(listings, W).matches.length, 1);
 });
 
-// ---- preferred sections (Sep 15) ----
+// ---- preferred lists (Sep 15; split by row Sep 18) ----
 import { decideAll, alertList } from '../lib/decide.mjs';
 
-const PREF = { ...W, priceMax: 100, preferred: { sections: [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140], priceMax: 100 }, alertOn: 'preferred' };
+const SECTIONS = [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140];
+const PREF = { ...W, priceMax: 100, preferred: [
+  { id: 'row1', label: 'Preferred sections, row 1', sections: SECTIONS, rowMax: 1, priceMax: 150, alerts: true },
+  { id: 'rows', label: 'Preferred sections, any other row', sections: SECTIONS, rowMin: 2, priceMax: 150 },
+] };
 const market = () => normalize([
-  raw({ id: 'p1', secLabel: 'Upper Level 339', rowLabel: '24', allIn: 98 }),   // preferred, high row: any row counts
-  raw({ id: 'p2', secLabel: '137', rowLabel: '3', allIn: 100 }),               // preferred, exactly at the limit
-  raw({ id: 'p3', secLabel: 'Mezzanine 237', rowLabel: '1', allIn: 130 }),     // preferred, over price: closest
+  raw({ id: 'r1', secLabel: 'Mezzanine 237', rowLabel: '1', allIn: 130 }),     // preferred, row 1: first list
+  raw({ id: 'r1b', secLabel: '340', rowLabel: '1', allIn: 160 }),              // row 1 over price: closest there
+  raw({ id: 'p1', secLabel: 'Upper Level 339', rowLabel: '24', allIn: 98 }),   // preferred, other row
+  raw({ id: 'p2', secLabel: '137', rowLabel: '3', allIn: 150 }),               // other row, exactly at the limit
   raw({ id: 'g1', secLabel: '327', rowLabel: '19', allIn: 90 }),               // general match
-  raw({ id: 'g2', secLabel: '138', rowLabel: '1', allIn: 95 }),                // skipped section: general, not preferred
+  raw({ id: 'g2', secLabel: '138', rowLabel: '1', allIn: 95 }),                // skipped section: general
   raw({ id: 'z1', secLabel: '337–340–OR–135–137', rowLabel: 'TBD', allIn: 80 }),// unassigned: never preferred
   raw({ id: 'g3', secLabel: '301', rowLabel: '1', allIn: 150 }),               // general closest
 ], 2).listings;
+const ids = (l) => l.map((m) => m.id);
 
-test('preferred pairs show only in the preferred list; everything else stays general', () => {
-  const d = decideAll(market(), PREF);
-  assert.deepEqual(d.preferred.matches.map((m) => m.id), ['p1', 'p2']);
-  assert.deepEqual(d.preferred.closest.map((m) => m.id), ['p3']);
-  assert.deepEqual(d.general.matches.map((m) => m.id), ['z1', 'g1', 'g2']);
-  const all = [...d.preferred.matches, ...d.preferred.closest, ...d.general.matches, ...d.general.closest].map((m) => m.id);
-  assert.equal(new Set(all).size, all.length, 'no listing appears in both lists');
+test('row 1 and other rows are separate lists, and no seat is in both', () => {
+  const { lists, general } = decideAll(market(), PREF);
+  assert.deepEqual(lists.map((l) => l.id), ['row1', 'rows']);
+  assert.deepEqual(ids(lists[0].matches), ['r1']);
+  assert.deepEqual(ids(lists[0].closest), ['r1b']);
+  assert.deepEqual(ids(lists[1].matches), ['p1', 'p2']);
+  assert.deepEqual(ids(general.matches), ['z1', 'g1', 'g2']);
+  const all = [...lists.flatMap((l) => [...l.matches, ...l.closest]), ...general.matches, ...general.closest].map((m) => m.id);
+  assert.equal(new Set(all).size, all.length, 'no listing appears in two lists');
 });
 
-test('a section missing from the list (138) is not preferred', () => {
-  assert.ok(!decideAll(market(), PREF).preferred.matches.some((m) => m.id === 'g2'));
+test('a row-1 seat never falls into the any-other-row list, even when over its price', () => {
+  const { lists } = decideAll(market(), PREF);
+  assert.ok(!ids([...lists[1].matches, ...lists[1].closest]).includes('r1b'));
+});
+
+test('a section missing from the list (138) is in neither preferred list', () => {
+  const { lists } = decideAll(market(), PREF);
+  assert.ok(!lists.some((l) => ids(l.matches).includes('g2')));
 });
 
 test('an unassigned listing naming preferred sections is still not preferred', () => {
   assert.ok(decideAll(market(), PREF).general.matches.some((m) => m.id === 'z1'));
 });
 
-test('alerts follow the preferred list, and only it', () => {
+test('alerts follow the list marked alerts, and only it', () => {
   const d = decideAll(market(), PREF);
-  assert.equal(alertList(PREF, d), d.preferred);
-  assert.equal(alertList({ ...PREF, alertOn: 'general' }, d), d.general);
+  assert.equal(alertList(PREF, d), d.lists[0]);
+  const noAlertFlag = { ...PREF, preferred: PREF.preferred.map((l) => ({ ...l, alerts: false })) };
+  const d2 = decideAll(market(), noAlertFlag);
+  assert.equal(alertList(noAlertFlag, d2), d2.general);
   const noPref = decideAll(market(), W);
-  assert.equal(noPref.preferred, null);
+  assert.deepEqual(noPref.lists, []);
   assert.equal(alertList(W, noPref), noPref.general);
 });
 
-test('general matches alone never alert when preferred alerting is on', () => {
-  const onlyGeneral = normalize([raw({ id: 'g', secLabel: '327', allIn: 90 })], 2).listings;
-  assert.equal(alertList(PREF, decideAll(onlyGeneral, PREF)).matches.length, 0);
+test('seats in the other lists never alert', () => {
+  const others = normalize([
+    raw({ id: 'g', secLabel: '327', rowLabel: '4', allIn: 90 }),
+    raw({ id: 'p', secLabel: '339', rowLabel: '9', allIn: 120 }),
+  ], 2).listings;
+  assert.equal(alertList(PREF, decideAll(others, PREF)).matches.length, 0);
+});
+
+test('a row rule rejects rows that are not numbers', () => {
+  const tbd = normalize([raw({ id: 't', secLabel: '339', rowLabel: 'TBD', allIn: 90 })], 2).listings;
+  const { lists } = decideAll(tbd, PREF);
+  assert.equal(lists[0].matches.length + lists[1].matches.length, 0);
 });

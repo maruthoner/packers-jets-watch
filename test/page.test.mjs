@@ -49,30 +49,34 @@ test('unassigned seats are labelled on the page', () => {
   assert.match(html, /exact seats not assigned yet/);
 });
 
-test('games with preferred sections render the preferred list first, labelled as the one that emails', () => {
-  const w = { ...W, preferred: { sections: [339, 137], priceMax: 100 }, alertOn: 'preferred' };
-  const html = renderPage(w, {
-    result: result({
-      preferred: { priceMax: 100, matches: [listing({ id: 'p', secLabel: '339', rowLabel: '24', price: 98 })], closest: [] },
-      matches: [listing({ id: 'g', secLabel: '327', price: 90 })],
-    }),
-    state: {}, others: [],
-  });
-  const pref = html.indexOf('Preferred sections'), general = html.indexOf('Other sections');
-  assert.ok(pref > 0 && general > pref, 'preferred section comes first');
-  assert.ok(!/email alerts|page only/.test(html), 'no alert labels on the headings');
-  assert.match(html.slice(pref, general), /339 &middot; Row 24/);
-  assert.ok(!html.slice(pref, general).includes('327'), 'general seat not in preferred section');
+const lists = (o = {}) => [
+  { id: 'row1', label: 'Preferred sections, row 1', sections: [339, 137], rowMax: 1, priceMax: 150,
+    matches: [listing({ id: 'r', secLabel: '339', rowLabel: '1', price: 128 })], closest: [], ...(o.row1 ?? {}) },
+  { id: 'rows', label: 'Preferred sections, any other row', sections: [339, 137], rowMin: 2, priceMax: 150,
+    matches: [listing({ id: 'p', secLabel: '137', rowLabel: '24', price: 98 })], closest: [], ...(o.rows ?? {}) },
+];
+
+test('each preferred list gets its own heading and criteria, in order, above other sections', () => {
+  const w = { ...W, preferred: [{}, {}] };
+  const html = renderPage(w, { result: result({ lists: lists(), matches: [listing({ id: 'g', secLabel: '327', price: 90 })] }), state: {}, others: [] });
+  const row1 = html.indexOf('Preferred sections, row 1');
+  const rows = html.indexOf('Preferred sections, any other row');
+  const general = html.indexOf('Other sections');
+  assert.ok(row1 > 0 && rows > row1 && general > rows, 'row 1, then other rows, then other sections');
+  assert.match(html.slice(row1, rows), /row 1 only/);
+  assert.match(html.slice(row1, rows), /339 &middot; Row 1/);
+  assert.match(html.slice(rows, general), /any row except row 1/);
+  assert.match(html.slice(rows, general), /137 &middot; Row 24/);
+  assert.ok(!html.slice(row1, rows).includes('137 &middot; Row 24'), 'other-row seat stays out of the row 1 list');
+  assert.match(html.slice(general), /327/);
+  assert.match(html.slice(row1, general), /\$150\.00 or less each/);
 });
 
-test('an empty preferred list says so and shows the cheapest there', () => {
-  const w = { ...W, preferred: { sections: [339], priceMax: 100 } };
-  const html = renderPage(w, {
-    result: result({ preferred: { priceMax: 100, matches: [], closest: [listing({ id: 'c', secLabel: '339', price: 140 })] } }),
-    state: {}, others: [],
-  });
-  assert.match(html, /No pair in your preferred sections at this price right now/);
-  assert.match(html, /\$40\.00 over your \$100\.00 limit/);
+test('an empty preferred list names itself', () => {
+  const w = { ...W, preferred: [{}] };
+  const html = renderPage(w, { result: result({ lists: [{ ...lists()[0], matches: [], closest: [listing({ id: 'c', secLabel: '339', rowLabel: '1', price: 190 })] }] }), state: {}, others: [] });
+  assert.match(html, /No pair in preferred sections, row 1 at this price right now\./);
+  assert.match(html, /\$40\.00 over your \$150\.00 limit/);
 });
 
 test('a marketplace left out of the check is named on the page', () => {
@@ -90,10 +94,13 @@ test('seat cards show the price without an "all-in, each" suffix', () => {
   assert.ok(!renderPage(W, { result: result(), state: {}, others: [] }).includes('all-in'));
 });
 
-test('empty preferred list reads as one sentence under an "Other sections" split', () => {
-  const w = { ...W, preferred: { sections: [339], priceMax: 100 } };
-  const html = renderPage(w, { result: result({ preferred: { priceMax: 100, matches: [], closest: [] } }), state: {}, others: [] });
-  assert.match(html, /No pair in your preferred sections at this price right now\.<\/div>/);
-  assert.ok(!html.includes('Cheapest there'));
-  assert.match(html, /<h2>Other sections<\/h2>/);
+
+test('row wording never reads as a one-row range or a bare number', () => {
+  const w = { ...W, preferred: [{}] };
+  const page = (list) => renderPage(w, { result: result({ lists: [{ ...lists()[0], ...list, matches: [], closest: [] }] }), state: {}, others: [] });
+  assert.match(page({ rowMax: 1, rowMin: undefined }), /row 1 only/);
+  assert.ok(!page({ rowMax: 1, rowMin: undefined }).includes('rows 1&ndash;1'));
+  assert.match(page({ rowMin: 2, rowMax: undefined }), /any row except row 1/);
+  assert.match(page({ rowMin: undefined, rowMax: 20 }), /rows 1&ndash;20/);
+  assert.match(page({ rowMin: undefined, rowMax: undefined }), /any row/);
 });
