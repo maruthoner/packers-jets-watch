@@ -63,15 +63,32 @@ jobs:
         run: |
           END=$(( $(date +%s) + 19800 ))           # 5h30m, inside the 350-minute job cap
           LOCK=$(sha1sum package-lock.json)
+          CRASHES=0
+          # GitHub runs this step with `set -e`, so every step that may fail transiently
+          # (a network blip on fetch, one crashed cycle) is handled here; otherwise a
+          # single blip would end the whole window and leave the games unwatched until
+          # the throttled schedule fires again.
           while :; do
             START=$(date +%s)
-            git fetch -q origin main && git reset -q --hard origin/main
+            git fetch -q origin main && git reset -q --hard origin/main \
+              || echo "could not sync with main — running the code from the last cycle"
             if [ "$(sha1sum package-lock.json)" != "$LOCK" ]; then
               echo "dependencies changed — reinstalling"
-              npm ci && npx playwright install chromium && LOCK=$(sha1sum package-lock.json)
+              if npm ci && npx playwright install chromium; then
+                LOCK=$(sha1sum package-lock.json)
+              else
+                echo "reinstall failed — continuing on the installed versions"
+              fi
             fi
-            node cycle.mjs; RC=$?
+            if node cycle.mjs; then RC=0; else RC=$?; fi
             [ "$RC" -eq 3 ] && { echo "no games left; stopping"; break; }
+            if [ "$RC" -eq 0 ]; then
+              CRASHES=0
+            else
+              CRASHES=$(( CRASHES + 1 ))
+              echo "cycle exited $RC ($CRASHES in a row)"
+              [ "$CRASHES" -ge 5 ] && { echo "five crashed cycles in a row — failing the job so the watchdog restarts it"; exit 1; }
+            fi
             [ "$DRY_RUN" = "1" ] && { echo "dry run: one cycle only"; break; }
             NEXT=$(( START + 1800 )); NOW=$(date +%s)
             [ "$NEXT" -ge "$END" ] && { echo "window ends before the next cycle; stopping"; break; }
