@@ -1,10 +1,10 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-18T10:51:55.307Z",
-  "when": "Sep 18, 2026, 6:51 AM ET",
+  "whenISO": "2026-09-18T11:21:52.636Z",
+  "when": "Sep 18, 2026, 7:21 AM ET",
   "quantity": 2,
   "priceMax": 100,
-  "listings": 7443,
+  "listings": 7471,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 16,
+  "readySeconds": 14,
   "feeds": {
-    "event365": 2134,
-    "seatgeek": 1129,
-    "ticketnetwork": 1350,
-    "megaseats": 1350,
-    "vividseats": 1755,
-    "gametime": 870,
-    "stubhub": 662,
-    "viagogo": 230,
+    "event365": 2130,
+    "seatgeek": 1126,
+    "ticketnetwork": 1478,
+    "megaseats": 1478,
+    "vividseats": 1751,
+    "gametime": 898,
+    "stubhub": 583,
+    "viagogo": 2,
     "ticketmaster": 0
   },
   "missing": [],
@@ -1630,21 +1630,21 @@
         "unassigned": false
       },
       {
+        "id": "1004042478TicketNetwork",
+        "source": "ticketnetwork",
+        "secLabel": "338",
+        "rowLabel": "6",
+        "price": 129.36,
+        "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D1004042478%26quantity%3D0",
+        "unassigned": false
+      },
+      {
         "id": "6aaa97fa8367e75c285feffbgametime",
         "source": "gametime",
         "secLabel": "340",
         "rowLabel": "17",
         "price": 130,
         "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aaa97fa8367e75c285feffb%3Fseat_count%3D0",
-        "unassigned": false
-      },
-      {
-        "id": "6aac7937d94ea8d9ec1887c0gametime",
-        "source": "gametime",
-        "secLabel": "338",
-        "rowLabel": "25",
-        "price": 133,
-        "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aac7937d94ea8d9ec1887c0%3Fseat_count%3D0",
         "unassigned": false
       }
     ]
