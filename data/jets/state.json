@@ -6,9 +6,19 @@
     "reason": "marketplaces returned 7,824 tickets but the page listed none (after 3 page loads)",
     "whenISO": "2026-09-17T23:29:19.494Z"
   },
-  "matchIssue": null,
-  "matchActive": false,
-  "notifiedBest": null,
-  "emptyStreak": 0,
-  "lastSuccessISO": "2026-09-19T17:27:47.077Z"
+  "alerts": {
+    "row1": {
+      "issue": null,
+      "active": false,
+      "notifiedBest": null,
+      "emptyStreak": 0
+    },
+    "hundreds": {
+      "issue": null,
+      "active": false,
+      "notifiedBest": null,
+      "emptyStreak": 0
+    }
+  },
+  "lastSuccessISO": "2026-09-19T17:57:46.989Z"
 }
