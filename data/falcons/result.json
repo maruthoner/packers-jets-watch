@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-19T22:59:10.984Z",
-  "when": "Sep 19, 2026, 6:59 PM ET",
+  "whenISO": "2026-09-19T23:29:10.958Z",
+  "when": "Sep 19, 2026, 7:29 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 822,
+  "listings": 801,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,47 +19,47 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 13,
+  "readySeconds": 11,
   "feeds": {
-    "event365": 1392,
-    "ticketnetwork": 1101,
-    "megaseats": 1101,
+    "event365": 1343,
+    "ticketnetwork": 1107,
+    "megaseats": 1102,
     "seatgeek": 218,
-    "vividseats": 1017,
-    "gametime": 1099,
-    "stubhub": 381,
-    "viagogo": 495,
+    "vividseats": 1018,
+    "gametime": 1101,
+    "stubhub": 392,
+    "viagogo": 252,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "14108051871viagogo",
-      "source": "viagogo",
-      "secLabel": "749S",
-      "rowLabel": "10",
-      "price": 149.6,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14108051871%26listingQty%3D",
-      "unassigned": false
-    },
-    {
-      "id": "14075319129viagogo",
+      "id": "14090485225viagogo",
       "source": "viagogo",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "",
       "price": 149.66,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319129%26listingQty%3D",
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14090485225%26listingQty%3D",
       "unassigned": true
     },
     {
-      "id": "883499489TicketNetwork",
+      "id": "1042266181TicketNetwork",
       "source": "ticketnetwork",
-      "secLabel": "749S",
-      "rowLabel": "10",
-      "price": 154.88,
-      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D883499489%26quantity%3D0",
-      "unassigned": false
+      "secLabel": "400 STANDING ROOM ONLY",
+      "rowLabel": "ga",
+      "price": 159.28,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D1042266181%26quantity%3D0",
+      "unassigned": true
+    },
+    {
+      "id": "1043715612TicketNetwork",
+      "source": "ticketnetwork",
+      "secLabel": "400 STANDING ROOM ONLY",
+      "rowLabel": "ga",
+      "price": 159.28,
+      "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D1043715612%26quantity%3D0",
+      "unassigned": true
     }
   ],
   "lists": []
