@@ -6,9 +6,13 @@
     "reason": "asked is not defined",
     "whenISO": "2026-09-17T10:57:56.114Z"
   },
-  "matchIssue": null,
-  "matchActive": false,
-  "notifiedBest": null,
-  "emptyStreak": 0,
-  "lastSuccessISO": "2026-09-19T17:28:02.388Z"
+  "alerts": {
+    "general": {
+      "issue": null,
+      "active": false,
+      "notifiedBest": null,
+      "emptyStreak": 0
+    }
+  },
+  "lastSuccessISO": "2026-09-19T17:57:58.030Z"
 }
