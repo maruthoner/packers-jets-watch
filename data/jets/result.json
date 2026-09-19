@@ -1,9 +1,9 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-19T03:24:51.454Z",
-  "when": "Sep 18, 2026, 11:24 PM ET",
+  "whenISO": "2026-09-19T03:55:01.637Z",
+  "when": "Sep 18, 2026, 11:55 PM ET",
   "quantity": 2,
-  "listings": 7338,
+  "listings": 7311,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -18,16 +18,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 17,
+  "readySeconds": 27,
   "feeds": {
-    "event365": 1566,
-    "seatgeek": 1248,
-    "ticketnetwork": 1490,
-    "megaseats": 1490,
-    "vividseats": 1813,
-    "gametime": 892,
-    "stubhub": 611,
-    "viagogo": 239,
+    "event365": 1293,
+    "seatgeek": 1250,
+    "ticketnetwork": 1495,
+    "megaseats": 1495,
+    "vividseats": 1737,
+    "gametime": 897,
+    "stubhub": 602,
+    "viagogo": 507,
     "ticketmaster": 0
   },
   "missing": [],
@@ -364,15 +364,6 @@
           "unassigned": false
         },
         {
-          "id": "6aa9b97f842aa8224a3b47a7gametime",
-          "source": "gametime",
-          "secLabel": "337",
-          "rowLabel": "17",
-          "price": 128,
-          "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa9b97f842aa8224a3b47a7%3Fseat_count%3D0",
-          "unassigned": false
-        },
-        {
           "id": "6aad4609a71203eee1bfdb5agametime",
           "source": "gametime",
           "secLabel": "340",
@@ -397,15 +388,6 @@
           "rowLabel": "23",
           "price": 128,
           "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17225767607%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-          "unassigned": false
-        },
-        {
-          "id": "14091399119stubhub",
-          "source": "stubhub",
-          "secLabel": "340",
-          "rowLabel": "25",
-          "price": 128.8,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14091399119%26listingQty%3D",
           "unassigned": false
         },
         {
@@ -442,6 +424,15 @@
           "rowLabel": "21",
           "price": 129.8,
           "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DPX0sg7V2vnN",
+          "unassigned": false
+        },
+        {
+          "id": "14091399119stubhub",
+          "source": "stubhub",
+          "secLabel": "340",
+          "rowLabel": "25",
+          "price": 129.85,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14091399119%26listingQty%3D",
           "unassigned": false
         },
         {
@@ -508,12 +499,12 @@
           "unassigned": false
         },
         {
-          "id": "8lKt6DOweMdseatgeek",
+          "id": "4vXcjX65VqYseatgeek",
           "source": "seatgeek",
           "secLabel": "339",
           "rowLabel": "19",
           "price": 132.1,
-          "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3D8lKt6DOweMd",
+          "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3D4vXcjX65VqY",
           "unassigned": false
         },
         {
@@ -589,21 +580,21 @@
           "unassigned": false
         },
         {
-          "id": "VB17225543280vividseats",
-          "source": "vividseats",
-          "secLabel": "Upper Level 339",
-          "rowLabel": "19",
-          "price": 133,
-          "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17225543280%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-          "unassigned": false
-        },
-        {
           "id": "VB17225543281vividseats",
           "source": "vividseats",
           "secLabel": "Upper Level 339",
           "rowLabel": "21",
           "price": 133,
           "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17225543281%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+          "unassigned": false
+        },
+        {
+          "id": "VB17227098168vividseats",
+          "source": "vividseats",
+          "secLabel": "Upper Level 339",
+          "rowLabel": "19",
+          "price": 133,
+          "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17227098168%26wsUser%3D1180%26groupId%3D%26qty%3D0",
           "unassigned": false
         },
         {
@@ -712,6 +703,15 @@
           "rowLabel": "23",
           "price": 136.72,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14091399081%26listingQty%3D",
+          "unassigned": false
+        },
+        {
+          "id": "6aa9b97f842aa8224a3b47a7gametime",
+          "source": "gametime",
+          "secLabel": "337",
+          "rowLabel": "17",
+          "price": 137,
+          "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aa9b97f842aa8224a3b47a7%3Fseat_count%3D0",
           "unassigned": false
         },
         {
@@ -868,15 +868,6 @@
           "unassigned": false
         },
         {
-          "id": "14097239008stubhub",
-          "source": "stubhub",
-          "secLabel": "339",
-          "rowLabel": "23",
-          "price": 142.94,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14097239008%26listingQty%3D",
-          "unassigned": false
-        },
-        {
           "id": "6566378993event365",
           "source": "event365",
           "secLabel": "337",
@@ -935,44 +926,8 @@
           "source": "stubhub",
           "secLabel": "338",
           "rowLabel": "21",
-          "price": 145.33,
+          "price": 146.53,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14095922272%26listingQty%3D",
-          "unassigned": false
-        },
-        {
-          "id": "14096664954stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "20",
-          "price": 146.18,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14096664954%26listingQty%3D",
-          "unassigned": false
-        },
-        {
-          "id": "14094400428stubhub",
-          "source": "stubhub",
-          "secLabel": "340",
-          "rowLabel": "15",
-          "price": 147.7,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14094400428%26listingQty%3D",
-          "unassigned": false
-        },
-        {
-          "id": "14095922267stubhub",
-          "source": "stubhub",
-          "secLabel": "338",
-          "rowLabel": "18",
-          "price": 147.7,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14095922267%26listingQty%3D",
-          "unassigned": false
-        },
-        {
-          "id": "14097009198stubhub",
-          "source": "stubhub",
-          "secLabel": "339",
-          "rowLabel": "21",
-          "price": 147.7,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14097009198%26listingQty%3D",
           "unassigned": false
         },
         {
@@ -994,15 +949,6 @@
           "unassigned": false
         },
         {
-          "id": "14096664951stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "19",
-          "price": 148.46,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14096664951%26listingQty%3D",
-          "unassigned": false
-        },
-        {
           "id": "385711216megaseats",
           "source": "megaseats",
           "secLabel": "340",
@@ -1012,21 +958,21 @@
           "unassigned": false
         },
         {
-          "id": "14061867418stubhub",
+          "id": "14095922267stubhub",
           "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "16",
-          "price": 148.89,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14061867418%26listingQty%3D",
+          "secLabel": "338",
+          "rowLabel": "18",
+          "price": 148.92,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14095922267%26listingQty%3D",
           "unassigned": false
         },
         {
-          "id": "14097009208stubhub",
+          "id": "14097009198stubhub",
           "source": "stubhub",
           "secLabel": "339",
-          "rowLabel": "19",
-          "price": 148.89,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14097009208%26listingQty%3D",
+          "rowLabel": "21",
+          "price": 148.92,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14097009198%26listingQty%3D",
           "unassigned": false
         },
         {
@@ -1040,6 +986,15 @@
         }
       ],
       "closest": [
+        {
+          "id": "14098853985stubhub",
+          "source": "stubhub",
+          "secLabel": "339",
+          "rowLabel": "19",
+          "price": 150.12,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14098853985%26listingQty%3D",
+          "unassigned": false
+        },
         {
           "id": "VB17209875533vividseats",
           "source": "vividseats",
@@ -1056,15 +1011,6 @@
           "rowLabel": "9",
           "price": 151.31,
           "link": "https://www.events365.com/checkout/payment/3287862/6568324024?quantity=0&refid=MjM4NzItNDAwMzE%3D%0A",
-          "unassigned": false
-        },
-        {
-          "id": "14064263728stubhub",
-          "source": "stubhub",
-          "secLabel": "340",
-          "rowLabel": "14",
-          "price": 152.45,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14064263728%26listingQty%3D",
           "unassigned": false
         }
       ]
