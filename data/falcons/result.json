@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-19T09:25:59.758Z",
-  "when": "Sep 19, 2026, 5:25 AM ET",
+  "whenISO": "2026-09-19T09:55:56.349Z",
+  "when": "Sep 19, 2026, 5:55 AM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 806,
+  "listings": 799,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,28 +19,28 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 10,
+  "readySeconds": 13,
   "feeds": {
-    "event365": 787,
-    "ticketnetwork": 1108,
-    "megaseats": 1108,
+    "event365": 813,
+    "ticketnetwork": 1107,
+    "megaseats": 1107,
     "seatgeek": 226,
-    "vividseats": 983,
+    "vividseats": 982,
     "gametime": 1106,
-    "stubhub": 434,
-    "viagogo": 523,
+    "stubhub": 309,
+    "viagogo": 248,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "14075319129viagogo",
+      "id": "14075319435viagogo",
       "source": "viagogo",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "",
-      "price": 149.66,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319129%26listingQty%3D",
+      "price": 150.98,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319435%26listingQty%3D",
       "unassigned": true
     },
     {
@@ -48,7 +48,7 @@
       "source": "viagogo",
       "secLabel": "739S",
       "rowLabel": "17",
-      "price": 159.19,
+      "price": 157.79,
       "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14090490166%26listingQty%3D",
       "unassigned": false
     },
