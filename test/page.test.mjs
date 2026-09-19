@@ -70,6 +70,9 @@ test('each preferred list gets its own heading and criteria, in order, above oth
   assert.ok(!html.slice(row1, rows).includes('137 &middot; Row 24'), 'other-row seat stays out of the row 1 list');
   assert.match(html.slice(general), /327/);
   assert.match(html.slice(row1, general), /\$150\.00 or less each/);
+  assert.ok(!html.includes('seats together &middot;'), 'the quantity is not repeated under each heading');
+  assert.match(html.slice(row1, rows), /<p class="crit">Sections 339, 137/, 'the criteria line starts the sentence');
+  assert.match(html, /listings for 2 together/, 'the quantity still appears once, at the top');
 });
 
 test('an empty list says so and still shows the closest seats', () => {
