@@ -1,9 +1,9 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-19T12:26:46.562Z",
-  "when": "Sep 19, 2026, 8:26 AM ET",
+  "whenISO": "2026-09-19T12:56:46.666Z",
+  "when": "Sep 19, 2026, 8:56 AM ET",
   "quantity": 2,
-  "listings": 7553,
+  "listings": 7631,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -18,16 +18,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 14,
+  "readySeconds": 13,
   "feeds": {
-    "event365": 1435,
-    "seatgeek": 1251,
-    "ticketnetwork": 1588,
-    "megaseats": 1590,
-    "vividseats": 1839,
-    "gametime": 891,
-    "stubhub": 642,
-    "viagogo": 243,
+    "event365": 1275,
+    "seatgeek": 1246,
+    "ticketnetwork": 1575,
+    "megaseats": 1575,
+    "vividseats": 1832,
+    "gametime": 893,
+    "stubhub": 610,
+    "viagogo": 490,
     "ticketmaster": 0
   },
   "missing": [],
@@ -102,6 +102,15 @@
       "priceMax": 150,
       "alerts": false,
       "matches": [
+        {
+          "id": "6a2b1e55d4cd5a899560beffgametime",
+          "source": "gametime",
+          "secLabel": "340",
+          "rowLabel": "23",
+          "price": 114,
+          "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a2b1e55d4cd5a899560beff%3Fseat_count%3D0",
+          "unassigned": false
+        },
         {
           "id": "VB17162388278vividseats",
           "source": "vividseats",
@@ -199,15 +208,6 @@
           "rowLabel": "25",
           "price": 120.3,
           "link": "https://www.events365.com/checkout/payment/3287862/6566378881?quantity=0&refid=MjM4NzItNDAwMzE%3D%0A",
-          "unassigned": false
-        },
-        {
-          "id": "6a2b1e55d4cd5a899560beffgametime",
-          "source": "gametime",
-          "secLabel": "340",
-          "rowLabel": "23",
-          "price": 121,
-          "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6a2b1e55d4cd5a899560beff%3Fseat_count%3D0",
           "unassigned": false
         },
         {
@@ -526,6 +526,15 @@
           "unassigned": false
         },
         {
+          "id": "14091399075stubhub",
+          "source": "stubhub",
+          "secLabel": "337",
+          "rowLabel": "24",
+          "price": 132.91,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14091399075%26listingQty%3D",
+          "unassigned": false
+        },
+        {
           "id": "6566378934event365",
           "source": "event365",
           "secLabel": "337",
@@ -580,6 +589,15 @@
           "unassigned": false
         },
         {
+          "id": "14091399074stubhub",
+          "source": "stubhub",
+          "secLabel": "340",
+          "rowLabel": "24",
+          "price": 133.66,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14091399074%26listingQty%3D",
+          "unassigned": false
+        },
+        {
           "id": "6a2b1e552093333d3fcc6101gametime",
           "source": "gametime",
           "secLabel": "340",
@@ -604,6 +622,15 @@
           "rowLabel": "16",
           "price": 134,
           "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17194463211%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+          "unassigned": false
+        },
+        {
+          "id": "14088885053stubhub",
+          "source": "stubhub",
+          "secLabel": "340",
+          "rowLabel": "17",
+          "price": 134.56,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14088885053%26listingQty%3D",
           "unassigned": false
         },
         {
@@ -661,6 +688,15 @@
           "unassigned": false
         },
         {
+          "id": "14091399081stubhub",
+          "source": "stubhub",
+          "secLabel": "337",
+          "rowLabel": "23",
+          "price": 136.72,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14091399081%26listingQty%3D",
+          "unassigned": false
+        },
+        {
           "id": "6aa9b97f842aa8224a3b47a7gametime",
           "source": "gametime",
           "secLabel": "337",
@@ -676,6 +712,15 @@
           "rowLabel": "15",
           "price": 137,
           "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17214223727%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+          "unassigned": false
+        },
+        {
+          "id": "385711216TicketNetwork",
+          "source": "ticketnetwork",
+          "secLabel": "340",
+          "rowLabel": "6",
+          "price": 137.28,
+          "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711216%26quantity%3D0",
           "unassigned": false
         },
         {
@@ -706,6 +751,15 @@
           "unassigned": false
         },
         {
+          "id": "VB15713328840vividseats",
+          "source": "vividseats",
+          "secLabel": "Upper Level 340",
+          "rowLabel": "6",
+          "price": 138,
+          "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB15713328840%26wsUser%3D1180%26groupId%3D%26qty%3D0",
+          "unassigned": false
+        },
+        {
           "id": "VB17196552495vividseats",
           "source": "vividseats",
           "secLabel": "Upper Level 340",
@@ -721,6 +775,15 @@
           "rowLabel": "24",
           "price": 138.15,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14094019359%26listingQty%3D",
+          "unassigned": false
+        },
+        {
+          "id": "385711216megaseats",
+          "source": "megaseats",
+          "secLabel": "340",
+          "rowLabel": "6",
+          "price": 138.55,
+          "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D385711216",
           "unassigned": false
         },
         {
@@ -757,15 +820,6 @@
           "rowLabel": "19",
           "price": 139,
           "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F698f604f0f7409b4426eb8a2%2Flistings%2F6aad46068b80e1b8131d34cb%3Fseat_count%3D0",
-          "unassigned": false
-        },
-        {
-          "id": "14099306471stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "22",
-          "price": 139.39,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14099306471%26listingQty%3D",
           "unassigned": false
         },
         {
@@ -811,24 +865,6 @@
           "rowLabel": "16",
           "price": 141,
           "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB17230614156%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-          "unassigned": false
-        },
-        {
-          "id": "14096664923stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "21",
-          "price": 141.66,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14096664923%26listingQty%3D",
-          "unassigned": false
-        },
-        {
-          "id": "14091399081stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "23",
-          "price": 142.31,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14091399081%26listingQty%3D",
           "unassigned": false
         },
         {
@@ -886,66 +922,21 @@
           "unassigned": false
         },
         {
-          "id": "14096664954stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "20",
-          "price": 147.39,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14096664954%26listingQty%3D",
-          "unassigned": false
-        },
-        {
-          "id": "14095922267stubhub",
+          "id": "14095922272stubhub",
           "source": "stubhub",
           "secLabel": "338",
-          "rowLabel": "18",
-          "price": 147.7,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14095922267%26listingQty%3D",
+          "rowLabel": "21",
+          "price": 147.72,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14095922272%26listingQty%3D",
           "unassigned": false
         },
         {
-          "id": "385711216TicketNetwork",
-          "source": "ticketnetwork",
+          "id": "3q7fNd0ZgKmseatgeek",
+          "source": "seatgeek",
           "secLabel": "340",
           "rowLabel": "6",
-          "price": 147.84,
-          "link": "https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https%3A%2F%2Fticketnetwork.com%2Fe%2Fcheckout-ticket%3FticketGroupId%3D385711216%26quantity%3D0",
-          "unassigned": false
-        },
-        {
-          "id": "VB15713328840vividseats",
-          "source": "vividseats",
-          "secLabel": "Upper Level 340",
-          "rowLabel": "6",
-          "price": 148,
-          "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fnew-york-jets-tickets-east-rutherford-metlife-stadium-3-1-2027%2Fproduction%2F6494593%3FshowDetails%3DVB15713328840%26wsUser%3D1180%26groupId%3D%26qty%3D0",
-          "unassigned": false
-        },
-        {
-          "id": "385711216megaseats",
-          "source": "megaseats",
-          "secLabel": "340",
-          "rowLabel": "6",
-          "price": 148.75,
-          "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730003%3FproductId%3D385711216",
-          "unassigned": false
-        },
-        {
-          "id": "14061867418stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "16",
-          "price": 148.89,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14061867418%26listingQty%3D",
-          "unassigned": false
-        },
-        {
-          "id": "14103545732stubhub",
-          "source": "stubhub",
-          "secLabel": "339",
-          "rowLabel": "19",
-          "price": 148.89,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14103545732%26listingQty%3D",
+          "price": 148.12,
+          "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3D3q7fNd0ZgKm",
           "unassigned": false
         },
         {
@@ -956,25 +947,16 @@
           "price": 149.57,
           "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fnew-york-jets-tickets%2F9-20-2026-east-rutherford-new-jersey-metlife-stadium%2Fnfl%2F18014030%3Fquantity%3D0%23listing%3DrVOHkLXeZYR",
           "unassigned": false
-        },
-        {
-          "id": "14096664951stubhub",
-          "source": "stubhub",
-          "secLabel": "337",
-          "rowLabel": "19",
-          "price": 149.68,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14096664951%26listingQty%3D",
-          "unassigned": false
         }
       ],
       "closest": [
         {
-          "id": "14095589694stubhub",
+          "id": "14103545732stubhub",
           "source": "stubhub",
-          "secLabel": "338",
-          "rowLabel": "15",
-          "price": 150.86,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14095589694%26listingQty%3D",
+          "secLabel": "339",
+          "rowLabel": "19",
+          "price": 150.12,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160417387%2F%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14103545732%26listingQty%3D",
           "unassigned": false
         },
         {
