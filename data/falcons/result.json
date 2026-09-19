@@ -1,7 +1,7 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-19T21:58:02.357Z",
-  "when": "Sep 19, 2026, 5:58 PM ET",
+  "whenISO": "2026-09-19T21:59:09.666Z",
+  "when": "Sep 19, 2026, 5:59 PM ET",
   "quantity": 3,
   "priceMax": 130,
   "listings": 817,
@@ -53,7 +53,7 @@
       "unassigned": true
     },
     {
-      "id": "883499489TicketNetwork",
+      "id": "883499489ticketnetwork",
       "source": "ticketnetwork",
       "secLabel": "749S",
       "rowLabel": "10",
