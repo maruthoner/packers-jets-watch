@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { WATCHERS } from './watchers.mjs';
-import { normalize, validate, decideAll, alertList, listSpecs } from './lib/decide.mjs';
+import { normalize, validate, decideAll, alertLists, listSpecs } from './lib/decide.mjs';
 import { plan, initialState, matchTitle, failTitle } from './lib/alerts.mjs';
 import { renderPage, fmt } from './lib/page.mjs';
 import { publish } from './lib/publish.mjs';
@@ -23,10 +23,14 @@ const readJson = (path, fallback) => { try { return JSON.parse(readFileSync(path
 const writeJson = (path, value) => { mkdirSync(join(path, '..'), { recursive: true }); writeFileSync(path, JSON.stringify(value, null, 2) + '\n'); };
 const sitePath = (w) => w.outDir.replace(/^docs\/?/, '');
 
-// The criteria alerts are judged against: the list marked `alerts`, else the game itself.
-export function alertSpec(w) {
-  const spec = listSpecs(w).find((s) => s.alerts);
-  return spec ? { ...spec, matchLabel: `${w.alertLabel} ${spec.label.toLowerCase()}` } : w;
+// One alert entry per list that emails, each with the spec its issue is written from.
+export function alertEntries(w, decided) {
+  const specs = listSpecs(w);
+  return alertLists(w, decided).map((l) => ({
+    id: l.id ?? 'general',
+    spec: specs.find((s) => s.id === l.id) ?? w,
+    matches: l.matches,
+  }));
 }
 
 export function paths(w) {
@@ -73,20 +77,25 @@ export function githubClient({ gh = (args) => execFileSync('gh', args, { encodin
 }
 
 export function executeActions(actions, state, client, { dry = false, logFn = log } = {}) {
-  const s = { ...state };
+  const s = { ...state, alerts: { ...(state.alerts ?? {}) } };
+  const listOf = (key) => (key.startsWith('match:') ? key.slice(6) : null);
   for (const a of actions) {
     if (dry) { logFn(`  DRY RUN — would ${a.type} ${a.key} issue${a.issue ? ` #${a.issue}` : ''}`); continue; }
+    const id = listOf(a.key);
     try {
-      if (a.type === 'open') s[`${a.key}Issue`] = client.open(a.title, a.body);
-      else if (a.type === 'comment') client.comment(a.issue, a.body);
+      if (a.type === 'open') {
+        const number = client.open(a.title, a.body);
+        if (id) s.alerts[id] = { ...(s.alerts[id] ?? {}), issue: number };
+        else s.failIssue = number;
+      } else if (a.type === 'comment') client.comment(a.issue, a.body);
       else if (a.type === 'edit') client.edit(a.issue, a.body);
-      logFn(`  ${a.type} ${a.key} issue #${s[`${a.key}Issue`] ?? a.issue}`);
+      logFn(`  ${a.type} ${a.key} issue #${(id ? s.alerts[id]?.issue : s.failIssue) ?? a.issue}`);
     } catch (e) {
       logFn(`  could not ${a.type} ${a.key} issue: ${String(e.message || e).split('\n')[0]}`);
       // An alert that did not land must be retried next cycle, not recorded as sent.
       if (a.type !== 'edit') {
-        if (a.key === 'match') { s.matchActive = false; s.notifiedBest = null; }
-        if (a.key === 'fail') s.failActive = false;
+        if (id) s.alerts[id] = { ...(s.alerts[id] ?? {}), active: false, notifiedBest: null };
+        else s.failActive = false;
       }
     }
   }
@@ -116,14 +125,14 @@ async function cycleOne(w) {
         readySeconds: read.readySeconds, feeds: read.feeds ?? null, missing: read.missing ?? [],
         matches: decided.general?.matches ?? [], closest: decided.general?.closest ?? [], lists: decided.lists,
       };
-      outcome = { ok: true, whenISO: read.whenISO, when: result.when, matches: alertList(w, decided).matches };
+      outcome = { ok: true, whenISO: read.whenISO, when: result.when, alerts: alertEntries(w, decided) };
     }
   }
   log(outcome.ok
-    ? `  [${w.id}] ${result.listings} listings${result.missing.length ? ` (not included: ${result.missing.map((m) => m.site).join(', ')})` : ''} — ${result.lists.map((l) => `${l.id}: ${l.matches.length}, `).join('')}${w.otherSections === false ? 'other sections: not listed' : `general: ${result.matches.length}`}; alerting on ${outcome.matches.length}${outcome.matches[0] ? `, best $${outcome.matches[0].price.toFixed(2)}` : ''}`
+    ? `  [${w.id}] ${result.listings} listings${result.missing.length ? ` (not included: ${result.missing.map((m) => m.site).join(', ')})` : ''} — ${result.lists.map((l) => `${l.id}: ${l.matches.length}, `).join('')}${w.otherSections === false ? 'other sections: not listed' : `general: ${result.matches.length}`}; alerting on ${outcome.alerts.map((a) => `${a.id} ${a.matches.length}${a.matches[0] ? ` (best $${a.matches[0].price.toFixed(2)})` : ''}`).join(', ')}`
     : `  [${w.id}] CHECK FAILED: ${outcome.reason}`);
 
-  const planned = plan(prevState, outcome, alertSpec(w), { owner: OWNER, runUrl: RUN_URL });
+  const planned = plan(prevState, outcome, w, { owner: OWNER, runUrl: RUN_URL });
   let state = executeActions(planned.actions, planned.state, githubClient(), { dry: DRY });
 
   if (outcome.ok) writeJson(p.result, result);
@@ -154,7 +163,7 @@ async function cycleOne(w) {
     if (n >= 2) {
       const again = plan({ ...state, failStreak: Math.max(state.failStreak, 1) },
         { ok: false, reason: `the status page has not published for ${n} cycles (${pub.detail})`, whenISO: new Date().toISOString() },
-        alertSpec(w), { owner: OWNER, runUrl: RUN_URL });
+        w, { owner: OWNER, runUrl: RUN_URL });
       executeActions(again.actions, again.state, githubClient());
     }
   } else {
@@ -178,7 +187,7 @@ async function main() {
         const p = paths(w);
         const failed = plan(readJson(p.state, initialState()),
           { ok: false, reason: `the check crashed: ${String(e.message || e).split('\n')[0]}`, whenISO: new Date().toISOString() },
-          alertSpec(w), { owner: OWNER, runUrl: RUN_URL });
+          w, { owner: OWNER, runUrl: RUN_URL });
         writeJson(p.state, executeActions(failed.actions, failed.state, githubClient(), { dry: DRY }));
       } catch (inner) { log(`  [${w.id}] could not record the crash: ${inner.message}`); }
     }

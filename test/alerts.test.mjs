@@ -6,7 +6,10 @@ import { executeActions } from '../cycle.mjs';
 const W = { id: 'jets', title: 'Packers at Jets', alertLabel: 'Jets', quantity: 2, priceMax: 100 };
 const CTX = { owner: 'maruthoner', runUrl: 'https://run' };
 const seat = (price, id = `id${price}`) => ({ id, price, secLabel: '327', rowLabel: '19', link: 'https://buy', unassigned: false });
-const ok = (matches, when = 'now') => ({ ok: true, whenISO: `2026-09-15T00:00:0${Math.floor(Math.random() * 9)}Z`, when, matches });
+// One emailing list ('general') unless a test passes its own alert entries.
+const ok = (matches, when = 'now') => ({ ok: true, whenISO: `2026-09-15T00:00:0${Math.floor(Math.random() * 9)}Z`, when,
+  alerts: [{ id: 'general', spec: W, matches }] });
+const okLists = (entries, when = 'now') => ({ ok: true, whenISO: '2026-09-19T00:00:00Z', when, alerts: entries });
 const fail = (reason = 'blocked') => ({ ok: false, reason, whenISO: '2026-09-15T00:00:00Z' });
 
 // Simulates GitHub so a whole sequence of checks can be replayed.
@@ -65,7 +68,7 @@ test('the issue body is kept current quietly', () => {
 test('seats vanish for one check only: no change (no flapping)', () => {
   const r = run([ok([seat(90)]), ok([]), ok([seat(90)])]);
   assert.equal(r.emails.length, 1);
-  assert.equal(r.state.matchActive, true);
+  assert.equal(r.state.alerts.general.active, true);
 });
 
 test(`seats gone for ${EMPTY_THRESHOLD} checks then return: quiet close-out, one email on return, same issue`, () => {
@@ -89,8 +92,8 @@ test('failures reset on success, and a later failure streak alerts again in the 
 
 test('a failed check never changes what we believe about seats', () => {
   const r = run([ok([seat(90)]), fail(), fail(), fail()]);
-  assert.equal(r.state.matchActive, true);
-  assert.equal(r.state.emptyStreak, 0);
+  assert.equal(r.state.alerts.general.active, true);
+  assert.equal(r.state.alerts.general.emptyStreak, 0);
 });
 
 test('an alert that could not be sent is retried next check, not recorded as sent', () => {
@@ -98,7 +101,7 @@ test('an alert that could not be sent is retried next check, not recorded as sen
   const broken = { open() { throw new Error('API down'); }, comment() {}, edit() {} };
   let p = plan(state, ok([seat(90)]), W, CTX);
   state = executeActions(p.actions, p.state, broken, { logFn: () => {} });
-  assert.equal(state.matchActive, false);
+  assert.equal(state.alerts.general.active, false);
   const gh = fakeGitHub();
   p = plan(state, ok([seat(90)]), W, CTX);
   state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
@@ -106,7 +109,8 @@ test('an alert that could not be sent is retried next check, not recorded as sen
 });
 
 test('state saying "active" but with no issue recovers by alerting again', () => {
-  const p = plan({ ...initialState(), matchActive: true, notifiedBest: 90, matchIssue: null }, ok([seat(90)]), W, CTX);
+  const p = plan({ ...initialState(), alerts: { general: { issue: null, active: true, notifiedBest: 90, emptyStreak: 0 } } },
+    ok([seat(90)]), W, CTX);
   assert.equal(p.actions[0].type, 'open');
 });
 
@@ -115,19 +119,57 @@ test('unassigned seats are called out in the alert text', () => {
   assert.match([...r.issues.values()][0].body, /location not assigned yet/);
 });
 
-test('the preferred alert issue has its own title; failures keep the game title', async () => {
-  const { alertSpec } = await import('../cycle.mjs');
-  const game = { ...W, preferred: [
-    { id: 'row1', label: 'Preferred sections, row 1', sections: [339], rowMax: 1, priceMax: 150, alerts: true },
-    { id: 'rows', label: 'Preferred sections, any other row', sections: [339], rowMin: 2, priceMax: 150 },
-  ] };
-  const spec = alertSpec(game);
-  const opened = plan(initialState(), ok([seat(95)]), spec, CTX).actions[0];
-  assert.equal(opened.title, 'Jets preferred sections, row 1: 2 seats together at $150.00 or less');
-  assert.match(opened.body, /sections 339/);
+const ROW1 = { ...W, id: 'row1', label: 'Row 1', sections: [337, 339], rowMax: 1, priceMax: 150 };
+const HUNDREDS = { ...W, id: 'hundreds', label: 'Section 100s', sections: [137, 139, 140], rowMax: 20, priceMax: 200 };
+
+test('each emailing list has its own title and criteria; failures keep the game title', () => {
+  const r = run([okLists([
+    { id: 'row1', spec: ROW1, matches: [seat(140)] },
+    { id: 'hundreds', spec: HUNDREDS, matches: [seat(190)] },
+  ])]);
+  const titles = [...r.issues.values()].map((i) => i.title);
+  assert.deepEqual(titles, ['Jets row 1: 2 seats together at $150.00 or less',
+    'Jets section 100s: 2 seats together at $200.00 or less']);
+  const [row1, hundreds] = [...r.issues.values()];
+  assert.match(row1.body, /sections 337, 339, row 1 only, \$150\.00 or less each/);
+  assert.match(hundreds.body, /sections 137, 139, 140, rows 1–20, \$200\.00 or less each/);
+  assert.match(hundreds.body, /Packers at Jets — Section 100s/);
   let s = initialState();
-  s = plan(s, fail(), spec, CTX).state;
-  assert.equal(plan(s, fail(), spec, CTX).actions[0].title, 'Jets: seat watch checks are failing');
+  s = plan(s, fail(), W, CTX).state;
+  assert.equal(plan(s, fail(), W, CTX).actions[0].title, 'Jets: seat watch checks are failing');
+});
+
+test('two emailing lists alert independently: one going quiet never silences the other', () => {
+  const gh = fakeGitHub();
+  let state = initialState();
+  const step = (row1Matches, hundredsMatches) => {
+    const p = plan(state, okLists([
+      { id: 'row1', spec: ROW1, matches: row1Matches },
+      { id: 'hundreds', spec: HUNDREDS, matches: hundredsMatches },
+    ]), W, CTX);
+    state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  };
+  step([seat(140)], []);                 // row 1 appears: one email
+  assert.deepEqual(gh.emails.map((e) => e.n), [100]);
+  step([seat(140)], [seat(190)]);        // 100s appears: its own issue, its own email
+  assert.deepEqual(gh.emails.map((e) => e.n), [100, 101]);
+  step([], [seat(180)]);                 // row 1 empty, 100s cheaper: only the cheaper one emails
+  step([], [seat(180)]);
+  assert.deepEqual(gh.emails.map((e) => e.n), [100, 101, 101]);
+  assert.equal(state.alerts.row1.active, false, 'row 1 closed out after two empty checks');
+  assert.equal(state.alerts.hundreds.active, true, 'section 100s still active');
+  assert.equal(gh.issues.size, 2);
+  step([seat(145)], [seat(180)]);        // row 1 returns: email again, same issue
+  assert.deepEqual(gh.emails.map((e) => e.n), [100, 101, 101, 100]);
+});
+
+test('a legacy single-list state does not resurrect old alerts', () => {
+  const legacy = { failStreak: 0, failIssue: 24, failActive: false, lastFailure: null,
+    matchIssue: 26, matchActive: true, notifiedBest: 128, emptyStreak: 0, lastSuccessISO: '2026-09-18T15:00:00Z' };
+  const p = plan(legacy, okLists([{ id: 'row1', spec: ROW1, matches: [seat(140)] }]), W, CTX);
+  assert.equal(p.state.matchIssue, undefined, 'legacy fields are dropped');
+  assert.equal(p.actions[0].type, 'open', 'the new list opens its own issue');
+  assert.equal(p.state.failIssue, 24, 'the failure issue is kept');
 });
 
 test('an empty-page failure carries what the page showed into the alert and the state', () => {

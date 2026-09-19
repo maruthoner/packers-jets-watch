@@ -101,7 +101,7 @@ test('without section or row filters, every located or unassigned seat counts', 
 });
 
 // ---- preferred lists (Sep 15; split by row Sep 18) ----
-import { decideAll, alertList } from '../lib/decide.mjs';
+import { decideAll, alertLists } from '../lib/decide.mjs';
 
 const SECTIONS = [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140];
 const PREF = { ...W, priceMax: 100, preferred: [
@@ -153,25 +153,49 @@ test('otherSections false leaves no general list, and seats outside the sections
   assert.ok(!shown.includes('g1') && !shown.includes('z1'), 'nothing from outside the preferred sections');
 });
 
-test('alerts follow the list marked alerts, and only it', () => {
+test('every list marked alerts emails; a game with none falls back to the general list', () => {
   const d = decideAll(market(), PREF);
-  assert.equal(alertList(PREF, d), d.lists[0]);
-  const noAlertFlag = { ...PREF, preferred: PREF.preferred.map((l) => ({ ...l, alerts: false })) };
-  const d2 = decideAll(market(), noAlertFlag);
-  assert.equal(alertList(noAlertFlag, d2), d2.general);
-  const noneAtAll = decideAll(market(), { ...PREF, otherSections: false, preferred: PREF.preferred.map((l) => ({ ...l, alerts: false })) });
-  assert.deepEqual(alertList({ otherSections: false }, noneAtAll).matches, []);
+  assert.deepEqual(alertLists(PREF, d).map((l) => l.id), ['row1']);
+  const both = { ...PREF, preferred: PREF.preferred.map((l) => ({ ...l, alerts: true })) };
+  assert.deepEqual(alertLists(both, decideAll(market(), both)).map((l) => l.id), ['row1', 'rows']);
+  const none = { ...PREF, preferred: PREF.preferred.map((l) => ({ ...l, alerts: false })) };
+  const d2 = decideAll(market(), none);
+  assert.deepEqual(alertLists(none, d2), [d2.general]);
+  const noneAndNoGeneral = { ...none, otherSections: false };
+  assert.deepEqual(alertLists(noneAndNoGeneral, decideAll(market(), noneAndNoGeneral)), []);
   const noPref = decideAll(market(), W);
   assert.deepEqual(noPref.lists, []);
-  assert.equal(alertList(W, noPref), noPref.general);
+  assert.deepEqual(alertLists(W, noPref), [noPref.general]);
 });
 
-test('seats in the other lists never alert', () => {
+test('seats in the page-only lists never alert', () => {
   const others = normalize([
     raw({ id: 'g', secLabel: '327', rowLabel: '4', allIn: 90 }),
     raw({ id: 'p', secLabel: '339', rowLabel: '9', allIn: 120 }),
   ], 2).listings;
-  assert.equal(alertList(PREF, decideAll(others, PREF)).matches.length, 0);
+  assert.deepEqual(alertLists(PREF, decideAll(others, PREF)).flatMap((l) => l.matches), []);
+});
+
+test('lists can differ in sections, rows and price, and a seat lands in the first it fits', () => {
+  const w = { ...W, otherSections: false, preferred: [
+    { id: 'row1', label: 'Row 1', sections: [337, 339], rowMax: 1, priceMax: 150, alerts: true },
+    { id: 'hundreds', label: 'Section 100s', sections: [137, 139], rowMax: 20, priceMax: 200, alerts: true },
+    { id: 'rows', label: 'Any row', sections: [337, 339], rowMin: 2, priceMax: 150 },
+  ] };
+  const market2 = normalize([
+    raw({ id: 'a', secLabel: '337', rowLabel: '1', allIn: 149 }),    // row 1 list
+    raw({ id: 'b', secLabel: '137', rowLabel: '1', allIn: 199 }),    // 100s: row 1 counts here
+    raw({ id: 'c', secLabel: '139', rowLabel: '20', allIn: 180 }),   // 100s: last row that counts
+    raw({ id: 'd', secLabel: '139', rowLabel: '21', allIn: 90 }),    // 100s: row 21 is in no list
+    raw({ id: 'e', secLabel: '339', rowLabel: '7', allIn: 140 }),    // any row
+    raw({ id: 'f', secLabel: '137', rowLabel: '4', allIn: 240 }),    // 100s but over $200: closest there
+  ], 2).listings;
+  const { lists } = decideAll(market2, w);
+  assert.deepEqual(lists.map((l) => l.matches.map((m) => m.id)), [['a'], ['c', 'b'], ['e']]); // cheapest first
+  assert.deepEqual(lists[1].closest.map((m) => m.id), ['f']);
+  const shown = lists.flatMap((l) => [...l.matches, ...l.closest]).map((m) => m.id);
+  assert.ok(!shown.includes('d'), 'row 21 of a 100-level section is in no list');
+  assert.deepEqual(alertLists(w, { lists, general: null }).map((l) => l.id), ['row1', 'hundreds']);
 });
 
 test('a row rule rejects rows that are not numbers', () => {

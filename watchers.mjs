@@ -10,8 +10,9 @@
 //                the list marked `alerts` is the only one that sends email
 //   otherSections  false: show only the lists above; seats elsewhere are not listed at all
 
-// Ruth, Sep 18: exactly these, in this order (135 and 236 dropped; 136, 138, 142, 238, 336 never included)
-const PREFERRED_SECTIONS = [337, 338, 339, 340, 237, 239, 240, 137, 139, 140];
+// Ruth, Sep 19: the upper/mezzanine sections, and the 100-level ones kept separate
+const UPPER_SECTIONS = [337, 338, 339, 340, 237, 239, 240];
+const HUNDRED_SECTIONS = [137, 139, 140];
 
 export const WATCHERS = {
   jets: {
@@ -24,11 +25,13 @@ export const WATCHERS = {
     outDir: 'docs',
     quantity: 2,
     closest: 3,
-    preferred: [               // Ruth, Sep 18: same sections, split by row; row 1 alone emails
+    preferred: [               // Ruth, Sep 19: Row 1 and Section 100s email; Any row is page only
       { id: 'row1', label: 'Row 1',
-        sections: PREFERRED_SECTIONS, rowMax: 1, priceMax: 150, alerts: true },
+        sections: UPPER_SECTIONS, rowMax: 1, priceMax: 150, alerts: true },
+      { id: 'hundreds', label: 'Section 100s',
+        sections: HUNDRED_SECTIONS, rowMax: 20, priceMax: 200, alerts: true },
       { id: 'rows', label: 'Any row',
-        sections: PREFERRED_SECTIONS, rowMin: 2, priceMax: 150 },
+        sections: UPPER_SECTIONS, rowMin: 2, priceMax: 150 },
     ],
     otherSections: false,      // Ruth, Sep 18: these two lists only
   },
