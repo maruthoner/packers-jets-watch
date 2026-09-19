@@ -1,7 +1,7 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-19T21:57:47.275Z",
-  "when": "Sep 19, 2026, 5:57 PM ET",
+  "whenISO": "2026-09-19T21:58:53.639Z",
+  "when": "Sep 19, 2026, 5:58 PM ET",
   "quantity": 2,
   "listings": 7528,
   "rejected": {
@@ -18,7 +18,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 11,
+  "readySeconds": 13,
   "feeds": {
     "event365": 1657,
     "seatgeek": 1197,
@@ -61,7 +61,7 @@
           "unassigned": false
         },
         {
-          "id": "383615295TicketNetwork",
+          "id": "383615295ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "337",
           "rowLabel": "1",
@@ -94,7 +94,7 @@
       "matches": [],
       "closest": [
         {
-          "id": "1042778620TicketNetwork",
+          "id": "1042778620ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "140",
           "rowLabel": "16",
@@ -139,7 +139,7 @@
       "alerts": false,
       "matches": [
         {
-          "id": "1026427415TicketNetwork",
+          "id": "1026427415ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "340",
           "rowLabel": "6",
@@ -454,7 +454,7 @@
           "unassigned": false
         },
         {
-          "id": "1035612534TicketNetwork",
+          "id": "1035612534ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "339",
           "rowLabel": "11",
@@ -643,7 +643,7 @@
           "unassigned": false
         },
         {
-          "id": "385711216TicketNetwork",
+          "id": "385711216ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "340",
           "rowLabel": "6",
@@ -715,7 +715,7 @@
           "unassigned": false
         },
         {
-          "id": "1004042478TicketNetwork",
+          "id": "1004042478ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "338",
           "rowLabel": "6",
@@ -841,7 +841,7 @@
           "unassigned": false
         },
         {
-          "id": "875508710TicketNetwork",
+          "id": "875508710ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "339",
           "rowLabel": "2",
@@ -958,7 +958,7 @@
           "unassigned": false
         },
         {
-          "id": "385711218TicketNetwork",
+          "id": "385711218ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "340",
           "rowLabel": "4",
