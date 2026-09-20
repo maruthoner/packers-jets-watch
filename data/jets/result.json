@@ -1,7 +1,7 @@
 {
   "watcher": "jets",
-  "whenISO": "2026-09-20T02:58:55.984Z",
-  "when": "Sep 19, 2026, 10:58 PM ET",
+  "whenISO": "2026-09-20T03:00:10.117Z",
+  "when": "Sep 19, 2026, 11:00 PM ET",
   "quantity": 2,
   "listings": 6913,
   "rejected": {
@@ -18,7 +18,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 16,
+  "readySeconds": 13,
   "feeds": {
     "event365": 1609,
     "seatgeek": 1103,
@@ -70,7 +70,7 @@
           "unassigned": false
         },
         {
-          "id": "383615295TicketNetwork",
+          "id": "383615295ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "337",
           "rowLabel": "1",
@@ -94,7 +94,7 @@
       "matches": [],
       "closest": [
         {
-          "id": "638985682TicketNetwork",
+          "id": "638985682ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "137",
           "rowLabel": "20",
@@ -310,7 +310,7 @@
           "unassigned": false
         },
         {
-          "id": "1004042478TicketNetwork",
+          "id": "1004042478ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "338",
           "rowLabel": "6",
@@ -733,7 +733,7 @@
           "unassigned": false
         },
         {
-          "id": "385711216TicketNetwork",
+          "id": "385711216ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "340",
           "rowLabel": "6",
@@ -1012,7 +1012,7 @@
           "unassigned": false
         },
         {
-          "id": "875508710TicketNetwork",
+          "id": "875508710ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "339",
           "rowLabel": "2",
@@ -1156,7 +1156,7 @@
           "unassigned": false
         },
         {
-          "id": "385711218TicketNetwork",
+          "id": "385711218ticketnetwork",
           "source": "ticketnetwork",
           "secLabel": "340",
           "rowLabel": "4",
