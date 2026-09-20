@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-20T17:03:09.629Z",
-  "when": "Sep 20, 2026, 1:03 PM ET",
+  "whenISO": "2026-09-20T17:33:14.350Z",
+  "when": "Sep 20, 2026, 1:33 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 738,
+  "listings": 764,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,28 +19,28 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 15,
+  "readySeconds": 20,
   "feeds": {
-    "event365": 947,
-    "ticketnetwork": 1094,
-    "megaseats": 1098,
+    "event365": 961,
+    "ticketnetwork": 1107,
+    "megaseats": 1106,
     "seatgeek": 208,
-    "vividseats": 984,
-    "gametime": 1100,
-    "stubhub": 360,
-    "viagogo": 497,
+    "vividseats": 992,
+    "gametime": 1095,
+    "stubhub": 317,
+    "viagogo": 511,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "14075319129viagogo",
+      "id": "14090485225viagogo",
       "source": "viagogo",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "",
       "price": 150.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319129%26listingQty%3D",
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14090485225%26listingQty%3D",
       "unassigned": true
     },
     {
