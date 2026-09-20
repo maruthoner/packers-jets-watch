@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-20T17:33:14.350Z",
-  "when": "Sep 20, 2026, 1:33 PM ET",
+  "whenISO": "2026-09-20T18:03:09.057Z",
+  "when": "Sep 20, 2026, 2:03 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 764,
+  "listings": 741,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,16 +19,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 20,
+  "readySeconds": 14,
   "feeds": {
-    "event365": 961,
-    "ticketnetwork": 1107,
-    "megaseats": 1106,
+    "event365": 975,
+    "ticketnetwork": 1106,
+    "megaseats": 1104,
     "seatgeek": 208,
-    "vividseats": 992,
-    "gametime": 1095,
-    "stubhub": 317,
-    "viagogo": 511,
+    "vividseats": 991,
+    "gametime": 1093,
+    "stubhub": 362,
+    "viagogo": 236,
     "ticketmaster": 0
   },
   "missing": [],
