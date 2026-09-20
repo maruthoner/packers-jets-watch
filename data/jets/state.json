@@ -8,17 +8,17 @@
   },
   "alerts": {
     "row1": {
-      "issue": null,
-      "active": false,
-      "notifiedBest": null,
+      "issue": 28,
+      "active": true,
+      "notifiedBest": 133.79,
       "emptyStreak": 0
     },
     "hundreds": {
       "issue": 27,
       "active": true,
-      "notifiedBest": 198.88,
+      "notifiedBest": 184.8,
       "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-20T13:03:04.919Z"
+  "lastSuccessISO": "2026-09-20T13:33:12.717Z"
 }
