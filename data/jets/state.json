@@ -10,15 +10,15 @@
     "row1": {
       "issue": 28,
       "active": true,
-      "notifiedBest": 100.32,
+      "notifiedBest": 80.96,
       "emptyStreak": 0
     },
     "hundreds": {
       "issue": 27,
       "active": true,
-      "notifiedBest": 179,
+      "notifiedBest": 126.37,
       "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-20T16:03:14.756Z"
+  "lastSuccessISO": "2026-09-20T16:33:08.114Z"
 }
