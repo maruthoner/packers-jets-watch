@@ -15,10 +15,10 @@
     },
     "hundreds": {
       "issue": 27,
-      "active": false,
-      "notifiedBest": null,
+      "active": true,
+      "notifiedBest": 198.88,
       "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-20T12:01:34.667Z"
+  "lastSuccessISO": "2026-09-20T12:31:41.903Z"
 }
