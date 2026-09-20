@@ -14,11 +14,11 @@
       "emptyStreak": 0
     },
     "hundreds": {
-      "issue": null,
-      "active": false,
-      "notifiedBest": null,
+      "issue": 27,
+      "active": true,
+      "notifiedBest": 189.23,
       "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-20T03:30:11.312Z"
+  "lastSuccessISO": "2026-09-20T04:00:10.628Z"
 }
