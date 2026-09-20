@@ -203,3 +203,20 @@ test('a row rule rejects rows that are not numbers', () => {
   const { lists } = decideAll(tbd, PREF);
   assert.equal(lists[0].matches.length + lists[1].matches.length, 0);
 });
+
+test('assignedOnly: standing room is never a match, even under the cap', () => {
+  const W3 = { id: 'f', quantity: 3, priceMax: 150, closest: 3, assignedOnly: true };
+  const { listings } = normalize([
+    raw({ id: 'a1vividseats', secLabel: '400 Standing Room Only', rowLabel: '', allIn: 120, splits: [3] }),
+    raw({ id: 'b1vividseats', secLabel: '136', rowLabel: '5', allIn: 145, splits: [3] }),
+  ], 3);
+  const out = decide(listings, W3);
+  assert.equal(out.matches.length, 1);
+  assert.equal(out.matches[0].secLabel, '136');
+});
+
+test('without assignedOnly an unassigned listing can still match', () => {
+  const W3 = { id: 'f', quantity: 3, priceMax: 150, closest: 3 };
+  const { listings } = normalize([raw({ secLabel: '400 Standing Room Only', rowLabel: '', allIn: 120, splits: [3] })], 3);
+  assert.equal(decide(listings, W3).matches.length, 1);
+});

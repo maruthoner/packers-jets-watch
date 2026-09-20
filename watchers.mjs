@@ -4,6 +4,8 @@
 //   priceMax     highest all-in price per ticket that counts as a match
 //   sections     optional: only these section numbers (omit for any section)
 //   rowMax       optional: only rows 1..rowMax (omit for any row)
+//   assignedOnly true: listings with no seat (standing room, 'TBD') never count
+//   venueMap     optional venue id; draws a section map at the foot of the page
 //   closest      how many near-misses to show on the page when nothing fits
 //   preferred    optional [{ id, label, sections, rowMax?, rowMin?, priceMax?, alerts? }]
 //                ordered: a seat belongs to the first list it fits and appears only there;
@@ -23,7 +25,9 @@ export const WATCHERS = {
     alertLabel: 'Falcons',
     outDir: 'docs',           // the main page since the Jets game ended (Ruth, Sep 20)
     quantity: 3,
-    priceMax: 130,             // any section, any row
+    priceMax: 150,             // any section, any row
+    assignedOnly: true,        // seats only — standing room is not a match (Ruth, Sep 20)
+    venueMap: 'lambeau',       // section map at the foot of the page
     closest: 3,
   },
 };

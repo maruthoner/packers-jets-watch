@@ -9,6 +9,7 @@ import { WATCHERS } from './watchers.mjs';
 import { normalize, validate, decideAll, alertLists, listSpecs } from './lib/decide.mjs';
 import { plan, initialState, matchTitle, failTitle } from './lib/alerts.mjs';
 import { renderPage, fmt } from './lib/page.mjs';
+import { loadVenue, sectionPrices } from './lib/map.mjs';
 import { publish } from './lib/publish.mjs';
 
 const DRY = process.argv.includes('--dry-run') || process.env.DRY_RUN === '1';
@@ -124,6 +125,7 @@ async function cycleOne(w) {
         priceMax: w.priceMax, listings: listings.length, rejected, sources: read.sample.sources,
         readySeconds: read.readySeconds, feeds: read.feeds ?? null, missing: read.missing ?? [],
         matches: decided.general?.matches ?? [], closest: decided.general?.closest ?? [], lists: decided.lists,
+        sectionPrices: w.venueMap ? sectionPrices(listings) : undefined,
       };
       outcome = { ok: true, whenISO: read.whenISO, when: result.when, alerts: alertEntries(w, decided) };
     }
@@ -141,7 +143,7 @@ async function cycleOne(w) {
     return { title: o.title, href: `${up}${sitePath(o) ? sitePath(o) + '/' : ''}` };
   });
   mkdirSync(w.outDir, { recursive: true });
-  writeFileSync(p.page, renderPage(w, { result, state, others }));
+  writeFileSync(p.page, renderPage(w, { result, state, others, venue: w.venueMap ? loadVenue(w.venueMap) : null }));
   writeJson(p.state, state);
 
   if (DRY) { log('  DRY RUN — not publishing'); return; }
