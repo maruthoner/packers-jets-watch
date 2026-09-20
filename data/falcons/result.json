@@ -1,10 +1,10 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-20T18:04:00.719Z",
-  "when": "Sep 20, 2026, 2:04 PM ET",
+  "whenISO": "2026-09-20T18:34:10.111Z",
+  "when": "Sep 20, 2026, 2:34 PM ET",
   "quantity": 3,
   "priceMax": 130,
-  "listings": 741,
+  "listings": 756,
   "rejected": {
     "price": 0,
     "quantity": 0
@@ -19,32 +19,32 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 16,
+  "readySeconds": 25,
   "feeds": {
     "event365": 975,
-    "ticketnetwork": 1106,
-    "megaseats": 1104,
-    "seatgeek": 208,
-    "vividseats": 991,
-    "gametime": 1093,
-    "stubhub": 362,
-    "viagogo": 236,
+    "ticketnetwork": 1107,
+    "megaseats": 1107,
+    "seatgeek": 212,
+    "vividseats": 1000,
+    "gametime": 1095,
+    "stubhub": 430,
+    "viagogo": 520,
     "ticketmaster": 0
   },
   "missing": [],
   "matches": [],
   "closest": [
     {
-      "id": "14090485225viagogo",
+      "id": "14075319129viagogo",
       "source": "viagogo",
       "secLabel": "400 Standing Room Only",
       "rowLabel": "",
-      "price": 150.98,
-      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14090485225%26listingQty%3D",
+      "price": 149.66,
+      "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14075319129%26listingQty%3D",
       "unassigned": true
     },
     {
-      "id": "1042266181ticketnetwork",
+      "id": "1042266181TicketNetwork",
       "source": "ticketnetwork",
       "secLabel": "400 STANDING ROOM ONLY",
       "rowLabel": "ga",
@@ -53,7 +53,7 @@
       "unassigned": true
     },
     {
-      "id": "1047822031ticketnetwork",
+      "id": "1047822031TicketNetwork",
       "source": "ticketnetwork",
       "secLabel": "400 STANDING ROOM ONLY",
       "rowLabel": "ga",
