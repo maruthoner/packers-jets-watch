@@ -10,7 +10,7 @@
     "row1": {
       "issue": 28,
       "active": true,
-      "notifiedBest": 133.79,
+      "notifiedBest": 108,
       "emptyStreak": 0
     },
     "hundreds": {
@@ -20,5 +20,5 @@
       "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-20T13:33:12.717Z"
+  "lastSuccessISO": "2026-09-20T14:03:13.879Z"
 }
