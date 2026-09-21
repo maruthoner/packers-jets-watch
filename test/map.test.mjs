@@ -62,7 +62,8 @@ test('context shapes are never priced or counted in the legend', () => {
 
 test('every section is numbered, at a size that fits it', () => {
   const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
-  assert.equal((svg.match(/<text /g) ?? []).length, venue.sections.length);
+  // Section numbers open with x=; the two sideline labels carry a class.
+  assert.equal((svg.match(/<text x=/g) ?? []).length, venue.sections.length);
 });
 
 test('legend counts account for every section', () => {
@@ -86,4 +87,18 @@ test('a section listed without its letter still shades that section', () => {
   // The live regression: 27 sections priced as "634", drawn as "634s", shaded as neither.
   const svg = renderMap(venue, { prices: sectionPrices([seat({ secLabel: '634', price: 140 })]), priceMax: 150, quantity: 3 });
   assert.match(svg, /class="sec fits"><title>634S — from \$140\.00 each<\/title>/);
+});
+
+test('each sideline is labelled on the edge its own sections sit nearest', () => {
+  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
+  const sides = [...svg.matchAll(/<text class="side" x="[\d.]+" y="([\d.]+)">([A-Z ]+)<\/text>/g)]
+    .map((m) => [m[2], Number(m[1])]);
+  assert.equal(sides.length, 2);
+  const packers = sides.find(([n]) => n === 'PACKERS SIDE');
+  const visitor = sides.find(([n]) => n === 'VISITOR SIDE');
+  assert.ok(packers && visitor, 'both sidelines are named');
+  // Even sections 110-130 are drawn above the field on this map, odd 109-129 below.
+  assert.ok(packers[1] < visitor[1], 'Packers side is on the edge nearest sections 110-130');
+  const y = (n) => venue.sections.find((s) => s[1] === n)[2].reduce((a, p) => a + p[1], 0) / 12;
+  assert.ok(y('120') < y('119'), 'the map really does put the even sections on top');
 });

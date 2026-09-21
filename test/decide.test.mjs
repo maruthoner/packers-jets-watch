@@ -58,10 +58,31 @@ test('matches are sorted cheapest first, ties broken by id for stable output', (
 });
 
 test('closest shows only above-limit listings, capped', () => {
-  const r = [101, 102, 103, 104, 105].map((p, i) => raw({ id: `i${i}`, allIn: p }));
+  const r = [101, 102, 103, 104, 105].map((p, i) => raw({ id: `i${i}`, secLabel: `${300 + i}`, allIn: p }));
   const { matches, closest } = decide(normalize(r, 2).listings, W);
   assert.equal(matches.length, 0);
   assert.deepEqual(closest.map((c) => c.price), [101, 102, 103]);
+});
+
+test('closest shows one section per card, not three seats in one section', () => {
+  // The live case: the three cheapest listings all sat in 743S, so the page said
+  // nothing about the rest of the stadium (Ruth, Sep 20).
+  const r = [
+    raw({ id: 'a', secLabel: '743S', allIn: 175 }),
+    raw({ id: 'b', secLabel: '743', allIn: 178 }),   // same section, written without the letter
+    raw({ id: 'c', secLabel: '743S', allIn: 179 }),
+    raw({ id: 'd', secLabel: '637S', allIn: 189 }),
+    raw({ id: 'e', secLabel: '354', allIn: 204 }),
+    raw({ id: 'f', secLabel: '634S', allIn: 212 }),
+  ];
+  const { closest } = decide(normalize(r, 2).listings, W);
+  assert.deepEqual(closest.map((c) => [c.secLabel, c.price]), [['743S', 175], ['637S', 189], ['354', 204]]);
+});
+
+test('listings with no section number each stand on their own', () => {
+  const r = [raw({ id: 'a', secLabel: 'GA', allIn: 200 }), raw({ id: 'b', secLabel: 'GA', allIn: 201 })];
+  const { closest } = decide(normalize(r, 2).listings, W);
+  assert.equal(closest.length, 2);
 });
 
 test('unsafe links are dropped, not rendered', () => {
