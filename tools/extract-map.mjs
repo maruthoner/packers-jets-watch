@@ -4,6 +4,11 @@
 // Each section is stored as its own outline (a short list of points), not as a
 // bounding box: real sections are angled wedges, and boxes drawn round them
 // overlap their neighbours and cover the field.
+//
+// Two lists come out of this. `sections` is seating we can price and shade.
+// `context` is everything else the stadium is made of — suites and the two
+// lounges — drawn greyed underneath so the empty rings read as part of the
+// building rather than as holes in the map (Ruth, Sep 20).
 import { chromium } from 'playwright';
 import { writeFileSync } from 'fs';
 import { WATCHERS } from '../watchers.mjs';
@@ -19,15 +24,18 @@ if (!W?.venueMap) {
 function readMap({ points }) {
   const svg = document.querySelector('svg.venue-map-svg');
   if (!svg) return { error: 'no venue map on the page' };
-  const keep = new Set(['low', '300_lvl', 'up_end', 'mid_end', 'low_end', 'club']);
+  // Zones holding seats this watcher can match. Everything else is context.
+  const SEATING = new Set(['low', '300_lvl', 'up_end', 'mid_end', 'low_end', 'club', 'mlpd']);
   const round = (n) => Math.round(n * 10) / 10;
 
   // Section ids look like sec_<zone>_<name>_<zone>; zones themselves contain
   // underscores (300_lvl), so the zone is matched by backreference.
   const best = new Map();
   for (const el of svg.querySelectorAll('path[id]')) {
-    const m = el.id.match(/^sec_(.+)_([A-Za-z0-9]+)_\1$/);
-    if (!m || !keep.has(m[1])) continue;
+    // sec_<zone>_<name>_<zone>, or sec_<name>_<name> for the two lounges.
+    const m = el.id.match(/^sec_(.+)_([A-Za-z0-9]+)_\1$/) || el.id.match(/^sec_(.+)_\1$/);
+    if (!m) continue;
+    if (m[2] === undefined) m[2] = m[1];
     let len = 0;
     try { len = el.getTotalLength(); } catch { continue; }
     if (!len) continue;
@@ -39,7 +47,7 @@ function readMap({ points }) {
       const p = el.getPointAtLength((len * i) / points);
       pts.push([round(p.x), round(p.y)]);
     }
-    best.set(key, { zone: m[1], name: m[2], len, pts });
+    best.set(key, { zone: m[1], name: m[2], len, pts, seating: SEATING.has(m[1]) });
   }
 
   // Their map has no field element, only sections. The field is the space the
@@ -59,8 +67,12 @@ function readMap({ points }) {
   // The map is sized by width/height, not a viewBox, so build one from them.
   const vb = svg.getAttribute('viewBox')
     || `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`;
-  const sections = [...best.values()].map((s) => [s.zone, s.name, s.pts]);
-  return { viewBox: vb, field, sections };
+  const all = [...best.values()];
+  return {
+    viewBox: vb, field,
+    sections: all.filter((s) => s.seating).map((s) => [s.zone, s.name, s.pts]),
+    context: all.filter((s) => !s.seating).map((s) => [s.zone.endsWith('_ste') ? `Suite ${s.name}` : '', s.pts]),
+  };
 }
 
 const browser = await chromium.launch();
@@ -79,11 +91,12 @@ try {
   const out = `data/${W.venueMap}-map.json`;
   writeFileSync(out, JSON.stringify({
     note: 'Section outlines measured from the seating map on the event listings page. Rebuild with: node tools/extract-map.mjs ' + id,
-    viewBox: map.viewBox, field: map.field, sections: map.sections,
+    viewBox: map.viewBox, field: map.field, sections: map.sections, context: map.context,
   }, null, 0));
   const zones = {};
   for (const [z] of map.sections) zones[z] = (zones[z] ?? 0) + 1;
-  console.log(`wrote ${out}: ${map.sections.length} sections`, zones);
+  console.log(`wrote ${out}: ${map.sections.length} seating sections`, zones);
+  console.log(`plus ${map.context.length} context shapes (suites and lounges)`);
   console.log('viewBox', map.viewBox, 'field', map.field);
 } finally {
   await browser.close();

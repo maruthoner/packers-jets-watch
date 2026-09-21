@@ -42,11 +42,27 @@ test('bands are relative to the price cap', () => {
   assert.equal(band(undefined, 150), 'none');
 });
 
-test('the map draws every section exactly once, plus the field', () => {
+test('the map draws every section and every context shape exactly once, plus the field', () => {
   const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
-  assert.equal((svg.match(/class="sec /g) ?? []).length, venue.sections.length);
-  assert.equal(venue.sections.length, 168);
+  const seating = (svg.match(/class="sec (?:fits|near|over|none)"/g) ?? []).length;
+  const context = (svg.match(/class="sec context"/g) ?? []).length;
+  assert.equal(seating, venue.sections.length);
+  assert.equal(context, venue.context.length);
+  assert.equal(venue.sections.length, 169);
+  assert.ok(venue.context.length > 150, 'suites and lounges are drawn as context');
   assert.match(svg, /class="field"/);
+});
+
+test('context shapes are never priced or counted in the legend', () => {
+  // A suite number must not steal the shading of a seating section.
+  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
+  const counts = [...svg.matchAll(/class="key"><i class="sw \w+"><\/i>[^<]*<b>(\d+)<\/b>/g)].map((m) => Number(m[1]));
+  assert.equal(counts.reduce((a, b) => a + b, 0), venue.sections.length);
+});
+
+test('every section is numbered, at a size that fits it', () => {
+  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
+  assert.equal((svg.match(/<text /g) ?? []).length, venue.sections.length);
 });
 
 test('legend counts account for every section', () => {
