@@ -132,3 +132,9 @@ test('the tally counts both kinds, singular and plural, and flags a real match',
   const none = renderPage(W, { result: result({ matches: [], closest: [listing({ id: 'b' }), listing({ id: 'c' })] }), state: {}, others: [] });
   assert.match(none, /<b>0 exact matches<\/b> &middot; 2 close matches</);
 });
+
+test('the header line ends with the price cap, not the check interval', () => {
+  const html = renderPage(W, { result: result(), state: {}, others: [] });
+  assert.match(html, /<b>12,000<\/b> listings for 2 together &middot; <b>\$100<\/b> max per ticket/);
+  assert.doesNotMatch(html, /checks every 30 minutes/);
+});
