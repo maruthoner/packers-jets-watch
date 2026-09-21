@@ -13,6 +13,11 @@ on:
   schedule:
     - cron: '12,42 * * * *'   # offset from the watcher's own half-hour clock
   workflow_dispatch:
+    inputs:
+      force_restart:
+        description: 'Restart the watcher even if checks look healthy'
+        type: boolean
+        default: false
 
 permissions:
   actions: write    # to cancel a stuck run and start a new one
@@ -34,8 +39,12 @@ jobs:
         id: age
         run: node tools/staleness.mjs
 
+      # `force_restart` is for recovering by hand, and for proving this step works
+      # without waiting for a real stall. It never applies once the games are played.
       - name: Clear whatever is stuck, and get checks running again
-        if: steps.age.outputs.action == 'restart' || steps.age.outputs.action == 'alert'
+        if: |
+          steps.age.outputs.action == 'restart' || steps.age.outputs.action == 'alert'
+          || (inputs.force_restart && steps.age.outputs.action != 'idle')
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
