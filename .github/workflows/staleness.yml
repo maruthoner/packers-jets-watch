@@ -95,9 +95,14 @@ jobs:
             echo "already reported in #$NUM — staying quiet"
             exit 0
           fi
-          gh issue create --repo "$REPO" --title "$TITLE" --assignee "$OWNER" --body \
-"@$OWNER — the seat watch has not completed a successful check in **$MINUTES minutes**, and restarting it automatically has not brought it back.
+          # Indented heredoc: YAML strips the block's common indentation, so the
+          # terminator lands at column 0 in the script it produces.
+          BODY=$(cat <<EOF
+          @$OWNER — the seat watch has not completed a successful check in **$MINUTES minutes**, and restarting it automatically has not brought it back.
 
-No conclusion should be drawn from the status page while this is true: it shows the last check that worked, which is now well out of date, and no alert can arrive for seats that appear in the meantime.
+          No conclusion should be drawn from the status page while this is true: it shows the last check that worked, which is now well out of date, and no alert can arrive for seats that appear in the meantime.
 
-This check: $RUN_URL"
+          This check: $RUN_URL
+          EOF
+          )
+          gh issue create --repo "$REPO" --title "$TITLE" --assignee "$OWNER" --body "$BODY"
