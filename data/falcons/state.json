@@ -12,7 +12,13 @@
       "active": true,
       "notifiedBest": 138.73,
       "emptyStreak": 0
+    },
+    "preferred": {
+      "issue": null,
+      "active": false,
+      "notifiedBest": null,
+      "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-21T21:23:29.321Z"
+  "lastSuccessISO": "2026-09-21T21:53:32.555Z"
 }
