@@ -1,7 +1,7 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-21T19:52:32.403Z",
-  "when": "Sep 21, 2026, 3:52 PM ET",
+  "whenISO": "2026-09-21T19:53:29.840Z",
+  "when": "Sep 21, 2026, 3:53 PM ET",
   "quantity": 3,
   "priceMax": 150,
   "listings": 638,
@@ -20,7 +20,7 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 27,
+  "readySeconds": 11,
   "feeds": {
     "vividseats": 830,
     "event365": 1289,
