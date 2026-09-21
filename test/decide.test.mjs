@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalize, validate, decide, sourceOf, isSafeLink, isUnassigned, withQuantity } from '../lib/decide.mjs';
+import { normalize, validate, decide, decideAll, alertLists, sectionFits, sectionsText, sourceOf, isSafeLink, isUnassigned, withQuantity } from '../lib/decide.mjs';
 
 const raw = (o = {}) => ({ id: 'X1vividseats', secLabel: '327', rowLabel: '19', allIn: 90, splits: [2], link: 'https://example.com/buy', ...o });
 const W = { id: 't', quantity: 2, priceMax: 100, closest: 3 };
@@ -122,7 +122,6 @@ test('without section or row filters, every located or unassigned seat counts', 
 });
 
 // ---- preferred lists (Sep 15; split by row Sep 18) ----
-import { decideAll, alertLists } from '../lib/decide.mjs';
 
 const SECTIONS = [337, 338, 339, 340, 236, 237, 239, 240, 135, 137, 139, 140];
 const PREF = { ...W, priceMax: 100, preferred: [
@@ -348,4 +347,62 @@ test('a listing with no buy link is kept, not dropped', () => {
   const { listings } = normalize([raw({ link: '' })], 2);
   assert.equal(listings.length, 1);
   assert.equal(listings[0].link, null);
+});
+
+// --- Preferred / Regular, split by level (Ruth, Sep 21) ---
+
+const atSection = (sec, price = 90) => raw({ id: `S${sec}vividseats`, secLabel: sec, allIn: price });
+
+test('a level covers every section with that leading digit', () => {
+  const spec = { levels: [1, 3, 4] };
+  for (const sec of ['135', '100', '354', '403', '494', '443S', '432S']) {
+    assert.equal(sectionFits({ secLabel: sec, unassigned: false }, spec), true, sec);
+  }
+  for (const sec of ['630S', '670', '694', '743S']) {
+    assert.equal(sectionFits({ secLabel: sec, unassigned: false }, spec), false, sec);
+  }
+});
+
+test('the club deck splits on the number, as a ticket shows it', () => {
+  // 403-494 are preferred; 670-694 are the same deck but count as regular.
+  assert.equal(sectionFits({ secLabel: '470', unassigned: false }, { levels: [1, 3, 4] }), true);
+  assert.equal(sectionFits({ secLabel: '670', unassigned: false }, { levels: [1, 3, 4] }), false);
+  assert.equal(sectionFits({ secLabel: '670', unassigned: false }, { levels: [6, 7] }), true);
+});
+
+test('a seat with no fixed location belongs to no list', () => {
+  assert.equal(sectionFits({ secLabel: '400 Standing Room Only', unassigned: true }, { levels: [1, 3, 4] }), false);
+  assert.equal(sectionFits({ secLabel: '301-306-OR-346-350', unassigned: false }, { levels: [3] }), false);
+});
+
+test('every listing lands in exactly one of the two lists', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  const w = WATCHERS.falcons;
+  const { listings } = normalize(
+    ['135', '354', '470', '630S', '743S'].map((s) => atSection(s)).map((r) => ({ ...r, splits: [3] })),
+    3);
+  const { lists, general } = decideAll(listings, w);
+  assert.equal(general, null, 'no catch-all list');
+  assert.deepEqual(lists.map((l) => l.id), ['preferred', 'regular']);
+  assert.deepEqual(lists[0].matches.map((m) => m.secLabel), ['135', '354', '470']);
+  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), ['630S', '743S']);
+  const total = lists.reduce((n, l) => n + l.matches.length, 0);
+  assert.equal(total, listings.length, 'nothing is dropped or counted twice');
+});
+
+test('only Preferred emails', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  const w = WATCHERS.falcons;
+  const { listings } = normalize(
+    ['135', '743S'].map((s) => ({ ...atSection(s), splits: [3] })), 3);
+  const emailing = alertLists(w, decideAll(listings, w));
+  assert.deepEqual(emailing.map((l) => l.id), ['preferred']);
+});
+
+test('the criteria read as levels, not as a list of 120 numbers', () => {
+  assert.equal(sectionsText({ levels: [1, 3, 4] }), 'sections in the 100s, 300s and 400s');
+  assert.equal(sectionsText({ levels: [6, 7] }), 'sections in the 600s and 700s');
+  assert.equal(sectionsText({ levels: [1] }), 'sections in the 100s');
+  assert.equal(sectionsText({ sections: [137, 139] }), 'sections 137, 139');
+  assert.equal(sectionsText({}), 'any section');
 });

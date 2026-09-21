@@ -3,6 +3,8 @@
 //   quantity     seats that must be sold together
 //   priceMax     highest all-in price per ticket that counts as a match
 //   sections     optional: only these section numbers (omit for any section)
+//   levels       optional: only these levels, by leading digit — [1, 3, 4] is the
+//                100s, 300s and 400s (omit for any level)
 //   rowMax       optional: only rows 1..rowMax (omit for any row)
 //   assignedOnly true: listings with no seat (standing room, 'TBD') never count
 //   excludeSources marketplaces to ignore completely — not matched, not shown, not mapped
@@ -40,6 +42,16 @@ export const WATCHERS = {
     excludeSources: ['ticketnetwork'],
     venueMap: 'lambeau',       // section map at the foot of the page
     closest: 3,
+    // Two lists, split by where the seats are (Ruth, Sep 21). A listing belongs to
+    // the first list it fits, so nothing is counted twice. The leading digit decides,
+    // which is what a ticket shows: the club deck is split by it too — 403-494 are
+    // preferred, 670-694 are regular. Only Preferred emails; Regular is the page only.
+    preferred: [
+      { id: 'preferred', label: 'Preferred', levels: [1, 3, 4], alerts: true },
+      { id: 'regular', label: 'Regular', levels: [6, 7] },
+    ],
+    // The two lists cover every level the market uses, so there is no catch-all.
+    otherSections: false,
     // Notes on the stadium itself (Ruth, Sep 20). Nothing here comes from the
     // listings; it is background for reading a section number on the map.
     notes: [

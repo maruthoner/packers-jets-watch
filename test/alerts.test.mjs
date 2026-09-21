@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { plan, initialState, FAIL_THRESHOLD, EMPTY_THRESHOLD } from '../lib/alerts.mjs';
 import { executeActions, alertEntries } from '../cycle.mjs';
-import { normalize, decideAll } from '../lib/decide.mjs';
+import { normalize, decideAll, alertLists } from '../lib/decide.mjs';
 import { WATCHERS } from '../watchers.mjs';
 
 const W = { id: 'jets', title: 'Packers at Jets', alertLabel: 'Jets', quantity: 2, priceMax: 100 };
@@ -211,15 +211,22 @@ function pipeline(w, raw) {
     ok: true, whenISO: '2026-09-21T00:00:00Z', when: 'now', alerts: alertEntries(w, decided),
   }, w, CTX);
   executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
-  return { decided, ...gh };
+  // What could email, and what the page would show — across whichever lists exist.
+  const emailing = alertLists(w, decided);
+  const shown = decided.general ? [decided.general, ...decided.lists] : decided.lists;
+  return {
+    decided, ...gh,
+    matched: emailing.flatMap((l) => l.matches),
+    closest: shown.flatMap((l) => l.closest),
+  };
 }
 
 test('near misses never email, however close they get', () => {
   const F = WATCHERS.falcons;
   // A cent over the cap is still over the cap.
-  const r = pipeline(F, [150.01, 151, 175.02, 190.7, 400].map((p, i) => rawListing(p, `${740 + i}`)));
-  assert.equal(r.decided.general.matches.length, 0, 'nothing is at or under the cap');
-  assert.ok(r.decided.general.closest.length > 0, 'the page still shows the near misses');
+  const r = pipeline(F, [150.01, 151, 175.02, 190.7, 400].map((p, i) => rawListing(p, `${130 + i}`)));
+  assert.equal(r.matched.length, 0, 'nothing is at or under the cap');
+  assert.ok(r.closest.length > 0, 'the page still shows the near misses');
   assert.deepEqual(r.emails, [], 'but nothing is emailed');
   assert.equal(r.issues.size, 0, 'and no issue is opened');
 });
@@ -227,24 +234,35 @@ test('near misses never email, however close they get', () => {
 test('standing room at a fitting price never emails', () => {
   const F = WATCHERS.falcons;
   const r = pipeline(F, [rawListing(99, '400 Standing Room Only', { rowLabel: 'GA' })]);
-  assert.equal(r.decided.general.matches.length, 0, 'assignedOnly keeps it out');
+  assert.equal(r.matched.length, 0, 'assignedOnly keeps it out');
   assert.deepEqual(r.emails, []);
 });
 
 test('a listing at exactly the cap emails once, mentioning the owner', () => {
   const F = WATCHERS.falcons;
-  const r = pipeline(F, [rawListing(F.priceMax, '743S'), rawListing(F.priceMax + 0.01, '637S')]);
-  assert.equal(r.decided.general.matches.length, 1, 'the cap is inclusive');
+  const r = pipeline(F, [rawListing(F.priceMax, '135'), rawListing(F.priceMax + 0.01, '137')]);
+  assert.equal(r.matched.length, 1, 'the cap is inclusive');
   assert.equal(r.emails.length, 1, 'exactly one email');
   const [issue] = [...r.issues.values()];
-  assert.equal(issue.title, `Falcons: ${F.quantity} seats together at $${F.priceMax}.00 or less`);
+  assert.equal(issue.title, `Falcons preferred: ${F.quantity} seats together at $${F.priceMax}.00 or less`);
   assert.match(issue.body, /@maruthoner/, 'the mention is what sends the email');
   assert.match(issue.body, /\$150\.00/);
 });
 
 test('a listing that cannot be sold as 3 together never emails', () => {
   const F = WATCHERS.falcons;
-  const r = pipeline(F, [rawListing(80, '743S', { splits: [1, 2, 4] })]);
-  assert.equal(r.decided.general.matches.length, 0);
+  const r = pipeline(F, [rawListing(80, '135', { splits: [1, 2, 4] })]);
+  assert.equal(r.matched.length, 0);
   assert.deepEqual(r.emails, []);
+});
+
+test('a Regular match is shown but never emailed; a Preferred one emails', () => {
+  // Ruth, Sep 21: only the 100s/300s/400s email. 700s seats still appear on the page.
+  const F = WATCHERS.falcons;
+  const regular = pipeline(F, [rawListing(100, '743S')]);
+  assert.deepEqual(regular.emails, [], 'a cheap 700s seat does not email');
+  assert.equal(regular.decided.lists.find((l) => l.id === 'regular').matches.length, 1, 'but it is listed');
+
+  const preferred = pipeline(F, [rawListing(100, '135')]);
+  assert.equal(preferred.emails.length, 1);
 });
