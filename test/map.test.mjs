@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import { sectionKey, sectionPrices, band, renderMap, loadVenue } from '../lib/map.mjs';
 
 const venue = loadVenue('lambeau');
+// "7 sections" / "none right now" -> 7 / 0, summed across the four bands.
+const legendTotal = (html) => [...html.matchAll(/<span class="n">([^<]*)<\/span>/g)]
+  .reduce((t, m) => t + (m[1] === 'none right now' ? 0 : Number(m[1].match(/\d+/)[0])), 0);
+
 const seat = (o = {}) => ({ secLabel: '136', rowLabel: '5', price: 200, unassigned: false, ...o });
 
 test('a section number is the same key whichever way it is written', () => {
@@ -56,8 +60,7 @@ test('the map draws every section and every context shape exactly once, plus the
 test('context shapes are never priced or counted in the legend', () => {
   // A suite number must not steal the shading of a seating section.
   const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
-  const counts = [...svg.matchAll(/class="key"><i class="sw \w+"><\/i>[^<]*<b>(\d+)<\/b>/g)].map((m) => Number(m[1]));
-  assert.equal(counts.reduce((a, b) => a + b, 0), venue.sections.length);
+  assert.equal(legendTotal(svg), venue.sections.length);
 });
 
 test('every section is numbered, at a size that fits it', () => {
@@ -69,8 +72,7 @@ test('every section is numbered, at a size that fits it', () => {
 test('legend counts account for every section', () => {
   const prices = { '136': 140, '750s': 200, '103': 400 };
   const svg = renderMap(venue, { prices, priceMax: 150, quantity: 3 });
-  const counts = [...svg.matchAll(/class="key"><i class="sw (\w+)"><\/i>[^<]*<b>(\d+)<\/b>/g)].map((m) => Number(m[2]));
-  assert.equal(counts.reduce((a, b) => a + b, 0), venue.sections.length);
+  assert.equal(legendTotal(svg), venue.sections.length);
 });
 
 test('a section with a fitting price is shaded as fitting', () => {
@@ -101,4 +103,12 @@ test('each sideline is labelled on the edge its own sections sit nearest', () =>
   assert.ok(packers[1] < visitor[1], 'Packers side is on the edge nearest sections 110-130');
   const y = (n) => venue.sections.find((s) => s[1] === n)[2].reduce((a, p) => a + p[1], 0) / 12;
   assert.ok(y('120') < y('119'), 'the map really does put the even sections on top');
+});
+
+test('a legend swatch is a swatch, not a results box', () => {
+  // `class="sw none"` also matched the page's .none box rule, which padded the
+  // fourth swatch to three times the size of the other three.
+  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
+  assert.match(svg, /<i class="sw sw-none"><\/i>/);
+  assert.doesNotMatch(svg, /class="sw (fits|near|over|none)"/);
 });

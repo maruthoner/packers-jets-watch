@@ -78,7 +78,7 @@ test('each preferred list gets its own heading and criteria, in order, above oth
 test('an empty list says so and still shows the closest seats', () => {
   const w = { ...W, preferred: [{}] };
   const html = renderPage(w, { result: result({ lists: [{ ...lists()[0], matches: [], closest: [listing({ id: 'c', secLabel: '339', rowLabel: '1', price: 190 })] }] }), state: {}, others: [] });
-  assert.match(html, /No 2 seats together fit this right now\./);
+  assert.match(html, /<div class="tally"><b>0 exact matches<\/b> &middot; 1 close match<\/div>/);
   assert.match(html, /\$40\.00 over your \$150\.00 limit/);
 });
 
@@ -124,4 +124,11 @@ test('the notes section repeats the config, escaped, and is left out when there 
   assert.match(html, /<h2>Notes<\/h2>/);
   assert.match(html, /<dt>Lower bowl<\/dt><dd>Benches &amp; no seat backs<\/dd>/);
   assert.doesNotMatch(renderPage(W, { result: null, state: {}, others: [] }), /<h2>Notes<\/h2>/);
+});
+
+test('the tally counts both kinds, singular and plural, and flags a real match', () => {
+  const one = renderPage(W, { result: result({ matches: [listing()], closest: [listing({ id: 'b', price: 120 })] }), state: {}, others: [] });
+  assert.match(one, /<b class="good">1 exact match<\/b> &middot; 1 close match</);
+  const none = renderPage(W, { result: result({ matches: [], closest: [listing({ id: 'b' }), listing({ id: 'c' })] }), state: {}, others: [] });
+  assert.match(none, /<b>0 exact matches<\/b> &middot; 2 close matches</);
 });
