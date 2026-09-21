@@ -93,14 +93,16 @@ test('a section listed without its letter still shades that section', () => {
 
 test('each sideline is labelled on the edge its own sections sit nearest', () => {
   const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
-  const sides = [...svg.matchAll(/<text class="side" x="[\d.]+" y="([\d.]+)">([A-Z ]+)<\/text>/g)]
-    .map((m) => [m[2], Number(m[1])]);
+  const sides = [...svg.matchAll(/<text class="side (home|away)" x="[\d.]+" y="([\d.]+)">([A-Z ]+)<\/text>/g)]
+    .map((m) => [m[3], Number(m[2]), m[1]]);
   assert.equal(sides.length, 2);
   const packers = sides.find(([n]) => n === 'PACKERS SIDE');
   const visitor = sides.find(([n]) => n === 'VISITOR SIDE');
   assert.ok(packers && visitor, 'both sidelines are named');
   // Even sections 110-130 are drawn above the field on this map, odd 109-129 below.
   assert.ok(packers[1] < visitor[1], 'Packers side is on the edge nearest sections 110-130');
+  assert.equal(packers[2], 'home');
+  assert.equal(visitor[2], 'away');
   const y = (n) => venue.sections.find((s) => s[1] === n)[2].reduce((a, p) => a + p[1], 0) / 12;
   assert.ok(y('120') < y('119'), 'the map really does put the even sections on top');
 });
