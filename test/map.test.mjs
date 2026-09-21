@@ -5,17 +5,17 @@ import { sectionKey, sectionPrices, band, renderMap, loadVenue } from '../lib/ma
 const venue = loadVenue('lambeau');
 const seat = (o = {}) => ({ secLabel: '136', rowLabel: '5', price: 200, unassigned: false, ...o });
 
-test('section labels reduce to the key used by the map', () => {
-  assert.equal(sectionKey('Section 750S'), '750s');
-  assert.equal(sectionKey('741 S'), '741s');
-  assert.equal(sectionKey('Upper Level 336'), '336');
-  assert.equal(sectionKey('336'), '336');
+test('a section number is the same key whichever way it is written', () => {
+  // Sellers list the same seats as both "634" and "634S"; the venue calls it 634s.
+  for (const l of ['Section 750S', '741 S', 'Upper Level 336', '336', '634', '634S', '634s']) {
+    assert.equal(sectionKey(l), l.match(/\d+/)[0]);
+  }
 });
 
-test('a letter that begins a word is not a section suffix', () => {
-  // 400S is a real section; "400 Standing Room Only" is not in it.
-  assert.equal(sectionKey('400 Standing Room Only'), '400');
-  assert.equal(sectionKey('400 STANDING ROOM ONLY'), '400');
+test('the venue and the seller meet on the same key', () => {
+  const names = venue.sections.map((s) => s[1]);
+  assert.ok(names.includes('634s'));
+  assert.equal(sectionKey('634s'), sectionKey('Section 634'));
 });
 
 test('labels with no section number have no key', () => {
@@ -25,7 +25,7 @@ test('labels with no section number have no key', () => {
 test('each section keeps its cheapest listing', () => {
   const prices = sectionPrices([seat({ price: 260 }), seat({ price: 203 }), seat({ secLabel: '750S', price: 310 })]);
   assert.equal(prices['136'], 203);
-  assert.equal(prices['750s'], 310);
+  assert.equal(prices['750'], 310);
 });
 
 test('listings with no assigned seat never colour a section', () => {
@@ -64,4 +64,10 @@ test('a section with a fitting price is shaded as fitting', () => {
 test('no venue renders nothing rather than a broken map', () => {
   assert.equal(renderMap(null, { priceMax: 150, quantity: 3 }), '');
   assert.equal(loadVenue('nope'), null);
+});
+
+test('a section listed without its letter still shades that section', () => {
+  // The live regression: 27 sections priced as "634", drawn as "634s", shaded as neither.
+  const svg = renderMap(venue, { prices: sectionPrices([seat({ secLabel: '634', price: 140 })]), priceMax: 150, quantity: 3 });
+  assert.match(svg, /class="sec fits"><title>634S — from \$140\.00 each<\/title>/);
 });
