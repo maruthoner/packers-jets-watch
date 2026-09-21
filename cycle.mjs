@@ -114,8 +114,11 @@ async function cycleOne(w) {
   if (!read.ok) {
     outcome = { ok: false, reason: read.reason, diagnostics: read.diagnostics ?? null, whenISO: new Date().toISOString() };
   } else {
-    const { listings, rejected } = normalize(read.raw, w.quantity);
-    const problem = validate({ rawCount: read.raw.length, rejected, missing: read.missing ?? [] }, w);
+    const { listings, rejected, considered } = normalize(read.raw, w.quantity, { exclude: w.excludeSources });
+    if (rejected.source) log(`  [${w.id}] ignored ${rejected.source} listings from ${w.excludeSources.join(', ')}`);
+    // Validate against what was actually considered, so an excluded marketplace
+    // cannot dilute the checks that catch a broken read.
+    const problem = validate({ rawCount: considered, rejected, missing: read.missing ?? [] }, w);
     if (problem) {
       outcome = { ok: false, reason: problem, whenISO: read.whenISO };
     } else {

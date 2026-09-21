@@ -272,3 +272,46 @@ test('normalize puts the watcher quantity into every buy link', () => {
   const r = raw({ link: 'https://t.example/checkout?ticketGroupId=9&quantity=0', splits: [3] });
   assert.equal(normalize([r], 3).listings[0].link, 'https://t.example/checkout?ticketGroupId=9&quantity=3');
 });
+
+// --- An untrusted marketplace is dropped outright (Ruth, Sep 21) ---
+// TicketNetwork quotes a price ~1.38x below what its own checkout charges, and
+// its copy of a listing is always cheaper than the honest MegaSeats copy of the
+// same ticket, so it would always be the one to trigger an alert.
+
+const tn = (o = {}) => raw({ id: 'X1TicketNetwork', ...o });
+const ms = (o = {}) => raw({ id: 'X1megaseats', ...o });
+
+test('excluded listings never match, never show, and never reach the map', () => {
+  const { listings, rejected, considered } = normalize(
+    [tn({ allIn: 50 }), ms({ allIn: 95 }), raw({ allIn: 99 })], 2, { exclude: ['ticketnetwork'] });
+  assert.equal(listings.length, 2, 'the TicketNetwork listing is gone entirely');
+  assert.ok(!listings.some((l) => l.id.endsWith('TicketNetwork')));
+  assert.equal(rejected.source, 1);
+  assert.equal(considered, 2, 'and it does not count toward what was checked');
+  const { matches } = decide(listings, W);
+  assert.deepEqual(matches.map((m) => m.price), [95, 99], 'the $50 phantom cannot win');
+});
+
+test('an exclusion is not counted as a data problem', () => {
+  const { rejected, considered } = normalize([tn({ allIn: null }), raw({ allIn: 90 })], 2, { exclude: ['ticketnetwork'] });
+  assert.equal(rejected.price, 0, 'an excluded listing is not judged on its price');
+  assert.equal(rejected.source, 1);
+  assert.equal(validate({ rawCount: considered, rejected }, W), null, 'and does not fail the check');
+});
+
+test('matching is case-insensitive and leaves every other marketplace alone', () => {
+  const { listings } = normalize(
+    [tn(), ms(), raw({ id: 'V1vividseats' }), raw({ id: 'S1stubhub' })], 2, { exclude: ['TicketNetwork'] });
+  assert.deepEqual(listings.map((l) => sourceOf(l.id)), ['megaseats', 'vividseats', 'stubhub']);
+});
+
+test('no exclusions configured means nothing is dropped', () => {
+  const { listings, rejected } = normalize([tn(), ms()], 2);
+  assert.equal(listings.length, 2);
+  assert.equal(rejected.source, 0);
+});
+
+test('the live Falcons config excludes TicketNetwork', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  assert.deepEqual(WATCHERS.falcons.excludeSources, ['ticketnetwork']);
+});

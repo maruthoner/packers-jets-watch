@@ -5,6 +5,7 @@
 //   sections     optional: only these section numbers (omit for any section)
 //   rowMax       optional: only rows 1..rowMax (omit for any row)
 //   assignedOnly true: listings with no seat (standing room, 'TBD') never count
+//   excludeSources marketplaces to ignore completely — not matched, not shown, not mapped
 //   venueMap     optional venue id; draws a section map at the foot of the page
 //   closest      how many near-misses to show on the page when nothing fits
 //   notes        optional [[heading, text]] shown as a Notes section at the foot of the page
@@ -28,6 +29,15 @@ export const WATCHERS = {
     quantity: 3,
     priceMax: 150,             // any section, any row
     assignedOnly: true,        // seats only — standing room is not a match (Ruth, Sep 20)
+    // TicketNetwork's price is not all-in. Checked against its own checkout on five
+    // listings (Sep 20-21), every one out by the same 1.3787x: $193.60 became $266.92,
+    // $178.64 became $246.29. TicketWhiz appears to quote the MegaSeats price for these,
+    // which is discounted by promo code NOFEES15 — a discount TicketNetwork does not
+    // honour. Nothing is lost by dropping it: all 486 of its listings are also on
+    // MegaSeats under the same ticket ids, at prices that do check out, and the
+    // TicketNetwork copy is always the cheaper of the two, so it would always be the
+    // one to trigger an alert (Ruth, Sep 21).
+    excludeSources: ['ticketnetwork'],
     venueMap: 'lambeau',       // section map at the foot of the page
     closest: 3,
     // Notes on the stadium itself (Ruth, Sep 20). Nothing here comes from the
