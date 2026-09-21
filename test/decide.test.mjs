@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalize, validate, decide, sourceOf, isSafeLink, isUnassigned } from '../lib/decide.mjs';
+import { normalize, validate, decide, sourceOf, isSafeLink, isUnassigned, withQuantity } from '../lib/decide.mjs';
 
 const raw = (o = {}) => ({ id: 'X1vividseats', secLabel: '327', rowLabel: '19', allIn: 90, splits: [2], link: 'https://example.com/buy', ...o });
 const W = { id: 't', quantity: 2, priceMax: 100, closest: 3 };
@@ -240,4 +240,35 @@ test('without assignedOnly an unassigned listing can still match', () => {
   const W3 = { id: 'f', quantity: 3, priceMax: 150, closest: 3 };
   const { listings } = normalize([raw({ secLabel: '400 Standing Room Only', rowLabel: '', allIn: 120, splits: [3] })], 3);
   assert.equal(decide(listings, W3).matches.length, 1);
+});
+
+// --- Buy links carry the quantity being bought (Ruth, Sep 20) ---
+// TicketWhiz always writes quantity=0. Live checks on 2026-09-20: viagogo then
+// defaults its listing selector to 1 ticket, and the TicketNetwork checkout errors
+// out altogether. Both work correctly once the real quantity is in the URL.
+
+test('quantity=0 is replaced, encoded inside an affiliate wrapper or plain', () => {
+  const viagogo = 'https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FE-160435466%3Fbd%3Dtrue%26quantity%3D0%26listingId%3D14108233531%26listingQty%3D';
+  const tn = 'https://ticketnetwork.lusg.net/c/5762650/1592982/2322?u=https://ticketnetwork.com/e/checkout-ticket?ticketGroupId=1035917518&quantity=0';
+  assert.match(withQuantity(viagogo, 3), /quantity%3D3/);
+  assert.match(withQuantity(viagogo, 3), /listingQty%3D3/);
+  assert.equal(withQuantity(tn, 3), tn.replace('quantity=0', 'quantity=3'));
+});
+
+test('a quantity that is already real is left alone, and 10 is not read as 1 then 0', () => {
+  const ten = 'https://x.example/e?quantity=10&listingId=7';
+  assert.equal(withQuantity(ten, 3), ten, 'quantity=10 is not "quantity=1" followed by a 0');
+  const two = 'https://x.example/e?quantity=2';
+  assert.equal(withQuantity(two, 3), two);
+});
+
+test('a link with no quantity, or no link at all, survives untouched', () => {
+  assert.equal(withQuantity('https://x.example/buy', 3), 'https://x.example/buy');
+  assert.equal(withQuantity(null, 3), null);
+  assert.equal(withQuantity('https://x.example/e?quantity=0', NaN), 'https://x.example/e?quantity=0');
+});
+
+test('normalize puts the watcher quantity into every buy link', () => {
+  const r = raw({ link: 'https://t.example/checkout?ticketGroupId=9&quantity=0', splits: [3] });
+  assert.equal(normalize([r], 3).listings[0].link, 'https://t.example/checkout?ticketGroupId=9&quantity=3');
 });
