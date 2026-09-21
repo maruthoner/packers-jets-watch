@@ -14,7 +14,7 @@
 //   otherSections  false: show only the lists above; seats elsewhere are not listed at all
 //
 // A game is dropped from here once it has been played. The Jets watch (Sep 20) ended
-// with its final page kept at docs/jets/index.html.
+// and its pages were removed on Sep 20 at Ruth's request.
 
 export const WATCHERS = {
   falcons: {
