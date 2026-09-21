@@ -266,3 +266,20 @@ test('a Regular match is shown but never emailed; a Preferred one emails', () =>
   const preferred = pipeline(F, [rawListing(100, '135')]);
   assert.equal(preferred.emails.length, 1);
 });
+
+test('a list that no longer emails does not leave a thread behind', () => {
+  // Ruth has reshaped the lists three times; each reshape used to strand the old
+  // list's state, keeping an issue open that nothing would ever update again.
+  const first = plan(initialState(), okLists([{ id: 'general', spec: W, matches: [seat(90)] }]), W, CTX);
+  const afterOpen = { ...first.state, alerts: { general: { ...first.state.alerts.general, issue: 30 } } };
+  assert.equal(afterOpen.alerts.general.issue, 30);
+
+  const second = plan(afterOpen, okLists([{ id: 'preferred', spec: W, matches: [] }]), W, CTX);
+  assert.deepEqual(Object.keys(second.state.alerts), ['preferred'], 'the old list is gone from the state');
+});
+
+test('a failed check does not prune anything', () => {
+  const live = plan(initialState(), okLists([{ id: 'preferred', spec: W, matches: [seat(90)] }]), W, CTX);
+  const afterFail = plan(live.state, fail(), W, CTX);
+  assert.ok(afterFail.state.alerts.preferred, 'state survives a failure');
+});

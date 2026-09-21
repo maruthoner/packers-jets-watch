@@ -406,3 +406,35 @@ test('the criteria read as levels, not as a list of 120 numbers', () => {
   assert.equal(sectionsText({ sections: [137, 139] }), 'sections 137, 139');
   assert.equal(sectionsText({}), 'any section');
 });
+
+test('standing room is recognised however it is written', () => {
+  // All five shapes seen live on Sep 21.
+  const sro = [
+    ['400 Standing Room Only', ''],
+    ['400 STANDING ROOM ONLY', 'ga'],
+    ['SRO', 'GA'],
+    ['440SRO', 'GA'],
+    ['432SRO', 'general'],   // this one used to pass as a real seat
+  ];
+  for (const [secLabel, rowLabel] of sro) {
+    assert.equal(isUnassigned({ secLabel, rowLabel }), true, `${secLabel} / ${rowLabel}`);
+  }
+});
+
+test('a real seat is still a real seat', () => {
+  for (const [secLabel, rowLabel] of [['135', '11'], ['743S', '8'], ['354', '3'], ['470', '1']]) {
+    assert.equal(isUnassigned({ secLabel, rowLabel }), false, `${secLabel} / ${rowLabel}`);
+  }
+});
+
+test('standing room never matches and never shades the map', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  const w = WATCHERS.falcons;
+  const { listings } = normalize([
+    { id: 'a1vividseats', secLabel: '432SRO', rowLabel: 'general', allIn: 100, splits: [3], link: 'https://e.com/b' },
+    { id: 'b1vividseats', secLabel: '135', rowLabel: '11', allIn: 140, splits: [3], link: 'https://e.com/b' },
+  ], 3);
+  const { lists } = decideAll(listings, w);
+  const matched = lists.flatMap((l) => l.matches).map((m) => m.secLabel);
+  assert.deepEqual(matched, ['135'], 'the standing-room listing is not a match at any price');
+});
