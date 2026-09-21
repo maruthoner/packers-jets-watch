@@ -138,3 +138,12 @@ test('the header line ends with the price cap, not the check interval', () => {
   assert.match(html, /<b>12,000<\/b> listings for 2 together &middot; <b>\$100<\/b> max per ticket/);
   assert.doesNotMatch(html, /checks every 30 minutes/);
 });
+
+test('a check with no buy links at all says so, and one with links stays quiet', () => {
+  const none = renderPage(W, { result: result({ listings: 12, linkless: 12 }), state: {}, others: [] });
+  assert.match(none, /Buy links are unavailable on this check/);
+  const some = renderPage(W, { result: result({ listings: 12, linkless: 3 }), state: {}, others: [] });
+  assert.doesNotMatch(some, /Buy links are unavailable/);
+  const old = renderPage(W, { result: result({ listings: 12 }), state: {}, others: [] });
+  assert.doesNotMatch(old, /Buy links are unavailable/, 'a result from before this field existed is not flagged');
+});

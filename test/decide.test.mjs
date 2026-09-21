@@ -315,3 +315,37 @@ test('the live Falcons config excludes TicketNetwork', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   assert.deepEqual(WATCHERS.falcons.excludeSources, ['ticketnetwork']);
 });
+
+test('an excluded marketplace is not recorded as having contributed', () => {
+  // result.json's `sources` is built from the listings that survived, so it must
+  // not name a marketplace whose listings were all dropped (Ruth, Sep 21).
+  const { listings } = normalize([tn(), ms(), raw({ id: 'V1vividseats' })], 2, { exclude: ['ticketnetwork'] });
+  const sources = [...new Set(listings.map((l) => sourceOf(l.id)))].sort();
+  assert.deepEqual(sources, ['megaseats', 'vividseats']);
+});
+
+test('every marketplace spelling of the quantity parameter is filled in', () => {
+  // Surveyed live on Sep 21 — each marketplace names it differently.
+  const cases = [
+    ['https://x/e?quantity=0&listingId=7', 'https://x/e?quantity=3&listingId=7'],
+    ['https://x/e?qty=0', 'https://x/e?qty=3'],
+    ['https://x/e?seat_count=0', 'https://x/e?seat_count=3'],
+    ['https://vivid.io/t?u=https%3A%2F%2Fv.com%2Fp%2F1%26qty%3D0', 'https://vivid.io/t?u=https%3A%2F%2Fv.com%2Fp%2F1%26qty%3D3'],
+    ['https://gt.io/x?u=https%3A%2F%2Fg.co%2Fl%2F9%3Fseat_count%3D0', 'https://gt.io/x?u=https%3A%2F%2Fg.co%2Fl%2F9%3Fseat_count%3D3'],
+    ['https://x/e?quantity=0&listingQty=', 'https://x/e?quantity=3&listingQty=3'],
+  ];
+  for (const [before, after] of cases) assert.equal(withQuantity(before, 3), after, before);
+});
+
+test('"qty" is not matched inside "listingQty"', () => {
+  // listingQty=0 must be treated as listingQty, never as a stray qty.
+  assert.equal(withQuantity('https://x/e?listingQty=0', 3), 'https://x/e?listingQty=3');
+  assert.equal(withQuantity('https://x/e?myquantity=0', 3), 'https://x/e?myquantity=0', 'a different parameter is left alone');
+});
+
+test('a listing with no buy link is kept, not dropped', () => {
+  // The seats and price are still true; only the Buy button is missing.
+  const { listings } = normalize([raw({ link: '' })], 2);
+  assert.equal(listings.length, 1);
+  assert.equal(listings[0].link, null);
+});

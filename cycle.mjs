@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { WATCHERS } from './watchers.mjs';
-import { normalize, validate, decideAll, alertLists, listSpecs } from './lib/decide.mjs';
+import { normalize, validate, decideAll, alertLists, listSpecs, sourceOf } from './lib/decide.mjs';
 import { plan, initialState, matchTitle, failTitle } from './lib/alerts.mjs';
 import { renderPage, fmt } from './lib/page.mjs';
 import { loadVenue, sectionPrices } from './lib/map.mjs';
@@ -116,6 +116,8 @@ async function cycleOne(w) {
   } else {
     const { listings, rejected, considered } = normalize(read.raw, w.quantity, { exclude: w.excludeSources });
     if (rejected.source) log(`  [${w.id}] ignored ${rejected.source} listings from ${w.excludeSources.join(', ')}`);
+    const linkless = listings.filter((l) => !l.link).length;
+    if (listings.length && linkless === listings.length) log(`  [${w.id}] WARNING: no listing has a buy link — the checkout URL field has moved again`);
     // Validate against what was actually considered, so an excluded marketplace
     // cannot dilute the checks that catch a broken read.
     const problem = validate({ rawCount: considered, rejected, missing: read.missing ?? [] }, w);
@@ -125,7 +127,15 @@ async function cycleOne(w) {
       const decided = decideAll(listings, w);
       result = {
         watcher: w.id, whenISO: read.whenISO, when: fmt(read.whenISO), quantity: w.quantity,
-        priceMax: w.priceMax, listings: listings.length, rejected, sources: read.sample.sources,
+        priceMax: w.priceMax, listings: listings.length, rejected,
+        // How many kept listings have no buy link. All of them means the field moved
+        // again; the page says so rather than quietly dropping every Buy button.
+        linkless: listings.filter((l) => !l.link).length,
+        // The marketplaces these results actually rest on — taken from the listings
+        // that survived, so an excluded one is not recorded as having contributed.
+        // read.sample.sources stays pre-exclusion: ready.mjs compares it between two
+        // reads of the page to tell whether the market moved.
+        sources: [...new Set(listings.map((l) => sourceOf(l.id)))].sort(),
         readySeconds: read.readySeconds, feeds: read.feeds ?? null, missing: read.missing ?? [],
         matches: decided.general?.matches ?? [], closest: decided.general?.closest ?? [], lists: decided.lists,
         sectionPrices: w.venueMap ? sectionPrices(listings) : undefined,

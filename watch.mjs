@@ -87,7 +87,12 @@ function snapshotInPage({ quantity, withRaw, withDiag }) {
     sample, diag,
     raw: list.map((t) => ({
       id: t.tgID, secLabel: t.tgUserSec || t.tgCanonSec || '', rowLabel: t.tgUserRow || '',
-      allIn: t.tgAllInPrice, splits: t.splits, link: t.tgCheckoutParams || '',
+      allIn: t.tgAllInPrice, splits: t.splits,
+      // The checkout URL moved: tgCheckoutParams was empty on all 3,372 listings on
+      // Sep 21 while ticket_link carried it, which left the page with no Buy buttons
+      // for several hours. Read both, newest-known first (see `linkless` in cycle.mjs,
+      // which makes it visible rather than silent if the field moves again).
+      link: t.ticket_link || t.tgCheckoutParams || '',
     })),
   };
 }
