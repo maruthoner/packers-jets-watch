@@ -1,7 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { plan, initialState, FAIL_THRESHOLD, EMPTY_THRESHOLD } from '../lib/alerts.mjs';
-import { executeActions } from '../cycle.mjs';
+import { executeActions, alertEntries } from '../cycle.mjs';
+import { normalize, decideAll } from '../lib/decide.mjs';
+import { WATCHERS } from '../watchers.mjs';
 
 const W = { id: 'jets', title: 'Packers at Jets', alertLabel: 'Jets', quantity: 2, priceMax: 100 };
 const CTX = { owner: 'maruthoner', runUrl: 'https://run' };
@@ -189,4 +191,60 @@ test('an ordinary failure carries no diagnostics line', () => {
   const s2 = plan(s1.state, { ok: false, reason: 'blocked', whenISO: '2026-09-18T01:30:00Z' }, W, CTX);
   assert.ok(!s2.actions.find((a) => a.type === 'open').body.includes('What the page showed'));
   assert.equal(s1.state.lastFailure.diagnostics, undefined);
+});
+
+// --- Only exact matches may email (Ruth, Sep 20) ---
+// These run the real pipeline — raw listings through normalize, decideAll,
+// alertEntries and plan — against the live Falcons config, so they fail if a
+// future change lets anything but a listing at or under the cap reach an email.
+
+const rawListing = (price, sec, o = {}) => ({
+  id: `L${price}vividseats`, secLabel: sec, rowLabel: '8', allIn: price,
+  splits: [3], link: 'https://example.com/buy', ...o,
+});
+
+function pipeline(w, raw) {
+  const { listings } = normalize(raw, w.quantity);
+  const decided = decideAll(listings, w);
+  const gh = fakeGitHub();
+  const p = plan(initialState(), {
+    ok: true, whenISO: '2026-09-21T00:00:00Z', when: 'now', alerts: alertEntries(w, decided),
+  }, w, CTX);
+  executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  return { decided, ...gh };
+}
+
+test('near misses never email, however close they get', () => {
+  const F = WATCHERS.falcons;
+  // A cent over the cap is still over the cap.
+  const r = pipeline(F, [150.01, 151, 175.02, 190.7, 400].map((p, i) => rawListing(p, `${740 + i}`)));
+  assert.equal(r.decided.general.matches.length, 0, 'nothing is at or under the cap');
+  assert.ok(r.decided.general.closest.length > 0, 'the page still shows the near misses');
+  assert.deepEqual(r.emails, [], 'but nothing is emailed');
+  assert.equal(r.issues.size, 0, 'and no issue is opened');
+});
+
+test('standing room at a fitting price never emails', () => {
+  const F = WATCHERS.falcons;
+  const r = pipeline(F, [rawListing(99, '400 Standing Room Only', { rowLabel: 'GA' })]);
+  assert.equal(r.decided.general.matches.length, 0, 'assignedOnly keeps it out');
+  assert.deepEqual(r.emails, []);
+});
+
+test('a listing at exactly the cap emails once, mentioning the owner', () => {
+  const F = WATCHERS.falcons;
+  const r = pipeline(F, [rawListing(F.priceMax, '743S'), rawListing(F.priceMax + 0.01, '637S')]);
+  assert.equal(r.decided.general.matches.length, 1, 'the cap is inclusive');
+  assert.equal(r.emails.length, 1, 'exactly one email');
+  const [issue] = [...r.issues.values()];
+  assert.equal(issue.title, `Falcons: ${F.quantity} seats together at $${F.priceMax}.00 or less`);
+  assert.match(issue.body, /@maruthoner/, 'the mention is what sends the email');
+  assert.match(issue.body, /\$150\.00/);
+});
+
+test('a listing that cannot be sold as 3 together never emails', () => {
+  const F = WATCHERS.falcons;
+  const r = pipeline(F, [rawListing(80, '743S', { splits: [1, 2, 4] })]);
+  assert.equal(r.decided.general.matches.length, 0);
+  assert.deepEqual(r.emails, []);
 });
