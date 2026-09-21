@@ -117,3 +117,11 @@ test('row wording never reads as a one-row range or a bare number', () => {
   assert.match(page({ rowMin: undefined, rowMax: 20 }), /rows 1&ndash;20/);
   assert.match(page({ rowMin: undefined, rowMax: undefined }), /any row/);
 });
+
+test('the notes section repeats the config, escaped, and is left out when there are none', () => {
+  const w = { ...W, notes: [['Lower bowl', 'Benches & no seat backs']] };
+  const html = renderPage(w, { result: null, state: {}, others: [] });
+  assert.match(html, /<h2>Notes<\/h2>/);
+  assert.match(html, /<dt>Lower bowl<\/dt><dd>Benches &amp; no seat backs<\/dd>/);
+  assert.doesNotMatch(renderPage(W, { result: null, state: {}, others: [] }), /<h2>Notes<\/h2>/);
+});

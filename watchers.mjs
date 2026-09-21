@@ -7,6 +7,7 @@
 //   assignedOnly true: listings with no seat (standing room, 'TBD') never count
 //   venueMap     optional venue id; draws a section map at the foot of the page
 //   closest      how many near-misses to show on the page when nothing fits
+//   notes        optional [[heading, text]] shown as a Notes section at the foot of the page
 //   preferred    optional [{ id, label, sections, rowMax?, rowMin?, priceMax?, alerts? }]
 //                ordered: a seat belongs to the first list it fits and appears only there;
 //                every list marked `alerts` emails, each in its own issue
@@ -29,5 +30,19 @@ export const WATCHERS = {
     assignedOnly: true,        // seats only — standing room is not a match (Ruth, Sep 20)
     venueMap: 'lambeau',       // section map at the foot of the page
     closest: 3,
+    // Notes on the stadium itself (Ruth, Sep 20). Nothing here comes from the
+    // listings; it is background for reading a section number on the map.
+    notes: [
+      ['Lower bowl, sections 100–138',
+        'Aluminum benches with no seat backs, rows 1 to 60. You can rent a cushion at the gates.'],
+      ['Packers side, even numbers 110–130',
+        'The west side of the stadium — the home sideline.'],
+      ['Visitor side, odd numbers 109–129',
+        'The east side of the stadium.'],
+      ['Outdoor club, sections 403–435',
+        'Above the lower bowl on the east side. Molded seats with backs and cup holders, about 10 rows per section.'],
+      ['Seat numbers',
+        'Seat 1 is the aisle seat on the side nearest the next higher-numbered section, and the numbers count up toward the next lower-numbered section.'],
+    ],
   },
 };
