@@ -1,0 +1,103 @@
+# Are checks actually still happening?
+#
+# watchdog.yml restarts a run that FAILS. It cannot see a run that HANGS: the job
+# stays "in progress" past its own timeout, keeps the seat-watch concurrency group,
+# and every later run sits queued behind it forever. That cost ~110 minutes on
+# Sep 18 and ~2 hours on Sep 21, both cleared only by cancelling by hand.
+#
+# So this asks the one question that cannot be faked — when did a check last
+# succeed? — reading the record the watcher itself commits after every cycle.
+name: Seat watch staleness
+
+on:
+  schedule:
+    - cron: '12,42 * * * *'   # offset from the watcher's own half-hour clock
+  workflow_dispatch:
+
+permissions:
+  actions: write    # to cancel a stuck run and start a new one
+  contents: read
+  issues: write     # to speak up when restarting is not working
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # No dependencies needed: this reads committed JSON and does arithmetic.
+      - name: How long since a check last succeeded?
+        id: age
+        run: node tools/staleness.mjs
+
+      - name: Clear whatever is stuck, and get checks running again
+        if: steps.age.outputs.action == 'restart' || steps.age.outputs.action == 'alert'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          REASON: ${{ steps.age.outputs.reason }}
+        run: |
+          set -u
+          echo "$REASON"
+
+          # Only touch a run old enough to have published by now, so a run that has
+          # just started is never mistaken for a stuck one.
+          CUTOFF=$(date -u -d '40 minutes ago' +%Y-%m-%dT%H:%M:%SZ)
+          RUNS=$(gh run list --workflow watch.yml --repo "$REPO" --limit 20 \
+                   --json databaseId,status,createdAt)
+
+          STUCK=$(echo "$RUNS" | jq -r --arg cut "$CUTOFF" \
+                   '.[] | select(.status == "in_progress") | select(.createdAt < $cut) | .databaseId')
+          for id in $STUCK; do
+            echo "cancelling stuck run $id"
+            gh run cancel "$id" --repo "$REPO" || echo "  could not cancel $id — continuing"
+          done
+
+          # A cancel is not instant, and a queued run cannot start until the group frees.
+          for _ in $(seq 1 12); do
+            BUSY=$(gh run list --workflow watch.yml --repo "$REPO" --limit 20 \
+                     --json status --jq '[.[] | select(.status == "in_progress")] | length')
+            [ "$BUSY" -eq 0 ] && break
+            sleep 10
+          done
+
+          # If one is already waiting its turn, it will start now that the group is free;
+          # starting another would only queue behind it.
+          WAITING=$(gh run list --workflow watch.yml --repo "$REPO" --limit 20 \
+                     --json status --jq '[.[] | select(.status == "queued" or .status == "pending")] | length')
+          if [ "$WAITING" -gt 0 ]; then
+            echo "a run is already waiting to start — leaving it to run"
+          else
+            echo "starting a fresh run"
+            gh workflow run watch.yml --repo "$REPO" --ref main
+          fi
+
+      # One issue, opened once. If it is already open, restarting is still being
+      # attempted above and there is nothing new to say, so no second email.
+      - name: Say so if restarting is not working
+        if: steps.age.outputs.action == 'alert'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          MINUTES: ${{ steps.age.outputs.minutes }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -u
+          TITLE="Seat watch: no check has succeeded in a long time"
+          NUM=$(gh issue list --repo "$REPO" --state open --search "in:title \"$TITLE\"" \
+                  --json number,title --jq "map(select(.title == \"$TITLE\")) | .[0].number // empty")
+          if [ -n "$NUM" ]; then
+            echo "already reported in #$NUM — staying quiet"
+            exit 0
+          fi
+          gh issue create --repo "$REPO" --title "$TITLE" --assignee "$OWNER" --body \
+"@$OWNER — the seat watch has not completed a successful check in **$MINUTES minutes**, and restarting it automatically has not brought it back.
+
+No conclusion should be drawn from the status page while this is true: it shows the last check that worked, which is now well out of date, and no alert can arrive for seats that appear in the meantime.
+
+This check: $RUN_URL"
