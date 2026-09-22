@@ -9,10 +9,10 @@
   "alerts": {
     "preferred": {
       "issue": 31,
-      "active": true,
-      "notifiedBest": 137.06,
-      "emptyStreak": 1
+      "active": false,
+      "notifiedBest": null,
+      "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-22T01:54:30.083Z"
+  "lastSuccessISO": "2026-09-22T02:24:27.267Z"
 }
