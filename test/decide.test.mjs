@@ -375,7 +375,7 @@ test('a seat with no fixed location belongs to no list', () => {
   assert.equal(sectionFits({ secLabel: '301-306-OR-346-350', unassigned: false }, { levels: [3] }), false);
 });
 
-test('every listing lands in exactly one of the two lists', async () => {
+test('every listing lands in exactly one list', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   const w = WATCHERS.falcons;
   const { listings } = normalize(
@@ -383,20 +383,21 @@ test('every listing lands in exactly one of the two lists', async () => {
     3);
   const { lists, general } = decideAll(listings, w);
   assert.equal(general, null, 'no catch-all list');
-  assert.deepEqual(lists.map((l) => l.id), ['preferred', 'regular']);
-  assert.deepEqual(lists[0].matches.map((m) => m.secLabel), ['135', '354', '470']);
-  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), ['630S', '743S']);
+  assert.deepEqual(lists.map((l) => l.id), ['top', 'preferred', 'regular']);
+  assert.deepEqual(lists[0].matches.map((m) => m.secLabel), [], 'nothing here is 119 or 120');
+  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), ['135', '354', '470']);
+  assert.deepEqual(lists[2].matches.map((m) => m.secLabel), ['630S', '743S']);
   const total = lists.reduce((n, l) => n + l.matches.length, 0);
   assert.equal(total, listings.length, 'nothing is dropped or counted twice');
 });
 
-test('only Preferred emails', async () => {
+test('Regular never emails', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   const w = WATCHERS.falcons;
   const { listings } = normalize(
     ['135', '743S'].map((s) => ({ ...atSection(s), splits: [3] })), 3);
   const emailing = alertLists(w, decideAll(listings, w));
-  assert.deepEqual(emailing.map((l) => l.id), ['preferred']);
+  assert.ok(!emailing.some((l) => l.id === 'regular'), 'the 600s and 700s stay off email');
 });
 
 test('the criteria read as levels, not as a list of 120 numbers', () => {
@@ -437,4 +438,39 @@ test('standing room never matches and never shades the map', async () => {
   const { lists } = decideAll(listings, w);
   const matched = lists.flatMap((l) => l.matches).map((m) => m.secLabel);
   assert.deepEqual(matched, ['135'], 'the standing-room listing is not a match at any price');
+});
+
+test('Top Choice takes 119 and 120 before Preferred can claim them', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  const w = WATCHERS.falcons;
+  const q = w.quantity;
+  const at = (sec, price) => ({ id: `${sec}vividseats`, secLabel: sec, rowLabel: '5', allIn: price, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
+  const { listings } = normalize([at('119', 200), at('120', 240), at('135', 200), at('743S', 100)], q);
+  const { lists } = decideAll(listings, w);
+  assert.deepEqual(lists.map((l) => l.id), ['top', 'preferred', 'regular']);
+  assert.deepEqual(lists[0].matches.map((m) => m.secLabel), ['119', '120'], 'both go to Top Choice');
+  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), [], '135 at $200 is over the $150 Preferred cap');
+  assert.deepEqual(lists[1].closest.map((m) => m.secLabel), ['135'], 'and shows there as a near miss');
+  assert.deepEqual(lists[2].matches.map((m) => m.secLabel), ['743S']);
+});
+
+test('Top Choice uses its own $250 cap, not the $150 one', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  const w = WATCHERS.falcons;
+  const top = w.preferred.find((l) => l.id === 'top');
+  assert.equal(top.priceMax, 250);
+  const at = (sec, price) => ({ id: `${sec}x`, secLabel: sec, rowLabel: '5', allIn: price, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
+  const { listings } = normalize([at('120', 250), at('119', 250.01)], w.quantity);
+  const { lists } = decideAll(listings, w);
+  assert.deepEqual(lists[0].matches.map((m) => m.price), [250], 'the cap is inclusive');
+  assert.deepEqual(lists[0].closest.map((m) => m.price), [250.01]);
+});
+
+test('Top Choice and Preferred both email; Regular does not', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  const w = WATCHERS.falcons;
+  const at = (sec, price) => ({ id: `${sec}x`, secLabel: sec, rowLabel: '5', allIn: price, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
+  const { listings } = normalize([at('120', 200), at('135', 140), at('743S', 100)], w.quantity);
+  const emailing = alertLists(w, decideAll(listings, w));
+  assert.deepEqual(emailing.map((l) => l.id), ['top', 'preferred']);
 });

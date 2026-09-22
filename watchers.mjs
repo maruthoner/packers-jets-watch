@@ -42,11 +42,16 @@ export const WATCHERS = {
     excludeSources: ['ticketnetwork'],
     venueMap: 'lambeau',       // section map at the foot of the page
     closest: 3,
-    // Two lists, split by where the seats are (Ruth, Sep 21). A listing belongs to
-    // the first list it fits, so nothing is counted twice. The leading digit decides,
-    // which is what a ticket shows: the club deck is split by it too — 403-494 are
-    // preferred, 670-694 are regular. Only Preferred emails; Regular is the page only.
+    // Three lists, split by where the seats are. ORDER MATTERS: a listing belongs to
+    // the first list it fits and appears only there, so Top Choice comes first or
+    // Preferred would swallow 119 and 120 along with the rest of the 100s.
+    // Top Choice: sections 119 and 120, its own $250 cap (Ruth, Sep 22).
+    // Preferred:  the 100s, 300s and 400s at $150 (Ruth, Sep 21). The leading digit
+    //             decides, which is what a ticket shows — that splits the club deck,
+    //             403-494 preferred and 670-694 regular.
+    // Regular:    the 600s and 700s at $150, page only, never emails.
     preferred: [
+      { id: 'top', label: 'Top Choice', sections: [119, 120], priceMax: 250, alerts: true },
       { id: 'preferred', label: 'Preferred', levels: [1, 3, 4], alerts: true },
       { id: 'regular', label: 'Regular', levels: [6, 7] },
     ],
