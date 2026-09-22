@@ -198,10 +198,13 @@ test('an ordinary failure carries no diagnostics line', () => {
 // alertEntries and plan — against the live Falcons config, so they fail if a
 // future change lets anything but a listing at or under the cap reach an email.
 
+// Sellable at any common quantity, so these follow the watched quantity rather
+// than pinning the tests to whatever it happens to be today.
 const rawListing = (price, sec, o = {}) => ({
   id: `L${price}vividseats`, secLabel: sec, rowLabel: '8', allIn: price,
-  splits: [3], link: 'https://example.com/buy', ...o,
+  splits: [1, 2, 3, 4], link: 'https://example.com/buy', ...o,
 });
+const notSellableAt = (q) => [1, 2, 3, 4].filter((n) => n !== q);
 
 function pipeline(w, raw) {
   const { listings } = normalize(raw, w.quantity);
@@ -249,9 +252,9 @@ test('a listing at exactly the cap emails once, mentioning the owner', () => {
   assert.match(issue.body, /\$150\.00/);
 });
 
-test('a listing that cannot be sold as 3 together never emails', () => {
+test('a listing that cannot be sold at the watched quantity never emails', () => {
   const F = WATCHERS.falcons;
-  const r = pipeline(F, [rawListing(80, '135', { splits: [1, 2, 4] })]);
+  const r = pipeline(F, [rawListing(80, '135', { splits: notSellableAt(F.quantity) })]);
   assert.equal(r.matched.length, 0);
   assert.deepEqual(r.emails, []);
 });

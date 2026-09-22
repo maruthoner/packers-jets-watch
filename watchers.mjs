@@ -28,7 +28,7 @@ export const WATCHERS = {
     kickoff: '2026-09-24T19:15:00-05:00', // Green Bay is Central time
     alertLabel: 'Falcons',
     outDir: 'docs',           // the main page since the Jets game ended (Ruth, Sep 20)
-    quantity: 3,
+    quantity: 2,          // 2 tickets, not 3 (Ruth, Sep 22)
     priceMax: 150,             // any section, any row
     assignedOnly: true,        // seats only — standing room is not a match (Ruth, Sep 20)
     // TicketNetwork's price is not all-in. Checked against its own checkout on five
