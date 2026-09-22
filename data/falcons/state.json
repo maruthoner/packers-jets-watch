@@ -7,18 +7,12 @@
     "whenISO": "2026-09-17T10:57:56.114Z"
   },
   "alerts": {
-    "preferred": {
-      "issue": 33,
-      "active": true,
-      "notifiedBest": 112.64,
-      "emptyStreak": 0
-    },
     "top": {
       "issue": 32,
       "active": true,
       "notifiedBest": 223.64,
-      "emptyStreak": 0
+      "emptyStreak": 1
     }
   },
-  "lastSuccessISO": "2026-09-22T16:27:30.287Z"
+  "lastSuccessISO": "2026-09-22T16:37:04.613Z"
 }
