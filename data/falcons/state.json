@@ -8,9 +8,9 @@
   },
   "alerts": {
     "preferred": {
-      "issue": 31,
-      "active": true,
-      "notifiedBest": 111.65,
+      "issue": null,
+      "active": false,
+      "notifiedBest": null,
       "emptyStreak": 0
     }
   },
