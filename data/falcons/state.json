@@ -8,11 +8,11 @@
   },
   "alerts": {
     "top": {
-      "issue": 32,
+      "issue": null,
       "active": false,
       "notifiedBest": null,
       "emptyStreak": 0
     }
   },
-  "lastSuccessISO": "2026-09-22T18:41:11.467Z"
+  "lastSuccessISO": "2026-09-22T19:01:54.314Z"
 }
