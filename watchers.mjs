@@ -45,14 +45,14 @@ export const WATCHERS = {
     // Three lists, split by where the seats are. ORDER MATTERS: a listing belongs to
     // the first list it fits and appears only there, so Top Choice comes first or
     // Preferred would swallow 119 and 120 along with the rest of the 100s.
-    // Top Choice: sections 119 and 120, its own $250 cap (Ruth, Sep 22).
-    // Preferred:  the 100s, 300s and 400s at $150 (Ruth, Sep 21). The leading digit
+    // Top Choice: sections 119 and 120, $200 cap — THE ONLY LIST THAT EMAILS (Ruth, Sep 22).
+    // Preferred:  the 100s, 300s and 400s at $150, page only since Sep 22. The leading digit
     //             decides, which is what a ticket shows — that splits the club deck,
     //             403-494 preferred and 670-694 regular.
     // Regular:    the 600s and 700s at $150, page only, never emails.
     preferred: [
-      { id: 'top', label: 'Top Choice', sections: [119, 120], priceMax: 250, alerts: true },
-      { id: 'preferred', label: 'Preferred', levels: [1, 3, 4], alerts: true },
+      { id: 'top', label: 'Top Choice', sections: [119, 120], priceMax: 200, alerts: true },
+      { id: 'preferred', label: 'Preferred', levels: [1, 3, 4] },
       { id: 'regular', label: 'Regular', levels: [6, 7] },
     ],
     // The two lists cover every level the market uses, so there is no catch-all.

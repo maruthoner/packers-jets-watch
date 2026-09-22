@@ -243,13 +243,14 @@ test('standing room at a fitting price never emails', () => {
 
 test('a listing at exactly the cap emails once, mentioning the owner', () => {
   const F = WATCHERS.falcons;
-  const r = pipeline(F, [rawListing(F.priceMax, '135'), rawListing(F.priceMax + 0.01, '137')]);
+  const top = F.preferred.find((l) => l.id === 'top');
+  const r = pipeline(F, [rawListing(top.priceMax, '120'), rawListing(top.priceMax + 0.01, '119')]);
   assert.equal(r.matched.length, 1, 'the cap is inclusive');
   assert.equal(r.emails.length, 1, 'exactly one email');
   const [issue] = [...r.issues.values()];
-  assert.equal(issue.title, `Falcons preferred: ${F.quantity} seats together at $${F.priceMax}.00 or less`);
+  assert.equal(issue.title, `Falcons top choice: ${F.quantity} seats together at $${top.priceMax}.00 or less`);
   assert.match(issue.body, /@maruthoner/, 'the mention is what sends the email');
-  assert.match(issue.body, /\$150\.00/);
+  assert.match(issue.body, /\$200\.00/);
 });
 
 test('a listing that cannot be sold at the watched quantity never emails', () => {
@@ -259,15 +260,16 @@ test('a listing that cannot be sold at the watched quantity never emails', () =>
   assert.deepEqual(r.emails, []);
 });
 
-test('a Regular match is shown but never emailed; a Preferred one emails', () => {
-  // Ruth, Sep 21: only the 100s/300s/400s email. 700s seats still appear on the page.
+test('only Top Choice emails; Preferred and Regular are listed in silence', () => {
+  // Ruth, Sep 22: emails only for 119/120 under $200. Everything else is page only.
   const F = WATCHERS.falcons;
-  const regular = pipeline(F, [rawListing(100, '743S')]);
-  assert.deepEqual(regular.emails, [], 'a cheap 700s seat does not email');
-  assert.equal(regular.decided.lists.find((l) => l.id === 'regular').matches.length, 1, 'but it is listed');
-
-  const preferred = pipeline(F, [rawListing(100, '135')]);
-  assert.equal(preferred.emails.length, 1);
+  for (const [sec, where] of [['743S', 'regular'], ['135', 'preferred']]) {
+    const r = pipeline(F, [rawListing(100, sec)]);
+    assert.deepEqual(r.emails, [], `a cheap ${sec} seat does not email`);
+    assert.equal(r.decided.lists.find((l) => l.id === where).matches.length, 1, 'but it is listed');
+  }
+  const top = pipeline(F, [rawListing(100, '120')]);
+  assert.equal(top.emails.length, 1, '119/120 does email');
 });
 
 test('a list that no longer emails does not leave a thread behind', () => {

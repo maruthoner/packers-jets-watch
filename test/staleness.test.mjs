@@ -49,3 +49,10 @@ test('the reported age is the one acted on', () => {
   assert.equal(v.minutes, 88);
   assert.match(v.reason, /88 minutes ago/);
 });
+
+test('the thresholds follow the 20-minute check cadence', () => {
+  // Checks every 20 minutes (Ruth, Sep 22), so two missed cycles is 40; the
+  // threshold sits just past that so one slow check is not called a stall.
+  assert.ok(STALE_AFTER_MIN > 40 && STALE_AFTER_MIN <= 60, `stale after ${STALE_AFTER_MIN}`);
+  assert.ok(ALERT_AFTER_MIN >= 2 * STALE_AFTER_MIN, 'restarting gets a fair chance before a person is bothered');
+});

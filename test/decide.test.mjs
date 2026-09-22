@@ -445,7 +445,7 @@ test('Top Choice takes 119 and 120 before Preferred can claim them', async () =>
   const w = WATCHERS.falcons;
   const q = w.quantity;
   const at = (sec, price) => ({ id: `${sec}vividseats`, secLabel: sec, rowLabel: '5', allIn: price, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
-  const { listings } = normalize([at('119', 200), at('120', 240), at('135', 200), at('743S', 100)], q);
+  const { listings } = normalize([at('119', 180), at('120', 190), at('135', 200), at('743S', 100)], q);
   const { lists } = decideAll(listings, w);
   assert.deepEqual(lists.map((l) => l.id), ['top', 'preferred', 'regular']);
   assert.deepEqual(lists[0].matches.map((m) => m.secLabel), ['119', '120'], 'both go to Top Choice');
@@ -454,23 +454,23 @@ test('Top Choice takes 119 and 120 before Preferred can claim them', async () =>
   assert.deepEqual(lists[2].matches.map((m) => m.secLabel), ['743S']);
 });
 
-test('Top Choice uses its own $250 cap, not the $150 one', async () => {
+test('Top Choice uses its own $200 cap, not the $150 one', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   const w = WATCHERS.falcons;
   const top = w.preferred.find((l) => l.id === 'top');
-  assert.equal(top.priceMax, 250);
+  assert.equal(top.priceMax, 200);
   const at = (sec, price) => ({ id: `${sec}x`, secLabel: sec, rowLabel: '5', allIn: price, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
-  const { listings } = normalize([at('120', 250), at('119', 250.01)], w.quantity);
+  const { listings } = normalize([at('120', 200), at('119', 200.01)], w.quantity);
   const { lists } = decideAll(listings, w);
-  assert.deepEqual(lists[0].matches.map((m) => m.price), [250], 'the cap is inclusive');
-  assert.deepEqual(lists[0].closest.map((m) => m.price), [250.01]);
+  assert.deepEqual(lists[0].matches.map((m) => m.price), [200], 'the cap is inclusive');
+  assert.deepEqual(lists[0].closest.map((m) => m.price), [200.01]);
 });
 
-test('Top Choice and Preferred both email; Regular does not', async () => {
+test('Top Choice is the only list that emails', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   const w = WATCHERS.falcons;
   const at = (sec, price) => ({ id: `${sec}x`, secLabel: sec, rowLabel: '5', allIn: price, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
-  const { listings } = normalize([at('120', 200), at('135', 140), at('743S', 100)], w.quantity);
+  const { listings } = normalize([at('120', 180), at('135', 140), at('743S', 100)], w.quantity);
   const emailing = alertLists(w, decideAll(listings, w));
-  assert.deepEqual(emailing.map((l) => l.id), ['top', 'preferred']);
+  assert.deepEqual(emailing.map((l) => l.id), ['top'], 'Preferred and Regular are page only (Ruth, Sep 22)');
 });

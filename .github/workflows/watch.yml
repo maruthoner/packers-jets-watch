@@ -2,7 +2,7 @@ name: Seat watch
 
 on:
   schedule:
-    - cron: '0,30 * * * *'
+    - cron: '7 * * * *'   # cold start only; the runs chain themselves (see below)
   workflow_dispatch:
     inputs:
       dry_run:
@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: write   # each run queues the next one
 
 concurrency:
   group: seat-watch
@@ -21,7 +22,7 @@ concurrency:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 30   # one check plus its pause; a dead runner shows up within this
     steps:
       - uses: actions/checkout@v5
         with:
@@ -52,45 +53,45 @@ jobs:
           git config user.name "seat-watch"
           git config user.email "noreply@github.com"
 
-      # GitHub's scheduler throttles */30 hard (observed ~1 run per 5 hours), so one job
-      # stays alive and keeps its own 30-minute clock. Every cycle first moves to the
-      # latest main, so criteria or code changes apply within one cycle, not one window.
+      # One check per run, then hand over.
+      #
+      # This used to be a single job looping for 5h30m. When its runner hung — Sep 18
+      # and twice on Sep 21 — the job sat "in progress" past its own timeout holding
+      # the concurrency group, and checks stopped for hours. Nothing noticed quickly:
+      # watchdog.yml only sees a run that FAILS, and GitHub throttles the cron watchdog
+      # to roughly one run every five hours whatever schedule it asks for.
+      #
+      # So each run now does exactly one check and exits, and the job's own 30-minute
+      # timeout is what catches a dead runner. The successor is queued BEFORE the check
+      # runs, so one is already waiting even if this runner dies mid-check; concurrency
+      # holds it until this run ends.
       - if: steps.games.outputs.active != '0'
-        name: Watch loop
+        name: One check, then hand over
         env:
           GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
         run: |
-          END=$(( $(date +%s) + 19800 ))           # 5h30m, inside the 350-minute job cap
-          LOCK=$(sha1sum package-lock.json)
-          CRASHES=0
-          # GitHub runs this step with `set -e`, so every step that may fail transiently
-          # (a network blip on fetch, one crashed cycle) is handled here; otherwise a
-          # single blip would end the whole window and leave the games unwatched until
-          # the throttled schedule fires again.
-          while :; do
-            START=$(date +%s)
-            git fetch -q origin main && git reset -q --hard origin/main \
-              || echo "could not sync with main — running the code from the last cycle"
-            if [ "$(sha1sum package-lock.json)" != "$LOCK" ]; then
-              echo "dependencies changed — reinstalling"
-              if npm ci && npx playwright install chromium; then
-                LOCK=$(sha1sum package-lock.json)
-              else
-                echo "reinstall failed — continuing on the installed versions"
-              fi
-            fi
-            if node cycle.mjs; then RC=0; else RC=$?; fi
-            [ "$RC" -eq 3 ] && { echo "no games left; stopping"; break; }
-            if [ "$RC" -eq 0 ]; then
-              CRASHES=0
-            else
-              CRASHES=$(( CRASHES + 1 ))
-              echo "cycle exited $RC ($CRASHES in a row)"
-              [ "$CRASHES" -ge 5 ] && { echo "five crashed cycles in a row — failing the job so the watchdog restarts it"; exit 1; }
-            fi
-            [ "$DRY_RUN" = "1" ] && { echo "dry run: one cycle only"; break; }
-            NEXT=$(( START + 1800 )); NOW=$(date +%s)
-            [ "$NEXT" -ge "$END" ] && { echo "window ends before the next cycle; stopping"; break; }
-            [ "$NEXT" -gt "$NOW" ] && sleep $(( NEXT - NOW ))
-          done
+          START=$(date +%s)
+          INTERVAL=1200   # 20 minutes between checks (Ruth, Sep 22)
+
+          if [ "$DRY_RUN" != "1" ]; then
+            gh workflow run watch.yml --repo "$REPO" --ref main \
+              || echo "could not queue the next run — the watchdog will pick this up"
+          fi
+
+          if node cycle.mjs; then RC=0; else RC=$?; fi
+          echo "cycle exited $RC"
+
+          # 3 means every game has been played. The successor already queued will find
+          # the same and stop at the "Any games left" step, so the chain ends there.
+          [ "$RC" -eq 3 ] && { echo "no games left to watch"; exit 0; }
+          [ "$DRY_RUN" = "1" ] && { echo "dry run: one cycle only"; exit 0; }
+
+          # Hold the slot so checks land every 20 minutes rather than back to back.
+          # A failed cycle waits too: without this a persistent failure would spin.
+          SLEEP=$(( INTERVAL - ($(date +%s) - START) ))
+          if [ "$SLEEP" -gt 0 ]; then
+            echo "next check in ${SLEEP}s; the queued run takes over when this one ends"
+            sleep "$SLEEP"
+          fi
