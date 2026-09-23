@@ -288,3 +288,44 @@ test('a failed check does not prune anything', () => {
   const afterFail = plan(live.state, fail(), W, CTX);
   assert.ok(afterFail.state.alerts.preferred, 'state survives a failure');
 });
+
+test('changing the criteria starts a new thread instead of reviving the old one', () => {
+  // Ruth changed the price twice and the quantity once; each time the watcher kept
+  // commenting into a closed issue whose title stated the old criteria — and a
+  // comment on a closed issue still emails.
+  const cheap = { ...W, priceMax: 100 };
+  const dear = { ...W, priceMax: 250 };
+  const gh = fakeGitHub();
+
+  let state = initialState();
+  let p = plan(state, okLists([{ id: 'top', spec: cheap, matches: [seat(90)] }]), W, CTX);
+  state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  const firstIssue = state.alerts.top.issue;
+  assert.equal([...gh.issues.values()][0].title, 'Jets: 2 seats together at $100.00 or less');
+
+  // Same criteria, seats gone then back: same thread.
+  p = plan(state, okLists([{ id: 'top', spec: cheap, matches: [] }]), W, CTX);
+  state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  p = plan(state, okLists([{ id: 'top', spec: cheap, matches: [] }]), W, CTX);
+  state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  p = plan(state, okLists([{ id: 'top', spec: cheap, matches: [seat(90)] }]), W, CTX);
+  state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  assert.equal(state.alerts.top.issue, firstIssue, 'unchanged criteria keep their thread');
+
+  // Price changes: a new thread, correctly titled.
+  p = plan(state, okLists([{ id: 'top', spec: dear, matches: [seat(240)] }]), W, CTX);
+  state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  assert.notEqual(state.alerts.top.issue, firstIssue, 'the stale thread is abandoned');
+  assert.equal(gh.issues.get(state.alerts.top.issue).title, 'Jets: 2 seats together at $250.00 or less');
+});
+
+test('state written before titles were tracked starts a fresh thread', () => {
+  // The live case on Sep 23: alerts.top pointed at closed issue #32, titled $250,
+  // while the watch had moved to $200.
+  const legacy = { ...initialState(), alerts: { top: { issue: 32, active: false, notifiedBest: null, emptyStreak: 0 } } };
+  const gh = fakeGitHub();
+  const p = plan(legacy, okLists([{ id: 'top', spec: W, matches: [seat(90)] }]), W, CTX);
+  const state = executeActions(p.actions, p.state, gh.client, { logFn: () => {} });
+  assert.notEqual(state.alerts.top.issue, 32, 'the unprovable reference is dropped');
+  assert.equal(p.actions[0].type, 'open', 'a new issue is opened, not a comment on #32');
+});
