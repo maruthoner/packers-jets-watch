@@ -1,14 +1,14 @@
 {
   "watcher": "falcons",
-  "whenISO": "2026-09-23T07:24:28.335Z",
-  "when": "Sep 23, 2026, 3:24 AM ET",
+  "whenISO": "2026-09-23T07:45:01.625Z",
+  "when": "Sep 23, 2026, 3:45 AM ET",
   "quantity": 2,
   "priceMax": 150,
-  "listings": 3404,
+  "listings": 3612,
   "rejected": {
     "price": 0,
     "quantity": 0,
-    "source": 764
+    "source": 781
   },
   "linkless": 0,
   "sources": [
@@ -20,16 +20,16 @@
     "viagogo",
     "vividseats"
   ],
-  "readySeconds": 15,
+  "readySeconds": 13,
   "feeds": {
-    "vividseats": 830,
-    "event365": 1392,
-    "ticketnetwork": 1184,
-    "megaseats": 1184,
+    "vividseats": 831,
+    "event365": 1397,
+    "ticketnetwork": 1202,
+    "megaseats": 1203,
     "seatgeek": 128,
-    "gametime": 1106,
-    "stubhub": 514,
-    "viagogo": 241,
+    "gametime": 1107,
+    "stubhub": 513,
+    "viagogo": 502,
     "ticketmaster": 0
   },
   "missing": [],
@@ -48,21 +48,21 @@
       "matches": [],
       "closest": [
         {
-          "id": "14118970163stubhub",
-          "source": "stubhub",
+          "id": "14118970163viagogo",
+          "source": "viagogo",
           "secLabel": "119",
           "rowLabel": "40",
-          "price": 252.68,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14118970163%26listingQty%3D2",
+          "price": 224.66,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14118970163%26listingQty%3D2",
           "unassigned": false
         },
         {
-          "id": "14109749415stubhub",
-          "source": "stubhub",
+          "id": "14109749415viagogo",
+          "source": "viagogo",
           "secLabel": "120",
           "rowLabel": "29",
-          "price": 255.92,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14109749415%26listingQty%3D2",
+          "price": 227.53,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14109749415%26listingQty%3D2",
           "unassigned": false
         }
       ]
@@ -79,6 +79,15 @@
       "alerts": false,
       "matches": [
         {
+          "id": "14145400076viagogo",
+          "source": "viagogo",
+          "secLabel": "131",
+          "rowLabel": "61",
+          "price": 122.63,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145400076%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "1066273120megaseats",
           "source": "megaseats",
           "secLabel": "305",
@@ -94,6 +103,33 @@
           "rowLabel": "5",
           "price": 125,
           "link": "https://vivid-seats.pxf.io/ticketwhiz?u=https%3A%2F%2Fwww.vividseats.com%2Fgreen-bay-packers-tickets-green-bay-lambeau-field-3-4-2026%2Fproduction%2F6489939%3FshowDetails%3DVB17140959696%26wsUser%3D1180%26groupId%3D%26qty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "13461476594viagogo",
+          "source": "viagogo",
+          "secLabel": "136",
+          "rowLabel": "33",
+          "price": 130.4,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13461476594%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14148743101viagogo",
+          "source": "viagogo",
+          "secLabel": "106",
+          "rowLabel": "36",
+          "price": 130.4,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14148743101%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "13738977886viagogo",
+          "source": "viagogo",
+          "secLabel": "100",
+          "rowLabel": "45",
+          "price": 132.62,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13738977886%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -133,6 +169,15 @@
           "unassigned": false
         },
         {
+          "id": "14128187401viagogo",
+          "source": "viagogo",
+          "secLabel": "104",
+          "rowLabel": "53",
+          "price": 135.46,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14128187401%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "6ab34a94ce05e90f3c447818gametime",
           "source": "gametime",
           "secLabel": "305",
@@ -142,30 +187,12 @@
           "unassigned": false
         },
         {
-          "id": "1056957381megaseats",
-          "source": "megaseats",
-          "secLabel": "104",
-          "rowLabel": "53",
-          "price": 136.85,
-          "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D1056957381",
-          "unassigned": false
-        },
-        {
           "id": "14130757197viagogo",
           "source": "viagogo",
           "secLabel": "340",
           "rowLabel": "4",
-          "price": 137.61,
+          "price": 136.4,
           "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14130757197%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
-          "id": "14145400076stubhub",
-          "source": "stubhub",
-          "secLabel": "131",
-          "rowLabel": "61",
-          "price": 137.83,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145400076%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -173,8 +200,62 @@
           "source": "viagogo",
           "secLabel": "336",
           "rowLabel": "4",
-          "price": 138.61,
+          "price": 136.4,
           "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150032223%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14126610042viagogo",
+          "source": "viagogo",
+          "secLabel": "135",
+          "rowLabel": "40",
+          "price": 136.55,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14126610042%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14145815397viagogo",
+          "source": "viagogo",
+          "secLabel": "131",
+          "rowLabel": "38",
+          "price": 136.55,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145815397%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14145820154viagogo",
+          "source": "viagogo",
+          "secLabel": "137",
+          "rowLabel": "46",
+          "price": 136.55,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145820154%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14145883651viagogo",
+          "source": "viagogo",
+          "secLabel": "101",
+          "rowLabel": "34",
+          "price": 136.55,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145883651%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14145400076stubhub",
+          "source": "stubhub",
+          "secLabel": "131",
+          "rowLabel": "61",
+          "price": 136.7,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145400076%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "1056957381megaseats",
+          "source": "megaseats",
+          "secLabel": "104",
+          "rowLabel": "53",
+          "price": 136.85,
+          "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D1056957381",
           "unassigned": false
         },
         {
@@ -205,6 +286,42 @@
           "unassigned": false
         },
         {
+          "id": "14150278372viagogo",
+          "source": "viagogo",
+          "secLabel": "307",
+          "rowLabel": "1",
+          "price": 141.35,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150278372%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "13520218934viagogo",
+          "source": "viagogo",
+          "secLabel": "134",
+          "rowLabel": "32",
+          "price": 141.5,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13520218934%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "13644001181viagogo",
+          "source": "viagogo",
+          "secLabel": "134",
+          "rowLabel": "33",
+          "price": 141.5,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13644001181%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14138000665viagogo",
+          "source": "viagogo",
+          "secLabel": "103",
+          "rowLabel": "51",
+          "price": 141.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14138000665%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "1066114506megaseats",
           "source": "megaseats",
           "secLabel": "103",
@@ -214,12 +331,12 @@
           "unassigned": false
         },
         {
-          "id": "14150278372viagogo",
+          "id": "14146085408viagogo",
           "source": "viagogo",
-          "secLabel": "307",
-          "rowLabel": "1",
-          "price": 142.61,
-          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150278372%26listingQty%3D2",
+          "secLabel": "130",
+          "rowLabel": "40",
+          "price": 141.99,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14146085408%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -241,11 +358,29 @@
           "unassigned": false
         },
         {
+          "id": "14145620293viagogo",
+          "source": "viagogo",
+          "secLabel": "101",
+          "rowLabel": "30",
+          "price": 145.16,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145620293%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14149858331viagogo",
+          "source": "viagogo",
+          "secLabel": "138",
+          "rowLabel": "35",
+          "price": 145.16,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14149858331%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "13461476594stubhub",
           "source": "stubhub",
           "secLabel": "136",
           "rowLabel": "33",
-          "price": 146.58,
+          "price": 145.37,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13461476594%26listingQty%3D2",
           "unassigned": false
         },
@@ -254,8 +389,107 @@
           "source": "stubhub",
           "secLabel": "106",
           "rowLabel": "36",
-          "price": 146.58,
+          "price": 145.37,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14148743101%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14145868359stubhub",
+          "source": "stubhub",
+          "secLabel": "105",
+          "rowLabel": "49",
+          "price": 146.17,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145868359%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14145993692viagogo",
+          "source": "viagogo",
+          "secLabel": "105",
+          "rowLabel": "37",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145993692%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14147369208viagogo",
+          "source": "viagogo",
+          "secLabel": "132",
+          "rowLabel": "53",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14147369208%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14147369210viagogo",
+          "source": "viagogo",
+          "secLabel": "132",
+          "rowLabel": "52",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14147369210%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14147445153viagogo",
+          "source": "viagogo",
+          "secLabel": "138",
+          "rowLabel": "31",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14147445153%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14147685050viagogo",
+          "source": "viagogo",
+          "secLabel": "103",
+          "rowLabel": "46",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14147685050%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14149513877viagogo",
+          "source": "viagogo",
+          "secLabel": "104",
+          "rowLabel": "37",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14149513877%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14150133045viagogo",
+          "source": "viagogo",
+          "secLabel": "104",
+          "rowLabel": "51",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150133045%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14150268796viagogo",
+          "source": "viagogo",
+          "secLabel": "104",
+          "rowLabel": "27",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150268796%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14150492009viagogo",
+          "source": "viagogo",
+          "secLabel": "133",
+          "rowLabel": "42",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150492009%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14151793703viagogo",
+          "source": "viagogo",
+          "secLabel": "111",
+          "rowLabel": "42",
+          "price": 146.61,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14151793703%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -277,12 +511,30 @@
           "unassigned": false
         },
         {
-          "id": "14145868359stubhub",
+          "id": "14150147175stubhub",
           "source": "stubhub",
-          "secLabel": "105",
-          "rowLabel": "49",
-          "price": 147.38,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14145868359%26listingQty%3D2",
+          "secLabel": "100",
+          "rowLabel": "52",
+          "price": 147.41,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150147175%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "13738977886stubhub",
+          "source": "stubhub",
+          "secLabel": "100",
+          "rowLabel": "45",
+          "price": 147.85,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13738977886%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "13739027357stubhub",
+          "source": "stubhub",
+          "secLabel": "100",
+          "rowLabel": "47",
+          "price": 147.85,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13739027357%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -295,39 +547,12 @@
           "unassigned": false
         },
         {
-          "id": "14150147175stubhub",
-          "source": "stubhub",
-          "secLabel": "100",
-          "rowLabel": "52",
-          "price": 148.63,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14150147175%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
           "id": "6286064550event365",
           "source": "event365",
           "secLabel": "136",
           "rowLabel": "33",
           "price": 148.92,
           "link": "https://www.events365.com/checkout/payment/3285895/6286064550?quantity=2&refid=MjM4NzItNDAwMzE%3D%0A",
-          "unassigned": false
-        },
-        {
-          "id": "13738977886stubhub",
-          "source": "stubhub",
-          "secLabel": "100",
-          "rowLabel": "45",
-          "price": 149.08,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13738977886%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
-          "id": "13739027357stubhub",
-          "source": "stubhub",
-          "secLabel": "100",
-          "rowLabel": "47",
-          "price": 149.08,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13739027357%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -360,12 +585,12 @@
           "unassigned": false
         },
         {
-          "id": "6a99a60014171662286ff27cgametime",
-          "source": "gametime",
-          "secLabel": "131",
-          "rowLabel": "49",
-          "price": 152,
-          "link": "https://gametime.hnyj8s.net/QjDGD6?u=https%3A%2F%2Fgametime.co%2Fevents%2F695cb0255a70588e3051bdbb%2Flistings%2F6a99a60014171662286ff27c%3Fseat_count%3D2",
+          "id": "14128187401stubhub",
+          "source": "stubhub",
+          "secLabel": "104",
+          "rowLabel": "53",
+          "price": 151.02,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14128187401%26listingQty%3D2",
           "unassigned": false
         }
       ]
@@ -385,8 +610,17 @@
           "source": "viagogo",
           "secLabel": "740S",
           "rowLabel": "17",
-          "price": 102.65,
+          "price": 101.75,
           "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13957714034%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "14149573996viagogo",
+          "source": "viagogo",
+          "secLabel": "739S",
+          "rowLabel": "2",
+          "price": 111.65,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14149573996%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -399,21 +633,21 @@
           "unassigned": false
         },
         {
-          "id": "14149573996viagogo",
-          "source": "viagogo",
-          "secLabel": "739S",
-          "rowLabel": "2",
-          "price": 112.64,
-          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14149573996%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
           "id": "12993318151viagogo",
           "source": "viagogo",
           "secLabel": "746S",
           "rowLabel": "2",
-          "price": 113.75,
+          "price": 112.75,
           "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D12993318151%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
+          "id": "13957714034stubhub",
+          "source": "stubhub",
+          "secLabel": "740S",
+          "rowLabel": "17",
+          "price": 114.4,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13957714034%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -423,15 +657,6 @@
           "rowLabel": "2",
           "price": 114.75,
           "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D1062090130",
-          "unassigned": false
-        },
-        {
-          "id": "13957714034stubhub",
-          "source": "stubhub",
-          "secLabel": "740S",
-          "rowLabel": "17",
-          "price": 115.34,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13957714034%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -471,6 +696,15 @@
           "unassigned": false
         },
         {
+          "id": "14050576393viagogo",
+          "source": "viagogo",
+          "secLabel": "734S",
+          "rowLabel": "9",
+          "price": 121.55,
+          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14050576393%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "1063195269megaseats",
           "source": "megaseats",
           "secLabel": "739S",
@@ -489,15 +723,6 @@
           "unassigned": false
         },
         {
-          "id": "14050576393viagogo",
-          "source": "viagogo",
-          "secLabel": "734S",
-          "rowLabel": "9",
-          "price": 122.63,
-          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14050576393%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
           "id": "VB15939216745vividseats",
           "source": "vividseats",
           "secLabel": "Section 746S",
@@ -511,7 +736,7 @@
           "source": "viagogo",
           "secLabel": "741S",
           "rowLabel": "14",
-          "price": 125.63,
+          "price": 124.52,
           "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14128330761%26listingQty%3D2",
           "unassigned": false
         },
@@ -520,7 +745,7 @@
           "source": "stubhub",
           "secLabel": "739S",
           "rowLabel": "2",
-          "price": 126.59,
+          "price": 125.55,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14149573996%26listingQty%3D2",
           "unassigned": false
         },
@@ -529,7 +754,7 @@
           "source": "viagogo",
           "secLabel": "730S",
           "rowLabel": "2",
-          "price": 127.63,
+          "price": 126.5,
           "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13665773623%26listingQty%3D2",
           "unassigned": false
         },
@@ -538,7 +763,7 @@
           "source": "stubhub",
           "secLabel": "746S",
           "rowLabel": "2",
-          "price": 127.84,
+          "price": 126.79,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D12993318151%26listingQty%3D2",
           "unassigned": false
         },
@@ -588,30 +813,12 @@
           "unassigned": false
         },
         {
-          "id": "14147434786viagogo",
-          "source": "viagogo",
-          "secLabel": "743S",
-          "rowLabel": "17",
-          "price": 130.79,
-          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14147434786%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
           "id": "1010607464megaseats",
           "source": "megaseats",
           "secLabel": "737S",
           "rowLabel": "11",
           "price": 130.9,
           "link": "https://megaseats.sjv.io/Wyzq6G?u=https%3A%2F%2Fwww.megaseats.com%2Ftickets%2F7730284%3FproductId%3D1010607464",
-          "unassigned": false
-        },
-        {
-          "id": "13959663058viagogo",
-          "source": "viagogo",
-          "secLabel": "740S",
-          "rowLabel": "14",
-          "price": 132.62,
-          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13959663058%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -655,17 +862,8 @@
           "source": "stubhub",
           "secLabel": "734S",
           "rowLabel": "9",
-          "price": 137.83,
+          "price": 136.7,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14050576393%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
-          "id": "14149295384viagogo",
-          "source": "viagogo",
-          "secLabel": "735S",
-          "rowLabel": "15",
-          "price": 137.96,
-          "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14149295384%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -678,21 +876,21 @@
           "unassigned": false
         },
         {
+          "id": "14128330761stubhub",
+          "source": "stubhub",
+          "secLabel": "741S",
+          "rowLabel": "14",
+          "price": 140.05,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14128330761%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "rVOHkLkmbGGseatgeek",
           "source": "seatgeek",
           "secLabel": "737 S",
           "rowLabel": "11",
           "price": 141,
           "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fgreen-bay-packers-tickets%2F9-24-2026-green-bay-wisconsin-lambeau-field%2Fnfl%2F18016552%3Fquantity%3D2%23listing%3DrVOHkLkmbGG",
-          "unassigned": false
-        },
-        {
-          "id": "14128330761stubhub",
-          "source": "stubhub",
-          "secLabel": "741S",
-          "rowLabel": "14",
-          "price": 141.2,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14128330761%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -718,7 +916,7 @@
           "source": "stubhub",
           "secLabel": "730S",
           "rowLabel": "2",
-          "price": 143.46,
+          "price": 142.28,
           "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13665773623%26listingQty%3D2",
           "unassigned": false
         },
@@ -777,6 +975,15 @@
           "unassigned": false
         },
         {
+          "id": "14147434786stubhub",
+          "source": "stubhub",
+          "secLabel": "743S",
+          "rowLabel": "17",
+          "price": 145.8,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14147434786%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "14138877158viagogo",
           "source": "viagogo",
           "secLabel": "738S",
@@ -792,15 +999,6 @@
           "rowLabel": "4",
           "price": 146.61,
           "link": "https://viagogo.prf.hn/click/camref:1101l4bXBI/destination:https%3A%2F%2Fwww.viagogo.com%2FSports-Tickets%2FFootball%2FNFL%2FNFL-Road-Games%2FGreen-Bay-Packers-Tickets%2FE-160435466%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14146007402%26listingQty%3D2",
-          "unassigned": false
-        },
-        {
-          "id": "14147434786stubhub",
-          "source": "stubhub",
-          "secLabel": "743S",
-          "rowLabel": "17",
-          "price": 147.02,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D14147434786%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -822,6 +1020,15 @@
           "unassigned": false
         },
         {
+          "id": "13959663058stubhub",
+          "source": "stubhub",
+          "secLabel": "740S",
+          "rowLabel": "14",
+          "price": 147.85,
+          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13959663058%26listingQty%3D2",
+          "unassigned": false
+        },
+        {
           "id": "14144509941viagogo",
           "source": "viagogo",
           "secLabel": "743S",
@@ -837,15 +1044,6 @@
           "rowLabel": "16",
           "price": 148.12,
           "link": "https://seatgeek.pxf.io/09O6ZR?u=https%3A%2F%2Fseatgeek.com%2Fgreen-bay-packers-tickets%2F9-24-2026-green-bay-wisconsin-lambeau-field%2Fnfl%2F18016552%3Fquantity%3D2%23listing%3Dq9ny112",
-          "unassigned": false
-        },
-        {
-          "id": "13959663058stubhub",
-          "source": "stubhub",
-          "secLabel": "740S",
-          "rowLabel": "14",
-          "price": 149.08,
-          "link": "https://stubhub.prf.hn/click/camref:1101l4bXBA/[p_id:1101l577142]/destination:https%3A%2F%2Fwww.stubhub.com%2Fevent%2F160435466%2F%3Fbd%3Dtrue%26quantity%3D2%26listingId%3D13959663058%26listingQty%3D2",
           "unassigned": false
         },
         {
@@ -890,93 +1088,93 @@
     }
   ],
   "sectionPrices": {
-    "100": 148.63,
-    "101": 145,
-    "102": 157,
-    "103": 141.95,
-    "104": 136.85,
-    "105": 147.38,
-    "106": 140,
+    "100": 132.62,
+    "101": 136.55,
+    "102": 152.76,
+    "103": 141.61,
+    "104": 135.46,
+    "105": 146.17,
+    "106": 130.4,
     "107": 153,
     "108": 174,
-    "109": 157.25,
+    "109": 157.22,
     "110": 155,
-    "111": 152,
-    "112": 187.06,
-    "113": 190.24,
-    "114": 176.75,
-    "115": 181,
-    "116": 237,
-    "117": 237,
+    "111": 146.61,
+    "112": 171.36,
+    "113": 169.18,
+    "114": 158.31,
+    "115": 167.61,
+    "116": 221.65,
+    "117": 224.66,
     "118": 212.24,
-    "119": 252.68,
-    "120": 255.92,
-    "121": 205.7,
-    "122": 240.44,
+    "119": 224.66,
+    "120": 227.53,
+    "121": 203.26,
+    "122": 211.88,
     "123": 186.15,
-    "124": 207.39,
-    "125": 197.59,
-    "126": 178,
-    "127": 195,
-    "128": 178,
-    "129": 161.64,
-    "130": 159.62,
-    "131": 137.83,
-    "132": 152,
-    "133": 152,
-    "134": 145,
-    "135": 148,
-    "136": 134,
-    "137": 153.5,
+    "124": 184.41,
+    "125": 174.15,
+    "126": 158.31,
+    "127": 187.4,
+    "128": 158.31,
+    "129": 152.6,
+    "130": 141.99,
+    "131": 122.63,
+    "132": 146.61,
+    "133": 146.61,
+    "134": 141.5,
+    "135": 136.55,
+    "136": 130.4,
+    "137": 136.55,
     "138": 133.45,
-    "300": 197,
+    "300": 195.25,
     "301": 133.45,
     "302": 125,
-    "303": 193.67,
-    "304": 198.11,
+    "303": 191.95,
+    "304": 196.35,
     "305": 124.95,
     "306": 3656,
-    "307": 142.61,
+    "307": 141.35,
     "308": 156.14,
     "310": 263,
-    "312": 172.4,
-    "314": 180.95,
-    "316": 179.51,
-    "318": 263.6,
-    "320": 224.55,
+    "312": 173.95,
+    "314": 182.57,
+    "316": 181.12,
+    "318": 261.25,
+    "320": 232.05,
     "322": 210,
     "326": 294.9,
     "330": 300.23,
-    "332": 197.39,
+    "332": 195.64,
     "334": 181.05,
-    "336": 138.61,
+    "336": 136.4,
     "338": 239.7,
-    "340": 137.61,
+    "340": 136.4,
     "342": 162.43,
     "344": 156.2,
     "345": 211.34,
-    "346": 185.7,
+    "346": 187,
     "347": 159.14,
     "348": 256,
     "349": 379.52,
     "350": 2806.82,
     "351": 2806.82,
-    "352": 173.81,
-    "353": 241.1,
+    "352": 175.37,
+    "353": 238.95,
     "354": 3002,
     "403": 323,
     "405": 284.69,
     "407": 217.53,
-    "409": 615.2,
+    "409": 620.76,
     "411": 402.35,
     "413": 425.66,
-    "415": 299.75,
-    "417": 314.6,
+    "415": 302.45,
+    "417": 317.43,
     "419": 401.46,
-    "421": 339.76,
-    "423": 336.54,
-    "425": 389.05,
-    "427": 283.25,
+    "421": 342.82,
+    "423": 339.58,
+    "425": 392.56,
+    "427": 285.8,
     "429": 234,
     "431": 214.6,
     "433": 495.59,
@@ -992,47 +1190,47 @@
     "484": 252.2,
     "486": 189.55,
     "488": 424.55,
-    "490": 312.13,
+    "490": 277.47,
     "492": 242,
-    "630": 223.64,
+    "630": 221.65,
     "632": 238.07,
     "634": 175.37,
-    "635": 204,
+    "635": 189.23,
     "636": 168.2,
     "637": 145.35,
-    "638": 190.34,
+    "638": 188.65,
     "639": 157,
     "640": 182.57,
     "641": 231.41,
     "642": 163,
     "643": 165,
-    "670": 316.37,
+    "670": 319.22,
     "672": 147.05,
     "674": 163.7,
-    "676": 294.17,
-    "678": 283.25,
-    "680": 284.03,
-    "682": 625.63,
-    "686": 352.55,
+    "676": 296.82,
+    "678": 285.8,
+    "680": 281.66,
+    "682": 620.02,
+    "686": 355.73,
     "688": 424,
     "690": 258,
     "692": 198.9,
     "694": 303,
-    "730": 127.63,
+    "730": 126.5,
     "732": 151.25,
-    "734": 122.63,
-    "735": 137.96,
+    "734": 121.55,
+    "735": 144,
     "736": 285,
     "737": 130.9,
     "738": 146.61,
-    "739": 112,
-    "740": 102.65,
-    "741": 125.63,
+    "739": 111.65,
+    "740": 101.75,
+    "741": 124.52,
     "742": 166.1,
-    "743": 130.79,
+    "743": 135,
     "744": 129.8,
     "745": 189.76,
-    "746": 113.75,
+    "746": 112.75,
     "747": 173.81,
     "748": 139.41,
     "749": 230.3,
