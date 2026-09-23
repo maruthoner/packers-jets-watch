@@ -1,11 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { sectionKey, sectionPrices, band, renderMap, loadVenue } from '../lib/map.mjs';
+import { sectionKey, sectionPrices, highlightedSections, renderMap, loadVenue } from '../lib/map.mjs';
 
 const venue = loadVenue('lambeau');
-// "7 sections" / "none right now" -> 7 / 0, summed across the four bands.
-const legendTotal = (html) => [...html.matchAll(/<span class="n">([^<]*)<\/span>/g)]
-  .reduce((t, m) => t + (m[1] === 'none right now' ? 0 : Number(m[1].match(/\d+/)[0])), 0);
+// "7 sections" / "none right now" -> 7 / 0, across the legend rows.
+const legendCounts = (html) => [...html.matchAll(/<span class="n">([^<]*)<\/span>/g)]
+  .map((m) => (m[1] === 'none right now' ? 0 : Number(m[1].match(/\d+/)[0])));
+const shade = (html, section) => (html.match(new RegExp(`class="sec (\\w+)"><title>${section} `)) ?? [])[1];
 
 const seat = (o = {}) => ({ secLabel: '136', rowLabel: '5', price: 200, unassigned: false, ...o });
 
@@ -37,18 +38,30 @@ test('listings with no assigned seat never colour a section', () => {
   assert.deepEqual(prices, {});
 });
 
-test('bands are relative to the price cap', () => {
-  assert.equal(band(150, 150), 'fits');
-  assert.equal(band(150.004, 150), 'fits'); // cent-level rounding must not miss
-  assert.equal(band(151, 150), 'near');
-  assert.equal(band(225, 150), 'near');
-  assert.equal(band(226, 150), 'over');
-  assert.equal(band(undefined, 150), 'none');
+test('the sections named in the lists are the ones highlighted', () => {
+  const result = { lists: [
+    { matches: [{ secLabel: '120' }], closest: [{ secLabel: 'Lower Level 119' }] },
+    { matches: [], closest: [{ secLabel: '121' }, { secLabel: '324' }] },
+  ] };
+  const { match, closest } = highlightedSections(result);
+  assert.deepEqual([...match], ['120']);
+  assert.deepEqual([...closest].sort(), ['119', '121', '324']);
+});
+
+test('a watcher with no lists falls back to its own matches and closest', () => {
+  const { match, closest } = highlightedSections({ matches: [{ secLabel: '743S' }], closest: [{ secLabel: '637S' }] });
+  assert.deepEqual([...match], ['743']);
+  assert.deepEqual([...closest], ['637']);
+});
+
+test('a listing with no section number highlights nothing', () => {
+  const { match } = highlightedSections({ matches: [{ secLabel: 'GA' }, { secLabel: '' }] });
+  assert.equal(match.size, 0);
 });
 
 test('the map draws every section and every context shape exactly once, plus the field', () => {
-  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
-  const seating = (svg.match(/class="sec (?:fits|near|over|none)"/g) ?? []).length;
+  const svg = renderMap(venue, { prices: {}, quantity: 2 });
+  const seating = (svg.match(/class="sec (?:match|closest|plain)"/g) ?? []).length;
   const context = (svg.match(/class="sec context"/g) ?? []).length;
   assert.equal(seating, venue.sections.length);
   assert.equal(context, venue.context.length);
@@ -57,42 +70,45 @@ test('the map draws every section and every context shape exactly once, plus the
   assert.match(svg, /class="field"/);
 });
 
-test('context shapes are never priced or counted in the legend', () => {
-  // A suite number must not steal the shading of a seating section.
-  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
-  assert.equal(legendTotal(svg), venue.sections.length);
+test('the legend counts only what is highlighted, never a suite', () => {
+  const svg = renderMap(venue, { prices: {}, quantity: 2, match: new Set(['120']), closest: new Set(['119', '121']) });
+  assert.deepEqual(legendCounts(svg), [1, 2], 'one match, two closest');
+  assert.equal((svg.match(/class="sec context"/g) ?? []).length, venue.context.length, 'suites are drawn but never counted');
 });
 
 test('every section is numbered, at a size that fits it', () => {
-  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
+  const svg = renderMap(venue, { prices: {}, quantity: 2 });
   // Section numbers open with x=; the two sideline labels carry a class.
   assert.equal((svg.match(/<text x=/g) ?? []).length, venue.sections.length);
 });
 
-test('legend counts account for every section', () => {
-  const prices = { '136': 140, '750s': 200, '103': 400 };
-  const svg = renderMap(venue, { prices, priceMax: 150, quantity: 3 });
-  assert.equal(legendTotal(svg), venue.sections.length);
+test('a section that is not in a list is left plain, whatever it costs', () => {
+  // The map no longer prices the whole stadium (Ruth, Sep 23).
+  const svg = renderMap(venue, { prices: { '136': 140, '103': 4000 }, quantity: 2, match: new Set(['120']) });
+  assert.equal(shade(svg, '136'), 'plain', 'a cheap section nobody listed stays plain');
+  assert.equal(shade(svg, '103'), 'plain');
+  assert.equal(shade(svg, '120'), 'match');
 });
 
-test('a section with a fitting price is shaded as fitting', () => {
-  const svg = renderMap(venue, { prices: { '136': 140 }, priceMax: 150, quantity: 3 });
-  assert.match(svg, /class="sec fits"><title>136 — from \$140\.00 each<\/title>/);
+test('a highlighted section still shows its price on hover', () => {
+  const svg = renderMap(venue, { prices: { '136': 140 }, quantity: 2, match: new Set(['136']) });
+  assert.match(svg, /class="sec match"><title>136 — from \$140\.00 each<\/title>/);
 });
 
 test('no venue renders nothing rather than a broken map', () => {
-  assert.equal(renderMap(null, { priceMax: 150, quantity: 3 }), '');
+  assert.equal(renderMap(null, { quantity: 2 }), '');
   assert.equal(loadVenue('nope'), null);
 });
 
-test('a section listed without its letter still shades that section', () => {
-  // The live regression: 27 sections priced as "634", drawn as "634s", shaded as neither.
-  const svg = renderMap(venue, { prices: sectionPrices([seat({ secLabel: '634', price: 140 })]), priceMax: 150, quantity: 3 });
-  assert.match(svg, /class="sec fits"><title>634S — from \$140\.00 each<\/title>/);
+test('a section listed without its letter still lines up with the map', () => {
+  // The live regression: sections priced as "634", drawn as "634s", matched as neither.
+  const { match } = highlightedSections({ matches: [{ secLabel: '634' }] });
+  const svg = renderMap(venue, { prices: sectionPrices([seat({ secLabel: '634', price: 140 })]), quantity: 2, match });
+  assert.match(svg, /class="sec match"><title>634S — from \$140\.00 each<\/title>/);
 });
 
 test('each sideline is labelled on the edge its own sections sit nearest', () => {
-  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
+  const svg = renderMap(venue, { prices: {}, quantity: 2 });
   const sides = [...svg.matchAll(/<text class="side (home|away)" x="[\d.]+" y="([\d.]+)">([A-Z ]+)<\/text>/g)]
     .map((m) => [m[3], Number(m[2]), m[1]]);
   assert.equal(sides.length, 2);
@@ -110,7 +126,7 @@ test('each sideline is labelled on the edge its own sections sit nearest', () =>
 test('a legend swatch is a swatch, not a results box', () => {
   // `class="sw none"` also matched the page's .none box rule, which padded the
   // fourth swatch to three times the size of the other three.
-  const svg = renderMap(venue, { prices: {}, priceMax: 150, quantity: 3 });
-  assert.match(svg, /<i class="sw sw-none"><\/i>/);
-  assert.doesNotMatch(svg, /class="sw (fits|near|over|none)"/);
+  const svg = renderMap(venue, { prices: {}, quantity: 2 });
+  assert.match(svg, /<i class="sw sw-match"><\/i>/);
+  assert.doesNotMatch(svg, /class="sw (match|closest|plain)"/);
 });
