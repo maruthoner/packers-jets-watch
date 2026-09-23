@@ -51,10 +51,10 @@ export const WATCHERS = {
     //             the rest of the 100s and 300s, and the whole 600s and 700s —
     //             is no longer searched; the map still shades it with its price.
     preferred: [
-      { id: 'top', label: 'Top Choice', sections: [119, 120], priceMax: 200, alerts: true },
+      { id: 'top', label: 'Preferred', sections: [119, 120], priceMax: 200, alerts: true },
       {
         id: 'preferred',
-        label: 'Preferred',
+        label: 'Standard',
         groups: [
           { sections: [117, 118, 121, 122] },
           { sections: [324, 326, 328, 417, 419, 421], rowMax: 5 },

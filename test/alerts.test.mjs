@@ -248,7 +248,8 @@ test('a listing at exactly the cap emails once, mentioning the owner', () => {
   assert.equal(r.matched.length, 1, 'the cap is inclusive');
   assert.equal(r.emails.length, 1, 'exactly one email');
   const [issue] = [...r.issues.values()];
-  assert.equal(issue.title, `Falcons top choice: ${F.quantity} seats together at $${top.priceMax}.00 or less`);
+  // The heading drives the issue title, so a rename starts a new thread (Ruth, Sep 23).
+  assert.equal(issue.title, `Falcons preferred: ${F.quantity} seats together at $${top.priceMax}.00 or less`);
   assert.match(issue.body, /@maruthoner/, 'the mention is what sends the email');
   assert.match(issue.body, /\$200\.00/);
 });

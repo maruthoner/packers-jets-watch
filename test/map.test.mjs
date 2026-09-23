@@ -130,3 +130,10 @@ test('a legend swatch is a swatch, not a results box', () => {
   assert.match(svg, /<i class="sw sw-match"><\/i>/);
   assert.doesNotMatch(svg, /class="sw (match|closest|plain)"/);
 });
+
+test('the map goes straight from its heading to the map', () => {
+  // The line explaining the shading is gone (Ruth, Sep 23).
+  const svg = renderMap(venue, { prices: {}, quantity: 2 });
+  assert.doesNotMatch(svg, /Only the sections listed above are marked/);
+  assert.match(svg, /<h2>Lambeau Field<\/h2>\n<div class="mapwrap">/);
+});
