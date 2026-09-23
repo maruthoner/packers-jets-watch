@@ -375,20 +375,33 @@ test('a seat with no fixed location belongs to no list', () => {
   assert.equal(sectionFits({ secLabel: '301-306-OR-346-350', unassigned: false }, { levels: [3] }), false);
 });
 
-test('every listing lands in exactly one list', async () => {
+test('only the named sections are searched; everything else is dropped', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   const w = WATCHERS.falcons;
-  const { listings } = normalize(
-    ['135', '354', '470', '630S', '743S'].map((s) => atSection(s)).map((r) => ({ ...r, splits: [3] })),
-    3);
+  const raws = ['119', '117', '122', '324', '135', '354', '743S']
+    .map((sec) => ({ ...atSection(sec), rowLabel: '4', splits: [1, 2, 3, 4] }));
+  const { listings } = normalize(raws, w.quantity);
   const { lists, general } = decideAll(listings, w);
   assert.equal(general, null, 'no catch-all list');
-  assert.deepEqual(lists.map((l) => l.id), ['top', 'preferred', 'regular']);
-  assert.deepEqual(lists[0].matches.map((m) => m.secLabel), [], 'nothing here is 119 or 120');
-  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), ['135', '354', '470']);
-  assert.deepEqual(lists[2].matches.map((m) => m.secLabel), ['630S', '743S']);
-  const total = lists.reduce((n, l) => n + l.matches.length, 0);
-  assert.equal(total, listings.length, 'nothing is dropped or counted twice');
+  assert.deepEqual(lists.map((l) => l.id), ['top', 'preferred'], 'Regular is gone (Ruth, Sep 23)');
+  assert.deepEqual(lists[0].matches.map((m) => m.secLabel), ['119']);
+  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), ['117', '122', '324']);
+  const listed = lists.flatMap((l) => [...l.matches, ...l.closest]).map((m) => m.secLabel);
+  for (const gone of ['135', '354', '743S']) {
+    assert.ok(!listed.includes(gone), `${gone} is no longer searched`);
+  }
+});
+
+test('the row rule applies per group, not to the whole list', async () => {
+  const { WATCHERS } = await import('../watchers.mjs');
+  const w = WATCHERS.falcons;
+  const at = (sec, row) => ({ id: `${sec}-${row}x`, secLabel: sec, rowLabel: row, allIn: 100, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
+  const { listings } = normalize([at('117', '55'), at('324', '10'), at('324', '11'), at('421', '1')], w.quantity);
+  const { lists } = decideAll(listings, w);
+  const pref = lists.find((l) => l.id === 'preferred');
+  assert.deepEqual(pref.matches.map((m) => `${m.secLabel}/${m.rowLabel}`), ['117/55', '324/10', '421/1']);
+  const listed = lists.flatMap((l) => [...l.matches, ...l.closest]).map((m) => `${m.secLabel}/${m.rowLabel}`);
+  assert.ok(!listed.includes('324/11'), 'row 11 of a first-ten-rows section is not searched');
 });
 
 test('Regular never emails', async () => {
@@ -401,6 +414,8 @@ test('Regular never emails', async () => {
 });
 
 test('the criteria read as levels, not as a list of 120 numbers', () => {
+  assert.equal(sectionsText({ groups: [{ sections: [117, 118] }, { sections: [324], rowMax: 10 }] }),
+    'sections 117, 118 (any row) or 324 (rows 1\u201310)');
   assert.equal(sectionsText({ levels: [1, 3, 4] }), 'sections in the 100s, 300s and 400s');
   assert.equal(sectionsText({ levels: [6, 7] }), 'sections in the 600s and 700s');
   assert.equal(sectionsText({ levels: [1] }), 'sections in the 100s');
@@ -432,12 +447,12 @@ test('standing room never matches and never shades the map', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   const w = WATCHERS.falcons;
   const { listings } = normalize([
-    { id: 'a1vividseats', secLabel: '432SRO', rowLabel: 'general', allIn: 100, splits: [3], link: 'https://e.com/b' },
-    { id: 'b1vividseats', secLabel: '135', rowLabel: '11', allIn: 140, splits: [3], link: 'https://e.com/b' },
-  ], 3);
+    { id: 'a1vividseats', secLabel: '118SRO', rowLabel: 'general', allIn: 100, splits: [1, 2, 3, 4], link: 'https://e.com/b' },
+    { id: 'b1vividseats', secLabel: '118', rowLabel: '11', allIn: 140, splits: [1, 2, 3, 4], link: 'https://e.com/b' },
+  ], w.quantity);
   const { lists } = decideAll(listings, w);
-  const matched = lists.flatMap((l) => l.matches).map((m) => m.secLabel);
-  assert.deepEqual(matched, ['135'], 'the standing-room listing is not a match at any price');
+  const matched = lists.flatMap((l) => l.matches).map((m) => `${m.secLabel}/${m.rowLabel}`);
+  assert.deepEqual(matched, ['118/11'], 'the standing-room listing is not a match at any price');
 });
 
 test('Top Choice takes 119 and 120 before Preferred can claim them', async () => {
@@ -445,13 +460,12 @@ test('Top Choice takes 119 and 120 before Preferred can claim them', async () =>
   const w = WATCHERS.falcons;
   const q = w.quantity;
   const at = (sec, price) => ({ id: `${sec}vividseats`, secLabel: sec, rowLabel: '5', allIn: price, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
-  const { listings } = normalize([at('119', 180), at('120', 190), at('135', 200), at('743S', 100)], q);
+  const { listings } = normalize([at('119', 180), at('120', 190), at('117', 200), at('122', 140)], q);
   const { lists } = decideAll(listings, w);
-  assert.deepEqual(lists.map((l) => l.id), ['top', 'preferred', 'regular']);
+  assert.deepEqual(lists.map((l) => l.id), ['top', 'preferred']);
   assert.deepEqual(lists[0].matches.map((m) => m.secLabel), ['119', '120'], 'both go to Top Choice');
-  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), [], '135 at $200 is over the $150 Preferred cap');
-  assert.deepEqual(lists[1].closest.map((m) => m.secLabel), ['135'], 'and shows there as a near miss');
-  assert.deepEqual(lists[2].matches.map((m) => m.secLabel), ['743S']);
+  assert.deepEqual(lists[1].matches.map((m) => m.secLabel), ['122'], '117 at $200 is over the $150 Preferred cap');
+  assert.deepEqual(lists[1].closest.map((m) => m.secLabel), ['117'], 'and shows there as a near miss');
 });
 
 test('Top Choice uses its own $200 cap, not the $150 one', async () => {
