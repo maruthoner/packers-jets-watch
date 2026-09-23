@@ -46,8 +46,8 @@ export const WATCHERS = {
     // appears only there.
     // Top Choice: sections 119 and 120, $200 — THE ONLY LIST THAT EMAILS.
     // Preferred:  named sections only, $150, page only. Two groups because the row
-    //             rule differs: 117/118/121/122 at any row, and 324/328/417/421
-    //             only in the first ten rows (Ruth, Sep 23). Everything else —
+    //             rule differs: 117/118/121/122 at any row, and 324/326/328/417/
+    //             419/421 only in the first five rows (Ruth, Sep 23). Everything else —
     //             the rest of the 100s and 300s, and the whole 600s and 700s —
     //             is no longer searched; the map still shades it with its price.
     preferred: [
@@ -57,7 +57,7 @@ export const WATCHERS = {
         label: 'Preferred',
         groups: [
           { sections: [117, 118, 121, 122] },
-          { sections: [324, 328, 417, 421], rowMax: 10 },
+          { sections: [324, 326, 328, 417, 419, 421], rowMax: 5 },
         ],
       },
     ],

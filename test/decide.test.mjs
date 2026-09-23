@@ -396,12 +396,13 @@ test('the row rule applies per group, not to the whole list', async () => {
   const { WATCHERS } = await import('../watchers.mjs');
   const w = WATCHERS.falcons;
   const at = (sec, row) => ({ id: `${sec}-${row}x`, secLabel: sec, rowLabel: row, allIn: 100, splits: [1, 2, 3, 4], link: 'https://e.com/b' });
-  const { listings } = normalize([at('117', '55'), at('324', '10'), at('324', '11'), at('421', '1')], w.quantity);
+  const { listings } = normalize([at('117', '55'), at('324', '5'), at('324', '6'), at('419', '1'), at('326', '3')], w.quantity);
   const { lists } = decideAll(listings, w);
   const pref = lists.find((l) => l.id === 'preferred');
-  assert.deepEqual(pref.matches.map((m) => `${m.secLabel}/${m.rowLabel}`), ['117/55', '324/10', '421/1']);
+  // Same price throughout, so these come back ordered by id.
+  assert.deepEqual(pref.matches.map((m) => `${m.secLabel}/${m.rowLabel}`), ['117/55', '324/5', '326/3', '419/1']);
   const listed = lists.flatMap((l) => [...l.matches, ...l.closest]).map((m) => `${m.secLabel}/${m.rowLabel}`);
-  assert.ok(!listed.includes('324/11'), 'row 11 of a first-ten-rows section is not searched');
+  assert.ok(!listed.includes('324/6'), 'row 6 of a first-five-rows section is not searched');
 });
 
 test('Regular never emails', async () => {
