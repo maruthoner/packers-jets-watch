@@ -133,9 +133,12 @@ test('the tally counts both kinds, singular and plural, and flags a real match',
   assert.match(none, /<b>0 exact matches<\/b> &middot; 2 close matches</);
 });
 
-test('the header line ends with the price cap, not the check interval', () => {
+test('the header line stops at the listing count', () => {
+  // No interval, and no price either: each section states its own cap below, and
+  // with three different caps a single figure up here would be wrong (Ruth, Sep 23).
   const html = renderPage(W, { result: result(), state: {}, others: [] });
-  assert.match(html, /<b>12,000<\/b> listings for 2 together &middot; <b>\$100<\/b> max per ticket/);
+  assert.match(html, /<b>12,000<\/b> listings for 2 together<\/p>/);
+  assert.doesNotMatch(html, /max per ticket/);
   assert.doesNotMatch(html, /checks every 30 minutes/);
 });
 
