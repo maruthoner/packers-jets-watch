@@ -55,6 +55,12 @@ function snapshotInPage({ quantity, withRaw, withDiag }) {
 
   const labelEl = [...document.querySelectorAll('span')].find((e) => /^(live prices|refreshing marketplaces)$/i.test((e.textContent || '').trim()));
   const qtyBtn = [...document.querySelectorAll('button')].find((b) => b.offsetParent !== null && /^\s*\d+\s*Seats?\s*$/.test(b.innerText || ''));
+  // TicketWhiz redesigned the filter bar on Sep 24: the seat selector became a chip
+  // showing the bare number instead of a "2 Seats" button. Both are live at once
+  // (the runners were still being served the old one). Normalised to the old wording
+  // so the readiness checks in ready.mjs keep reading one thing.
+  const qtyChip = qtyBtn ? null : [...document.querySelectorAll('button[class*="shrink-0"]')]
+    .find((b) => b.offsetParent !== null && /^\s*\d+\s*$/.test(b.innerText || ''));
   const names = ['vividseats', 'gametime', 'seatgeek', 'viagogo', 'stubhub', 'ticketnetwork', 'megaseats', 'event365', 'ticketmaster', 'tickpick', 'axs'];
   const sources = new Set();
   let unsellable = 0;
@@ -65,7 +71,7 @@ function snapshotInPage({ quantity, withRaw, withDiag }) {
   }
   const sample = {
     label: labelEl ? labelEl.textContent.trim() : null,
-    qtyText: qtyBtn ? qtyBtn.innerText.trim() : null,
+    qtyText: qtyBtn ? qtyBtn.innerText.trim() : (qtyChip ? `${qtyChip.innerText.trim()} Seats` : null),
     n: list.length,
     sources: [...sources].sort(),
     unsellable,
@@ -98,15 +104,35 @@ function snapshotInPage({ quantity, withRaw, withDiag }) {
 }
 
 // TicketWhiz filters quantity on its server, so the page's own selector must be set.
-// Its trigger is a Radix popover that opens on pointer-down; Playwright's click sends
-// real pointer events, which a plain DOM .click() does not.
+// Two designs are in the wild as of Sep 24 and a given page load may serve either:
+//   old — a button reading "2 Seats", opening a popover of numbers
+//   new — a filter chip reading just "2", opening a row of button.IndvButton numbers
+// Both open on pointer-down, so Playwright's click is required; a DOM .click() does
+// nothing (confirmed again on the new design).
 async function setQuantity(page, qty) {
-  const trigger = page.locator('button').filter({ hasText: /^\s*\d+\s*Seats?\s*$/ }).locator('visible=true').first();
-  await trigger.waitFor({ timeout: 30000 });
-  if (new RegExp(`^${qty} Seats?$`).test((await trigger.innerText()).trim())) return;
+  const want = String(qty);
+  const oldTrigger = page.locator('button').filter({ hasText: /^\s*\d+\s*Seats?\s*$/ }).locator('visible=true').first();
+  const newTrigger = page.locator('button[class*="shrink-0"]').filter({ hasText: /^\s*\d+\s*$/ }).locator('visible=true').first();
+
+  const deadline = Date.now() + 30000;
+  let design = null;
+  while (Date.now() < deadline && !design) {
+    if (await newTrigger.count().catch(() => 0)) design = 'new';
+    else if (await oldTrigger.count().catch(() => 0)) design = 'old';
+    else await page.waitForTimeout(500);
+  }
+  if (!design) throw new Error('the seat quantity selector never appeared');
+
+  const trigger = design === 'new' ? newTrigger : oldTrigger;
+  const showing = (await trigger.innerText()).trim();
+  const already = design === 'new' ? showing === want : new RegExp(`^${want} Seats?$`).test(showing);
+  if (already) return;
+
   await trigger.click();
-  const option = page.locator('[role=dialog] button, [data-radix-popper-content-wrapper] button')
-    .filter({ hasText: new RegExp(`^\\s*${qty}\\s*$`) }).locator('visible=true').first();
+  const option = design === 'new'
+    ? page.locator('button.IndvButton').filter({ hasText: new RegExp(`^\\s*${want}\\s*$`) }).locator('visible=true').first()
+    : page.locator('[role=dialog] button, [data-radix-popper-content-wrapper] button')
+      .filter({ hasText: new RegExp(`^\\s*${want}\\s*$`) }).locator('visible=true').first();
   await option.waitFor({ timeout: 15000 });
   await option.click();
   await page.keyboard.press('Escape').catch(() => {});
@@ -185,6 +211,17 @@ async function attemptRead(ctx, attempt, started) {
       : feedsPending(feeds).length ? `still waiting on ${feedsPending(feeds).join(', ')}`
         : (notReadyReason(cur, W.quantity) ?? 'market still changing');
     throw new Error(`page never settled within ${READY_DEADLINE_MS / 1000}s — last state: ${why}`);
+  } catch (e) {
+    // A slow or momentarily different page — the seat selector never appearing, the
+    // load stalling — deserves another try rather than failing the whole check.
+    // On Sep 24 two checks in a row died on "locator.waitFor: Timeout 30000ms
+    // exceeded" without ever using their retries, because an exception raised here
+    // bypassed the retry loop entirely and went straight to the outer handler.
+    // Not retried once the overall deadline has passed: there would be no time to
+    // do anything but fail again.
+    const why = String(e.message || e).split('\n')[0];
+    if (attempt < LOAD_ATTEMPTS && Date.now() - started < READY_DEADLINE_MS) return { retry: why };
+    return { fail: { reason: `${why} (after ${attempt} page load${attempt === 1 ? '' : 's'})` } };
   } finally {
     await page.close().catch(() => {});
   }
