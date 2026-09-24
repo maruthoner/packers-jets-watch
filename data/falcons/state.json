@@ -9,11 +9,11 @@
   "alerts": {
     "top": {
       "issue": 35,
-      "active": true,
-      "notifiedBest": 191.93,
+      "active": false,
+      "notifiedBest": null,
       "emptyStreak": 0,
       "title": "Falcons preferred: 2 seats together at $200.00 or less"
     }
   },
-  "lastSuccessISO": "2026-09-24T19:23:45.559Z"
+  "lastSuccessISO": "2026-09-24T19:29:24.728Z"
 }
