@@ -3,17 +3,17 @@
   "failIssue": 25,
   "failActive": false,
   "lastFailure": {
-    "reason": "page.waitForFunction: Timeout 20000ms exceeded. (after 3 page loads)",
-    "whenISO": "2026-09-24T19:42:01.572Z"
+    "reason": "asked is not defined",
+    "whenISO": "2026-09-17T10:57:56.114Z"
   },
   "alerts": {
     "top": {
       "issue": 35,
-      "active": false,
-      "notifiedBest": null,
+      "active": true,
+      "notifiedBest": 180.62,
       "emptyStreak": 0,
       "title": "Falcons preferred: 2 seats together at $200.00 or less"
     }
   },
-  "lastSuccessISO": "2026-09-24T20:49:23.286Z"
+  "lastSuccessISO": "2026-09-24T20:55:05.235Z"
 }
