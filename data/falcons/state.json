@@ -4,7 +4,7 @@
   "failActive": true,
   "lastFailure": {
     "reason": "page never settled within 220s — last state: the page never asked any marketplace (after 1 page load)",
-    "whenISO": "2026-09-24T23:30:06.526Z"
+    "whenISO": "2026-09-24T23:35:43.522Z"
   },
   "alerts": {
     "top": {
@@ -15,5 +15,5 @@
       "title": "Falcons preferred: 2 seats together at $200.00 or less"
     }
   },
-  "lastSuccessISO": "2026-09-24T23:04:09.539Z"
+  "lastSuccessISO": "2026-09-24T23:09:43.135Z"
 }
