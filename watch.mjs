@@ -106,36 +106,50 @@ function snapshotInPage({ quantity, withRaw, withDiag }) {
 // TicketWhiz filters quantity on its server, so the page's own selector must be set.
 // Two designs are in the wild as of Sep 24 and a given page load may serve either:
 //   old — a button reading "2 Seats", opening a popover of numbers
-//   new — a filter chip reading just "2", opening a row of button.IndvButton numbers
-// Both open on pointer-down, so Playwright's click is required; a DOM .click() does
-// nothing (confirmed again on the new design).
+//   new — a filter chip plus a row of button.IndvButton numbers 1-12. The chip reads
+//         "Seats" until a quantity is chosen and the number afterwards, so it cannot
+//         be found by looking for a number; that mistake failed every check at 19:05.
+//         The number row is usually already on the page, so it can be clicked
+//         directly; the chip opens it when it is not.
+// Both designs open on pointer-down, so Playwright's click is required — a DOM
+// .click() does nothing.
 async function setQuantity(page, qty) {
   const want = String(qty);
   const oldTrigger = page.locator('button').filter({ hasText: /^\s*\d+\s*Seats?\s*$/ }).locator('visible=true').first();
-  const newTrigger = page.locator('button[class*="shrink-0"]').filter({ hasText: /^\s*\d+\s*$/ }).locator('visible=true').first();
+  const chip = page.locator('button[class*="shrink-0"]').filter({ hasText: /^\s*(\d+|Seats?)\s*$/i }).locator('visible=true').first();
+  const number = page.locator('button.IndvButton').filter({ hasText: new RegExp(`^\\s*${want}\\s*$`) }).first();
+  const chipReads = (n) => [...document.querySelectorAll('button[class*="shrink-0"]')]
+    .some((b) => b.offsetParent !== null && (b.innerText || '').trim() === n);
 
-  const deadline = Date.now() + 30000;
+  const deadline = Date.now() + 45000;
   let design = null;
   while (Date.now() < deadline && !design) {
-    if (await newTrigger.count().catch(() => 0)) design = 'new';
-    else if (await oldTrigger.count().catch(() => 0)) design = 'old';
+    if (await oldTrigger.count().catch(() => 0)) design = 'old';
+    else if (await number.count().catch(() => 0) || await chip.count().catch(() => 0)) design = 'new';
     else await page.waitForTimeout(500);
   }
   if (!design) throw new Error('the seat quantity selector never appeared');
 
-  const trigger = design === 'new' ? newTrigger : oldTrigger;
-  const showing = (await trigger.innerText()).trim();
-  const already = design === 'new' ? showing === want : new RegExp(`^${want} Seats?$`).test(showing);
-  if (already) return;
-
-  await trigger.click();
-  const option = design === 'new'
-    ? page.locator('button.IndvButton').filter({ hasText: new RegExp(`^\\s*${want}\\s*$`) }).locator('visible=true').first()
-    : page.locator('[role=dialog] button, [data-radix-popper-content-wrapper] button')
+  if (design === 'old') {
+    if (new RegExp(`^${want} Seats?$`).test((await oldTrigger.innerText()).trim())) return;
+    await oldTrigger.click();
+    const option = page.locator('[role=dialog] button, [data-radix-popper-content-wrapper] button')
       .filter({ hasText: new RegExp(`^\\s*${want}\\s*$`) }).locator('visible=true').first();
-  await option.waitFor({ timeout: 15000 });
-  await option.click();
+    await option.waitFor({ timeout: 15000 });
+    await option.click();
+    await page.keyboard.press('Escape').catch(() => {});
+    return;
+  }
+
+  if (await chip.count().catch(() => 0) && (await chip.innerText()).trim() === want) return;
+  if (!(await number.isVisible().catch(() => false))) {
+    await chip.click();
+    await number.waitFor({ state: 'visible', timeout: 15000 });
+  }
+  await number.click();
   await page.keyboard.press('Escape').catch(() => {});
+  // Confirm the filter actually took rather than assuming the click landed.
+  await page.waitForFunction(chipReads, want, { timeout: 20000 });
 }
 
 // Follow every marketplace request the page makes and classify its answer.
