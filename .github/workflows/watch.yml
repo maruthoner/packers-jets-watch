@@ -22,7 +22,7 @@ concurrency:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 30   # one check plus its pause; a dead runner shows up within this
+    timeout-minutes: 12   # one check plus its pause; a dead runner shows up within this
     steps:
       - uses: actions/checkout@v5
         with:
@@ -73,7 +73,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
         run: |
           START=$(date +%s)
-          INTERVAL=1200   # 20 minutes between checks (Ruth, Sep 22)
+          INTERVAL=300   # 5 minutes between checks (Ruth, Sep 24)
 
           if [ "$DRY_RUN" != "1" ]; then
             gh workflow run watch.yml --repo "$REPO" --ref main \

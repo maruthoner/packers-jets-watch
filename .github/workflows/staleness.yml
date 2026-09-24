@@ -54,8 +54,9 @@ jobs:
           echo "$REASON"
 
           # Only touch a run old enough to have published by now, so a run that has
-          # just started is never mistaken for a stuck one.
-          CUTOFF=$(date -u -d '40 minutes ago' +%Y-%m-%dT%H:%M:%SZ)
+          # just started is never mistaken for a stuck one. A run is one check plus a
+          # 5-minute pause, and the job times out at 12.
+          CUTOFF=$(date -u -d '12 minutes ago' +%Y-%m-%dT%H:%M:%SZ)
           RUNS=$(gh run list --workflow watch.yml --repo "$REPO" --limit 20 \
                    --json databaseId,status,createdAt)
 
