@@ -1,10 +1,10 @@
 {
-  "failStreak": 1,
+  "failStreak": 0,
   "failIssue": 25,
   "failActive": false,
   "lastFailure": {
-    "reason": "the seat quantity selector never appeared (after 3 page loads)",
-    "whenISO": "2026-09-24T19:05:20.351Z"
+    "reason": "asked is not defined",
+    "whenISO": "2026-09-17T10:57:56.114Z"
   },
   "alerts": {
     "top": {
@@ -15,5 +15,5 @@
       "title": "Falcons preferred: 2 seats together at $200.00 or less"
     }
   },
-  "lastSuccessISO": "2026-09-24T18:52:42.377Z"
+  "lastSuccessISO": "2026-09-24T19:09:29.555Z"
 }
